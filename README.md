@@ -6,7 +6,7 @@ Konversiopakettia käytetään Melinda- ja Asteri-tietokantojen sekä Voyager-j�
 
 Kehitys
 -------
-Konversiosääntö on testausvaiheessa. Se ei ole vielä valmis tuotantokantojen muuntamiseen, mutta testaukseen voivat osallistua kaikki halukkaat.
+GitHub-varannossa on nyt konversion tuotantoversio.
 
 Viimeisimmät muutokset
 -------
