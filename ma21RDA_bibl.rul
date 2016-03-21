@@ -1,9 +1,14 @@
 RDA-konversio - bibliografiset tietueet
-versio 18.3.2016 / Kansalliskirjasto (TV)
+versio 21.3.2016 / Kansalliskirjasto (TV)
 
 #define version 317
 
 #define macro 300AE | RegReplace('\\b[Nn]\\.', 'noin', 'g'); \
+                      RegReplace('(\\d+) s\\.\$', '\\1 sivua.', 'g'); \
+                      RegReplace('(\\d+) s\\.', '\\1 sivua', 'g'); \
+                      RegReplace('(\\d+) bl\\.\$', '\\1 blad.', 'g'); \
+                      RegReplace('(\\d+) bl\\.', '\\1 blad', 'g'); \
+                      RegReplace('S\\. (\\d*-\\d*)', 'sivut \\1', 'g'); \
                       RegReplace('\\bsek([^A-Z-a-z])', 's\\1', 'g'); \
                       RegReplace('ss\\.', 'sivut', 'g'); \
                       RegReplace('\\bkuv\\.', 'kuvitettu', 'g'); \
@@ -326,7 +331,7 @@ F45 | 245 | S
 300I2 | 300(newest)I2 | S
 
 #if (RegFind(@041, 'eng') >= 0)
-300$a | <Y30$a | 300AE; 300BE; RegReplace('(\\d*) p\\.', '\\1 pages'); Delete ('.', At Ending)
+300$a | <Y30$a | 300AE; 300BE; RegReplace('(\\d*) p\\.', '\\1 pages')
 #endif
 
 #if (RegFind(@041, 'eng') < 0)

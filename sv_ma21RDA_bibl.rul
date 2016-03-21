@@ -1,10 +1,12 @@
 RDA-konversio - bibliografiset tietueet, ruotsi
-versio 18.3.2016 / Kansalliskirjasto (TV)
+versio 21.3.2016 / Kansalliskirjasto (TV)
 
 #define version 317
 
 #define macro 300AE | RegReplace('\\b[Nn]\\.', 'noin', 'g'); \
                       RegReplace('\\bsek([^A-Z-a-z])', 's\\1', 'g'); \
+                      RegReplace('(\\d+) bl\\.\$', '\\1 blad.', 'g'); \
+                      RegReplace('(\\d+) bl\\.', '\\1 blad', 'g'); \
                       RegReplace('ss\\.', 'sivut', 'g'); \
                       RegReplace('\\bkuv\\.', 'kuvitettu', 'g'); \
                       RegReplace('verkkojulkaisu', 'verkkoaineisto', 'g'); \
