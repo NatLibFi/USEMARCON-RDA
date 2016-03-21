@@ -5,7 +5,6 @@ versio 21.3.2016 / Kansalliskirjasto (TV)
 
 #define macro 300AE | RegReplace('\\b[Nn]\\.', 'noin', 'g'); \
                       RegReplace('\\bsek([^A-Z-a-z])', 's\\1', 'g'); \
-                      RegReplace('(\\d+) bl\\.\$', '\\1 blad.', 'g'); \
                       RegReplace('(\\d+) bl\\.', '\\1 blad', 'g'); \
                       RegReplace('ss\\.', 'sivut', 'g'); \
                       RegReplace('\\bkuv\\.', 'kuvitettu', 'g'); \
@@ -13,6 +12,7 @@ versio 21.3.2016 / Kansalliskirjasto (TV)
                       RegReplace('Verkkojulkaisu', 'Verkkoaineisto', 'g')
                       
 #define macro 300BE | RegReplace('kartt\\.', 'karttoja', 'g'); \
+                      RegReplace('kart\\.', 'kartor', 'g'); \
                       RegReplace('kuv\\.', 'kuvitettu', 'g'); \
                       RegReplace('mv\\.', 'mustavalkoinen', 'g'); \
                       RegReplace('vär\\.', 'värillinen', 'g'); \

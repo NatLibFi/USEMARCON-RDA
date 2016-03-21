@@ -4,11 +4,13 @@ versio 21.3.2016 / Kansalliskirjasto (TV)
 #define version 317
 
 #define macro 300AE | RegReplace('\\b[Nn]\\.', 'noin', 'g'); \
-                      RegReplace('(\\d+) s\\.\$', '\\1 sivua.', 'g'); \
                       RegReplace('(\\d+) s\\.', '\\1 sivua', 'g'); \
-                      RegReplace('(\\d+) bl\\.\$', '\\1 blad.', 'g'); \
+                      RegReplace('(\\[\\d+\\]) s\\.', '\\1 sivua', 'g'); \
                       RegReplace('(\\d+) bl\\.', '\\1 blad', 'g'); \
-                      RegReplace('S\\. (\\d*-\\d*)', 'sivut \\1', 'g'); \
+                      RegReplace('\\bs\\. (\\d+-\\d+)', 'sivut \\1', 'g'); \
+                      RegReplace('S\\. (\\d+-\\d+)', 'sivut \\1', 'g'); \
+                      RegReplace('1 vol\\.', '\\1 nide', 'g'); \
+                      RegReplace('(\\d+) vol\\.', '\\1 nidettä', 'g'); \
                       RegReplace('\\bsek([^A-Z-a-z])', 's\\1', 'g'); \
                       RegReplace('ss\\.', 'sivut', 'g'); \
                       RegReplace('\\bkuv\\.', 'kuvitettu', 'g'); \
