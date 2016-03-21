@@ -1112,7 +1112,7 @@ J73 | 730 | LOPPUPISTE
 800$m | <K80$m | ESITYSKOKOONPANO
 #endif
 
-800$o | <K80$o | SOVITUSMERKINTO, ESITYSKOKOONPANO
+800$o | <K80$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
 800$p | <K80$p | RAAMATTU
 800$4 | <K80$e | If (Not (Exists(@800$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
 800$? | <K80$? | S
