@@ -304,9 +304,17 @@ B43 | 243 | S
 
 F45 | 245 | S
 
+#if (Not Exists(@300))
+256I1 | 300I1 | S
+256I2 | 300I2 | S
+256   | 300   | VERKKOAINEISTO
+#endif
+
+#if (Exists(@300))
 256I1 | 256I1 | S
 256I2 | 256I2 | S
 256   | 256   | VERKKOAINEISTO
+#endif
 
 #if (Not Exists(@773))
 260I1 | 260I1 | S
@@ -413,7 +421,7 @@ T36   | <DEL  | S
               (RegFind(@337(3)$a, 'laitetta') >= 0) Or \
               (RegFind(@337(4)$a, 'laitetta') >= 0) ) \
           ) \
-        Or (RegFind(@300$a, '[Tt]ekstivihko|[Kk]irja|[Kk]artasto') >= 0) \
+        Or (RegFind(@300$a, '[Tt]ekstivihko|\\b[Kk]irja|[Kk]artasto') >= 0) \
         Or (RegFind(%336$a, 'Kartografinen') >=0) )
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
