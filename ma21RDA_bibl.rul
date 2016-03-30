@@ -115,6 +115,7 @@ versio 29.3.2016 / Kansalliskirjasto (TV)
 #define macro VERKKOAINEISTO | RegReplace('paperimuodossa', 'painettuna', 'g'); \
                                RegReplace('[Pp]aperisena', 'painettuna', 'g'); \
                                RegReplace('Verkkojulkaisu\\b', 'Verkkoaineisto', 'g'); \
+                               RegReplace('Verkkokirja', '1 verkkoaineisto', 'g'); \
                                RegReplace('verkkojulkaisuna', 'verkkoaineistona', 'g'); \
                                RegReplace('[Ii]nternet-julkaisu\\b', 'verkkoaineisto', 'g'); \
                                RegReplace('paperisena', 'painettuna', 'g'); \
@@ -153,7 +154,7 @@ versio 29.3.2016 / Kansalliskirjasto (TV)
 020I2 | 020I2 | S
 020$a | 020$a | If (RegFind(S, '\\d+') >= 0) Then S; RegReplace('[\\s](.*)', '')
 020$a | 020$q | If (RegFind(@020$a, '\\(') >= 0) Then S; RegReplace('(.*)\\(', ''); RegReplace('\\)', ''); SIDOSASUT; Delete(':', At Ending);
-
+020$c | <DEL  | S
 020$? | 020$? | Replace('.,' By ','); \ // Tapaukset tyyliin "020$q sid., muovikannet"
                 SIDOSASUT; \
                 Delete('('); \
@@ -307,13 +308,13 @@ F45 | 245 | S
 #if (Not Exists(@300))
 256I1 | 300I1 | S
 256I2 | 300I2 | S
-256   | 300   | VERKKOAINEISTO
+256   | 300   | VERKKOAINEISTO; 300AE; Delete('.', At Ending)
 #endif
 
 #if (Exists(@300))
 256I1 | 256I1 | S
 256I2 | 256I2 | S
-256   | 256   | VERKKOAINEISTO
+256   | 256   | VERKKOAINEISTO; 300AE; Delete('.', At Ending)
 #endif
 
 #if (Not Exists(@773))
@@ -608,10 +609,9 @@ T36   | <DEL  | S
 
 // SAMMA PÅ SVENSKA : MIKROFILMSRULLE
 
-#if (Not Exists(@338)) \
-  And ( (RegFind(@300$a, '[Mm]ikrofilm\\b') >= 0) Or (007/2/ = 'j') ) \
-  And (Not (000/7/ = 'e') Or (000/7/ = 'f')) \
-  And (Not Exists(@773))
+#if (Not Exists(@338)) And (Not Exists(@773)) \
+  And ( (RegFind(@300$a, '[Mm]ikrofilm\\b') >= 0) Or (007/1-2/ = 'hj') Or (008/24/ = 'a') ) \
+  And (Not ((000/7/ = 'e') Or (000/7/ = 'f')))
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
 000 | 338(newest)$a | 'mikrofilmsrulle'
