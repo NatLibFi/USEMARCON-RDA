@@ -1,5 +1,5 @@
 RDA-konversio - bibliografiset tietueet
-versio 29.3.2016 / Kansalliskirjasto (TV)
+versio 7.6.2016 / Kansalliskirjasto (TV)
 
 #define version 317
 
@@ -114,13 +114,11 @@ versio 29.3.2016 / Kansalliskirjasto (TV)
 
 #define macro VERKKOAINEISTO | RegReplace('paperimuodossa', 'painettuna', 'g'); \
                                RegReplace('[Pp]aperisena', 'painettuna', 'g'); \
-                               RegReplace('Verkkojulkaisu\\b', 'Verkkoaineisto', 'g'); \
                                RegReplace('Verkkokirja', '1 verkkoaineisto', 'g'); \
-                               RegReplace('verkkojulkaisuna', 'verkkoaineistona', 'g'); \
                                RegReplace('[Ii]nternet-julkaisu\\b', 'verkkoaineisto', 'g'); \
                                RegReplace('paperisena', 'painettuna', 'g'); \
                                RegReplace('[Ee]lektroninen aineisto', 'Verkkoaineisto', 'g'); \
-                               RegReplace('verkkojulkaisuun', 'verkkoaineistoon'); \
+                               RegReplace('erkkojulkaisu', 'erkkoaineisto'); \
                                RegReplace('Elektroninen julkaisu|Verkkojulkaisuun', 'Linkki verkkoaineistoon')
 
 #define macro FUNKTIOVALIMERKIT | RegReplace('(\\)|[Mm]r\\.|[Mm]rs\\.|[Jj]r\\.|Ph\\.+\\s+D\\.|Dr\\.|Sr\\.|[Rr]ev\\.|\\s[A-Za-z]\\.|\\.[A-Za-z]\\.)($4|$e)', '\\1,\\2', 'g'); \
@@ -826,7 +824,7 @@ T36   | <DEL  | S
 
 500I1 | 500I1 | S
 500I2 | 500I2 | S
-500   | 500   | S; RegReplace('et al\\.', 'ja muita')
+500   | 500   | S; RegReplace('et al\\.', 'ja muita'); VERKKOAINEISTO
 
 502I1 | 502I1 | S
 502I2 | 502I2 | S

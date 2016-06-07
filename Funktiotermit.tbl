@@ -18,17 +18,20 @@ k 0xc3 0xa4 s i k .	| k 0xc3 0xa4 s i k i r j o i t t a j a
 k 0xc3 0xa4 0xc3 0xa4 n t . | k 0xc3 0xa4 0xc3 0xa4 n t 0xc3 0xa4 j 0xc3 0xa4 
 l a v .	| l a v a s t a j a 
 l e i k k .	| l e i k k a a j a 
+l e i k .	| l e i k k a a j a 
 m i k s .	| m i k s a a j a 
 m u s .  | m u s i i k k i j o h t a j a
 n 0xc3 0xa4 y t t . | n 0xc3 0xa4 y t t e l i j 0xc3 0xa4 
 o h j . | o h j a a j a 
 o p e t t . | o p e t t a j a 
 p i i r t .	| p i i r t 0xc3 0xa4 j 0xc3 0xa4 
+p u v . | p u v u s t a j a
 r e d . | r e d a k t 0xc3 0xb6 r
 r e g . | r e g i s s 0xc3 0xb6 r
 s a n .	| s a n o i t t a j a 
 s o r m . | s o r m i t u k s e n 0x20 t e k i j 0xc3 0xa4
 s o v . | s o v i t t a j a 
+s u o m . | s u o m e n t a j a 
 s u u n n . | s u u n n i t t e l i j a 
 s 0xc3 0xa4 v . | s 0xc3 0xa4 v e l t 0xc3 0xa4 j 0xc3 0xa4 
 t a n s s i . | t a n s s i j a 
@@ -37,6 +40,7 @@ t o n s . | t o n s 0xc3 0xa4 t t a r e
 t u o t t .	| t u o t t a j a 
 v a l o k . | v a l o k u v a a j a 
 0xc3 0xa4 0xc3 0xa4 n i t t . | 0xc3 0xa4 0xc3 0xa4 n i t t 0xc3 0xa4 j 0xc3 0xa4 
+0xc3 0xa4 0xc3 0xa4 n . | 0xc3 0xa4 0xc3 0xa4 n i t t 0xc3 0xa4 j 0xc3 0xa4 
 0xc3 0xb6 v e r s . | 0xc3 0xb6 v e r s 0xc3 0xa4 t t a r e
 
 a b r i d g e r   | l y h e n t 0xc3 0xa4 j 0xc3 0xa4 
@@ -50,7 +54,6 @@ a r c h i t e c t   | a r k k i t e h t i
 a r r a n g e r   | s o v i t t a j a 
 a r t 0x20 d i r e c t o r  | l a v a s t a j a 
 a r t i s t   | t a i t e i l i j a 
-a u t h o r   | k i r j o i t t a j a 
 a u t o g r a p h e r   | n i m i k i r j o i t u k s e n 0x20 a n t a j a 
 b i n d e r   | s i t o j a 
 b o o k 0x20 d e s i g n e r  | g r a a f i n e n 0x20 s u u n n i t t e l i j a 
@@ -62,7 +65,6 @@ c h o r e o g r a p h e r   |   k o r e o g r a f i
 c o l l e c t i o n 0x20 r e g i s t r a r  | k o k o e l m a n 0x20 l u e t t e l o i j a 
 c o l l e c t o r   | k o k o e l m a n 0x20 m u o d o s t a j a 
 c o l l o t y p e r   | k o l l o t y p i a n 0x20 t e k i j 0xc3 0xa4 
-c o m m e n t a t o r   | k o m m e n t a a t t o r i 
 c o m p i l e r   | k o k o a j a 
 c o m p o s e r   | s 0xc3 0xa4 v e l t 0xc3 0xa4 j 0xc3 0xa4 
 c o n d u c t o r   | j o h t a j a 
@@ -79,7 +81,6 @@ d e d i c a t o r   | t e o k s e n 0x20 … 0x20 o m i s t a n u t
 d e f e n d a n t   | v a s t a a j a 0x20 o i k e u d e n k 0xc3 0xa4 y n n i s s 0xc3 0xa4 
 d e g r e e 0x20 g r a n t i n g 0x20 i n s t i t u t i o n   | o p p i a r v o n 0x20 m y 0xc3 0xb6 n t 0xc3 0xa4 n y t 0x20 l a i t o s 
 d e p o s i t o r   | a i n e i s t o n 0x20 t a l l e t t a j a 
-d e s i g n e r   | s u u n n i t t e l i j a 
 d i r e c t o r   | o h j a a j a 
 d i r e c t o r 0x20 o f 0x20 p h o t o g r a p h y   | k u v a a j a 
 d o n o r   | l a h j o i t t a j a 
@@ -97,7 +98,6 @@ f i l m m a k e r   | e l o k u v a n t e k i j 0xc3 0xa4
 f o r m e r 0x20 o w n e r  | a i k a i s e m p i 0x20 o m i s t a j a 
 h o n o u r e e   | k u n n i a n o s o i t u k s e n 0x20 k o h d e 
 h o n o u r e e 0x20 o f 0x20 i t e m   | k u n n i a n o s o i t u k s e n 0x20 k o h d e 
-h o s t   | j u o n t a j a 
 h o s t 0x20 i n s t i t u t i o n  | i s 0xc3 0xa4 n t 0xc3 0xa4 o r g a n i s a a t i o 
 i l l u m i n a t o r   | i l l u m i n o i n n i n 0x20 t e k i j 0xc3 0xa4 
 i l l u s t r a t o r   | k u v i t t a j a 
