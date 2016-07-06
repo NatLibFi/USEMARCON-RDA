@@ -131,11 +131,4 @@ w r i t e r 0x20 o f 0x20 i n t r o d u c t i o n   | f 0xc3 0xb6 r f a t t a r 
 w r i t e r 0x20 o f 0x20 p r e f a c e    | f 0xc3 0xb6 r f a t t a r e 0x20 t i l l 0x20 f 0xc3 0xb6 r o r d
 w r i t e r 0x20 o f 0x20 s u p p l e m e n t a r y 0x20 t e x t u a l 0x20 c o n t e n t   | f 0xc3 0xb6 r f a t t a r e 0x20 t i l l 0x20 f 0xc3 0xb6 r o r d , i n t r o d u c e r a n d e 0x20 m a t e r i a l , 0x20 e t c .
 
-S | s o p r a n
-A | a l t
-M z | m e z z o s o p r a n
-T | t e n o r
-B a r | b a r y t o n
-B | b a s  
-
 #DEFAULT	| COPY
