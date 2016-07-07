@@ -1,5 +1,5 @@
 RDA-konversio - bibliografiset tietueet, ruotsi
-versio 24.3.2016 / Kansalliskirjasto (TV)
+versio 7.7.2016 / Kansalliskirjasto (TV)
 
 #define version 317
 
@@ -872,7 +872,7 @@ J73 | 730 | LOPPUPISTE
 77?I1 | 77?I1 | S
 77?I2 | 77?I2 | S
 77?$c | 77?$c | S; VERKKOAINEISTO
-77?$i | 77?$i | S; VERKKOAINEISTO
+77?$i | 77?$i | S; VERKKOAINEISTO; SIDOSASUT
 77?   | 77?   | S
 
 78?I1 | 78?I1 | S
