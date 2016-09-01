@@ -1,5 +1,5 @@
 RDA-konversio - bibliografiset tietueet, ruotsi
-versio 7.7.2016 / Kansalliskirjasto (TV)
+versio 1.9.2016 / Kansalliskirjasto (TV)
 
 #define version 317
 
@@ -280,7 +280,7 @@ F40   | 240    | S
 
 B43 | 243 | S; RAAMATTU
 
-#if (Not Exists(%100)) And (Not Exists(%110)) And (Not Exists(%111))
+#if (Not Exists(%100)) And (Not Exists(%110)) And (Not Exists(%111)) And (Not Exists(%130))
 245I1 | 245I1  | '0'
 #endif
 

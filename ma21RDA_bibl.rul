@@ -1,5 +1,5 @@
 RDA-konversio - bibliografiset tietueet
-versio 7.7.2016 / Kansalliskirjasto (TV)
+versio 1.9.2016 / Kansalliskirjasto (TV)
 
 #define version 317
 
@@ -280,7 +280,7 @@ F40   | 240    | S
 
 B43 | 243 | S
 
-#if (Not Exists(%100)) And (Not Exists(%110)) And (Not Exists(%111))
+#if (Not Exists(%100)) And (Not Exists(%110)) And (Not Exists(%111)) And (Not Exists(%130))
 245I1 | 245I1  | '0'
 #endif
 
@@ -641,7 +641,7 @@ T36   | <DEL  | S
 
 #if (Not Exists(@338)) And (Not Exists(@773)) \
   And ( \
-    (RegFind(@300, '[Tt]aulu|[Uu][Ss][Bb]-muisti|[Oo]ptinen levy|[Ll]evyke|[Dd]isketti|[Oo]petuskuva') >= 0) \
+    (RegFind(@300, '[Tt]aulu\\b|[Uu][Ss][Bb]-muisti|[Oo]ptinen levy|[Ll]evyke|[Dd]isketti|[Oo]petuskuva') >= 0) \
     Or ( (RegFind(@337$a, 'useita v') >= 0) And (RegFind(@336$a, 'useita') >= 0) ) \
    )
 000 | 338(new)I1 | ' '
