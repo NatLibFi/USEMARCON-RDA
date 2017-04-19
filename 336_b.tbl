@@ -66,6 +66,7 @@ r 0xc3 0xb6 r e l s e n o t a t i o n   | n t v
 M u s i i k k i 0x20 ( e s i t e t t y ) 	| p r m 
 e s i t e t t y 0x20 m u s i i k k i    | p r m 
 M u s i k 0x20 ( f r a m f 0xc3 0xb6 r d )   | p r m 
+M u s i k 0x20 ( p e r f o r m a n c e )   | p r m 
 f r a m f 0xc3 0xb6 r d 0x20 m u s i k  | p r m 
 M u s i i k k i 0x20 ( k o s k e t e l t a v a 0x20 ; 0x20 n o t a t o i t u ) 	| t c m 
 t a k t i i l i 0x20 n u o t t i k i r j o i t u s  | t c m 
