@@ -2,7 +2,7 @@ USEMARCON-RDA
 ========
 USEMARCON-ohjelmalla käytettävä konversiosääntö MARC 21 (ISBD) -muotoisten bibliografisten ja auktoriteettitietueiden muuttamiseksi RDA-kuvailusääntöjen mukaisiksi.
 
-Konversiopakettia käytetään Melinda- ja Asteri-tietokantojen sekä Voyager-järjestelmää käyttävien tietokantojen RDA-konversioon. Tämänhetkisen suunnitelman mukaan konversio suoritetaan pääsiäisviikolla 2016.
+Konversiopakettia käytetään Melinda- ja Asteri-tietokantojen sekä Voyager-järjestelmää käyttävien tietokantojen RDA-konversioon. Konversio suoritettiin pääsiäisviikolla 2016.
 
 Kehitys
 -------

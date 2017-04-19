@@ -17,7 +17,8 @@ i n g e n 0x20 m e d i e t y p 	| o f 0xc3 0xb6 r m e d l a d
 m i k r o f o r m 	| m i k r o f o r m 
 m i k r o s k o p i s k 	| m i k r o s k o p i s k 
 o s p e c i f i c e r a d 0x20 m e d i e t y p 	| o s p e c i f i c e r a d 
-p r o j i c e r a d 0x20 / p r o j e k t i o n 	| p r o j i c e r b a r 
+p r o j i c e r a d | p r o j i c e r b a r 
+p r o j e k t i o n 	| p r o j i c e r b a r 
 s t e r e o g r a f i s k 	| s t e r e o g r a f i s k 
 
 e i 0x20 v 0xc3 0xa4 l i t t 0xc3 0xa4 v 0xc3 0xa4 0xc3 0xa4 0x20 l a i t e t t a 	| o f 0xc3 0xb6 r m e d l a d 
