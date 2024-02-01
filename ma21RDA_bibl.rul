@@ -310,10 +310,9 @@ F45 | 245 | S
 256   | 300   | VERKKOAINEISTO; 300AE; Delete('.', At Ending)
 #endif
 
+# 20240201: Remove remaining 256 fields. (In some cases data could theoretically go to field 516.)
 #if (Exists(@300))
-256I1 | 256I1 | S
-256I2 | 256I2 | S
-256   | 256   | VERKKOAINEISTO; 300AE; Delete('.', At Ending)
+256   | <DEL | S
 #endif
 
 #if (Not Exists(@773))
