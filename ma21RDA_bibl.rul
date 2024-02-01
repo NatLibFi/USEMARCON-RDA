@@ -179,7 +179,7 @@ versio 1.9.2016 / Kansalliskirjasto (TV)
 100$b | <A10$b | S; If ((100$c Follows 100$b) And RegFind(@100$c, 'fikt') >= 0) Delete (',', At Ending)
 100$c | <A10$c | FIKTIIVINENHAHMO
 100$d | <A10$d | AIKAMAAREET
-100$e | <A10$e | Table ('Funktiotermit.tbl'); Delete('.', At Ending); If (NextSub($e) = '') Then S + '.' Else S + ','
+100$e | <A10$e | Table ('Funktiotermit.tbl'); Delete('.', At Ending); If (NextSub($e) = '' OrNextSub($e) = '5' Or NextSub($e) = '9' ) Then S + '.' Else S + ','
 100$4 | <A10$e | If (Not (Exists(@100$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
 100$? | <A10$? | S
 
