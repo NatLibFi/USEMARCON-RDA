@@ -132,7 +132,8 @@ versio 1.9.2016 / Kansalliskirjasto (TV)
                           RegReplace(',,', ',')
 
 // Lisää loppupisteen kenttään, jos se ei lopu johonkin seuraavista merkeistä: ), ], ?, !, -, .
-#define macro LOPPUPISTE | If ( (RegFind('(\\)|\\]|\\?|\\!|-|\\.)\$') <0 ) ) Then S + '.' Else S
+// NV 20230201: added rule that does not add a dot after a control subfield
+#define macro LOPPUPISTE | If ( (RegFind('(\\)|\\]|\\?|\\!|-|\\.)\$') <0) And (RegFind('$[0-9][^$]+\$') <0) ) Then S + '.' Else S
 
 000/1-9/ | 000/1-9/ | S
 000/10/ | 000/10/ | 'a'
