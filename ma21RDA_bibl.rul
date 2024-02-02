@@ -770,7 +770,7 @@ T36   | <DEL  | S
 
 // TIETOLEVY
 
-#if (RegFind(@300$a,  '[Rr][Oo][Mm]|[Bb]lu-') >= 0) \
+#if (RegFind(@300$a,  '[Rr][Oo][Mm]') >= 0) \
   And (Not Exists(@773)) \
   And (Not Exists(@338)) \
   And (InTable(@336$a, '336_a.tbl'))
@@ -793,7 +793,7 @@ T36   | <DEL  | S
 
 // VIDEOLEVY
 
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Dd][Vv][Dd]-levy|[Vv]ideolevy') >= 0) And If (Not Exists(@773))
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Dd][Vv][Dd]-levy|[Vv]ideolevy|[Bb]lu-?ray') >= 0) And If (Not Exists(@773))
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
 000 | 338(newest)$a | 'videolevy'
