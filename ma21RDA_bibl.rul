@@ -499,7 +499,9 @@ T36   | <DEL  | S
 
 // DIA
 
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Kk]uultokuv|[Dd]iaa') >= 0) And If (Not Exists(@773))
+#if (Not Exists(@338)) And If (Not Exists(@773)) \
+    And If ( (RegFind(@300$a, '[Kk]uultokuv|[Dd]iaa') >= 0) \
+    	Or ( @000/7/ = 'g' And @007/1/ = 'g' And @007/2/ = 's' And RegFind(@300$a, '[Dd]iabild') < 0 ) )
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
 000 | 338(newest)$a | 'dia'
