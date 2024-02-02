@@ -457,7 +457,9 @@ T36   | <DEL  | S
 
 // VIDEOKASETTI
 
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Vv]ideokas') >= 0) And If (Not Exists(@773))
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Vv]ideokas') >= 0) \
+    And If (Not RegFind(@300$a, '[Vv]ideokass') >= 0) \
+    And If (Not Exists(@773))
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
 000 | 338(newest)$a | 'videokasetti'
@@ -736,7 +738,8 @@ T36   | <DEL  | S
 // ÄÄNIKASETTI
 
 #if (Not Exists(@338)) \
-  And If ( \
+    And If (Not RegFind(@300$a, 'kassett') >= 0) \
+    And If ( \
   (RegFind(@300$a, '[Cc]-kas') >= 0) \
   Or (RegFind(@300$a, '[Dd][Aa][Tt]-kase|[Dd][Cc][Cc]-kas|[Ää]nikas|kasettia') >= 0) \
   Or (RegFind(@300$e, '[Dd][Aa][Tt]-kase|[Dd][Cc][Cc]-kas|[Ää]nikas|kasettia') >= 0) \
