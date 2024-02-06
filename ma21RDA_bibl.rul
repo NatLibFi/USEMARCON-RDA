@@ -408,15 +408,14 @@ T36   | <DEL  | S
 
 // NIDE
 
-#if (Not Exists(@338)) \
-  And (Not Exists(@773)) \
+#if (Not Exists(@338)) And (Not Exists(@773)) \
   And ( ( @000/7/ = 'a' Or @000/7/ = 'c' Or @000/7/ = 'e' Or @000/7/ = 't') And \
           ( \
             ( (RegFind(@336(1)$a, 'eksti') >= 0) Or \
               (RegFind(@336(2)$a, 'eksti') >= 0) Or \
               (RegFind(@336(3)$a, 'eksti') >= 0) Or \
               (RegFind(@336(4)$a, 'eksti') >= 0) Or \
-              (RegFind(@336$a, 'notatoitu') >= 0 ) ) And \
+              (RegFind(@336$a, 'notatoitu|nuottikirjoitus') >= 0 ) ) And \
             ( (RegFind(@337(1)$a, 'laitetta') >= 0) Or \
               (RegFind(@337(2)$a, 'laitetta') >= 0) Or \
               (RegFind(@337(3)$a, 'laitetta') >= 0) Or \
@@ -730,7 +729,7 @@ T36   | <DEL  | S
 // ÄÄNILEVY
 
 #if (Not Exists(@338)) \
-  And ( (RegFind(@300, '[Cc][Dd]-levy|äänilevy') >= 0) ) \
+  And ( (RegFind(@300$a, '[Cc][Dd]-levy|äänilevy') >= 0) ) \
   And (Not Exists(@773))
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
@@ -742,7 +741,7 @@ T36   | <DEL  | S
 // SAMMA PÅ SVENSKA : LJUDSKIVA
 
 #if (Not Exists(@338)) \
-  And ( (RegFind(@300, '[Cc][Dd]-skiva|ljudskiva') >= 0) ) \
+  And ( (RegFind(@300$a, '[Cc][Dd]-skiva|ljudskiva') >= 0) ) \
   And (Not Exists(@773))
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
