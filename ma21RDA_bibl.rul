@@ -393,7 +393,7 @@ T36   | <DEL  | S
 
 #if Not (Exists(@337$b))
 337$a | 337$b | If (InTable(S, '337_b.tbl')) Then Table ('337_b.tbl')
-337$a | 337$2 | 'rdamedia'
+337$a | 337$2 | If (InTable(S, '337_b.tbl')) Then 'rdamedia'
 #endif
 
 #if (Exists(@337$b))
