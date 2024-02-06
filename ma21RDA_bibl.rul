@@ -660,7 +660,7 @@ T36   | <DEL  | S
 
 #if (Not Exists(@338)) And (Not Exists(@773)) \
   And ( \
-    (RegFind(@300, '[Tt]aulu\\b|[Uu][Ss][Bb]-muisti|[Oo]ptinen levy|[Ll]evyke|[Dd]isketti|[Oo]petuskuva') >= 0) \
+    (RegFind(@300, '[Tt]aulu\\b|[Uu][Ss][Bb]-muisti|[Ll]evyke|[Dd]isketti|[Oo]petuskuva') >= 0) \
     Or ( (RegFind(@337$a, 'useita v') >= 0) And (RegFind(@336$a, 'useita') >= 0) ) \
    )
 000 | 338(new)I1 | ' '
@@ -809,6 +809,7 @@ T36   | <DEL  | S
 
 // VIDEOLEVY vs TIETOLEVY
 
+// Here using LDR/06 to guess 338 value. 336 and 337 might be better or at leat more human-readable (eg. 337$a video...)
 #if (Not Exists(@338)) And (Not Exists(@773)) And (RegFind(@300$a, '[Dd][Vv][Dd]-levy|[Vv]ideolevy|[Bb]lu-?ray') >= 0) And (Not (@000/7/ = 'm')) 
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
@@ -817,7 +818,7 @@ T36   | <DEL  | S
 000 | 338(newest)$2 | 'rdacarrier'
 #endif
 
-#if (Not Exists(@338)) And (Not Exists(@773)) And (RegFind(@300$a, '[Dd][Vv][Dd]-levy|[Vv]ideolevy|[Bb]lu-?ray') >= 0) And (@000/7/ = 'm')
+#if (Not Exists(@338)) And (Not Exists(@773)) And (RegFind(@300$a, '[Dd][Vv][Dd]-levy|[Oo]ptinen levy|[Oo]ptista levy|[Vv]ideolevy|[Bb]lu-?ray') >= 0) And (@000/7/ = 'm')
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
 000 | 338(newest)$a | 'tietolevy'
