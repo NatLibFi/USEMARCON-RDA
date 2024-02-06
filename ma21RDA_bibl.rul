@@ -600,7 +600,7 @@ T36   | <DEL  | S
 // MIKROFILMIRULLA
 
 #if (Not Exists(@338)) \
-  And ( (RegFind(@300$a, '[Mm]ikrofilmi') >= 0) Or (007/1-2/ = 'hj') Or (008/24/ = 'a')) \
+  And ( (RegFind(@300$a, '[Mm]ikrofilmi|[Mm]icrofilm') >= 0) Or (007/1-2/ = 'hj') Or (008/24/ = 'a')) \
   And (Not (000/7/ = 'e') Or (000/7/ = 'f')) \
   And (Not Exists(@773))
 000 | 338(new)I1 | ' '
@@ -611,9 +611,8 @@ T36   | <DEL  | S
 #endif
 
 // SAMMA PÅ SVENSKA : MIKROFILMSRULLE
-
 #if (Not Exists(@338)) And (Not Exists(@773)) \
-  And ( (RegFind(@300$a, '[Mm]ikrofilm\\b') >= 0) Or (007/1-2/ = 'hj') Or (008/24/ = 'a') ) \
+  And ( RegFind(@300$a, '[Mm]ikrofilm\\b') >= 0 ) \
   And (Not ((000/7/ = 'e') Or (000/7/ = 'f')))
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
