@@ -807,9 +807,9 @@ T36   | <DEL  | S
 000 | 338(newest)$2 | 'rdacarrier'
 #endif
 
-// VIDEOLEVY
+// VIDEOLEVY vs TIETOLEVY
 
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Dd][Vv][Dd]-levy|[Vv]ideolevy|[Bb]lu-?ray') >= 0) And If (Not Exists(@773))
+#if (Not Exists(@338)) And (Not Exists(@773)) And (RegFind(@300$a, '[Dd][Vv][Dd]-levy|[Vv]ideolevy|[Bb]lu-?ray') >= 0) And (Not (@000/7/ = 'm')) 
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
 000 | 338(newest)$a | 'videolevy'
@@ -817,9 +817,19 @@ T36   | <DEL  | S
 000 | 338(newest)$2 | 'rdacarrier'
 #endif
 
-// SAMMA PÅ SVENSKA : VIDEOSKIVA
+#if (Not Exists(@338)) And (Not Exists(@773)) And (RegFind(@300$a, '[Dd][Vv][Dd]-levy|[Vv]ideolevy|[Bb]lu-?ray') >= 0) And (@000/7/ = 'm')
+000 | 338(new)I1 | ' '
+000 | 338(newest)I2 | ' '
+000 | 338(newest)$a | 'tietolevy'
+000 | 338(newest)$b | 'cd'
+000 | 338(newest)$2 | 'rdacarrier'
+#endif
 
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Dd][Vv][Dd]-skiv|[Vv]ideoskiv') >= 0) And If (Not Exists(@773))
+
+// SAMMA PÅ SVENSKA : VIDEOSKIVA (not bothering with all the finesse above...)
+
+#if (Not Exists(@338)) And If (Not Exists(@773)) \
+    And If (RegFind(@300$a, '[Dd][Vv][Dd]-skiv|[Vv]ideoskiv') >= 0) 
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
 000 | 338(newest)$a | 'videoskiva'
