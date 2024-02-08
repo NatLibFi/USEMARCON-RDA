@@ -366,9 +366,9 @@ Y30   | 300    | S
 T36(ns)$a | 336(n)$a | Delete('.', At Ending); \
                        Delete(',', At Ending); \
                        If (InTable(S, '336_a.tbl')) Then Table ('336_a.tbl') Else Table ('336_a_svenska.tbl')
-#if (Exists(T36$8))
-T36(ns)$a | 336(n)$8 | T36$8
-#endif
+//#if (Exists(T36$8))
+//T36(ns)$a | 336(n)$8 | T36$8
+//#endif
 
 T36   | <DEL  | S
 
@@ -384,7 +384,27 @@ T36   | <DEL  | S
 
 336(ns)$a | 336(n) | Sort('8ab2')
 
-// based on https://www.loc.gov/standards/valuelist/rdacontent.html
+// Try to guess missing 336 from 300. This gets iffy
+#if (Not Exists(@336)) And ( @000/7/ = 'o' Or @000/7/ = 'p') \
+     And (RegFind(@300$a, '\\bkirja') >= 0)
+000 | 336(new)$a | 'teksti'
+000 | 336(newest)I1 | ' '
+000 | 336(newest)I2 | ' '
+000 | 336(newest)$b | 'txt'
+000 | 336(newest)$2 | 'rdacontent'
+#endif
+
+#if (Not Exists(@336)) And ( @000/7/ = 'o' Or @000/7/ = 'p') \
+     And (RegFind(@300$a, 'äänilevy|C-kasetti|LP-levy') >= 0)
+// esitetty musiikki/prm vs puhe/spw vs ääni/snd...
+000 | 336(new)$a | 'ääni'
+000 | 336(newest)I1 | ' '
+000 | 336(newest)I2 | ' '
+000 | 336(newest)$b | 'snd'
+000 | 336(newest)$2 | 'rdacontent'
+#endif
+
+// Fallback based on https://www.loc.gov/standards/valuelist/rdacontent.html
 #if (Not Exists(%336)) And ( @000/7/ = 'o' Or @000/7/ = 'p') 
 000 | 336(new)$a | 'muu'
 000 | 336(newest)I1 | ' '
@@ -407,7 +427,27 @@ T36   | <DEL  | S
 337$2 | 337$2 | S
 #endif
 
-337$8 | 337$8 | S
+// 337$8 | 337$8 | S
+
+
+#if (Not Exists(@337)) And ( @000/7/ = 'o' Or @000/7/ = 'p') \
+     And (RegFind(@300$a, '\\bkirja') >= 0)
+000 | 337(new)$a | 'käytettävissä ilman laitetta'
+000 | 337(newest)I1 | ' '
+000 | 337(newest)I2 | ' '
+000 | 337(newest)$b | 'n'
+000 | 337(newest)$2 | 'rdacontent'
+#endif
+
+#if (Not Exists(@336)) And ( @000/7/ = 'o' Or @000/7/ = 'p') \
+     And (RegFind(@300$a, '\\bCD-äänilevy') >= 0)
+// esitetty musiikki/prm vs puhe/spw vs ääni/snd...
+000 | 337(new)$a | 'audio'
+000 | 337(newest)I1 | ' '
+000 | 337(newest)I2 | ' '
+000 | 337(newest)$b | 's'
+000 | 337(newest)$2 | 'rdacontent'
+#endif
 
 // https://www.loc.gov/standards/valuelist/rdamedia.html offers little
 // We could make rules for based on field 300, but that would get insanely complicate
