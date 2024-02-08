@@ -430,9 +430,9 @@ T36   | <DEL  | S
 // 337$8 | 337$8 | S
 
 
-#if (Not Exists(@337)) And
-    ( ( @000/7/ = 'o' Or @000/7/ = 'p') And (RegFind(@300$a, '\\bkirja') >= 0 ) \
-      Or ( (@000/7/ = 'e' Or @000/7/ = 'f') And (@008/30/ = '|' or @008/30/ = 'r' ) ) )
+#if (Not Exists(@337)) And \
+    ( ( ( @000/7/ = 'o' Or @000/7/ = 'p') And (RegFind(@300$a, '\\bkirja') >= 0 ) ) \
+      Or ( (@000/7/ = 'e' Or @000/7/ = 'f') And (@008/30/ = '|' Or @008/30/ = 'r' ) ) )
 000 | 337(new)$a | 'käytettävissä ilman laitetta'
 000 | 337(newest)I1 | ' '
 000 | 337(newest)I2 | ' '
