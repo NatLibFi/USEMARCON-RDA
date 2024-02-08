@@ -430,8 +430,9 @@ T36   | <DEL  | S
 // 337$8 | 337$8 | S
 
 
-#if (Not Exists(@337)) And ( @000/7/ = 'o' Or @000/7/ = 'p') \
-     And (RegFind(@300$a, '\\bkirja') >= 0)
+#if (Not Exists(@337)) And
+    ( ( @000/7/ = 'o' Or @000/7/ = 'p') And (RegFind(@300$a, '\\bkirja') >= 0 ) \
+      Or ( (@000/7/ = 'e' Or @000/7/ = 'f') And (@008/30/ = '|' or @008/30/ = 'r' ) ) )
 000 | 337(new)$a | 'käytettävissä ilman laitetta'
 000 | 337(newest)I1 | ' '
 000 | 337(newest)I2 | ' '
@@ -681,7 +682,7 @@ T36   | <DEL  | S
 
 // SAMMA PÅ SVENSKA : MIKROFILMSRULLE
 #if (Not Exists(@338)) And (Not Exists(@773)) \
-  And ( RegFind(@300$a, '[Mm]ikrofilm\\b') >= 0 ) \
+  And ( RegFind(@300$a, '[Mm]ikrofilm\\b|[Mm]ikrofilmsrull') >= 0 ) \
   And (Not ((000/7/ = 'e') Or (000/7/ = 'f')))
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
