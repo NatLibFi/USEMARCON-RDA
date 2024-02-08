@@ -10,15 +10,20 @@ E s i n e 0x20 ( k a r t o g r a f i n e n 0x20 ; 0x20 k o l m i u l o t t e i n
 E s i n e 0x20 ( k a r t o g r a f i n e n 0x20 ; 0x20 k o s k e t e l t a v a ) 	| k a r t o g r a f i n e n 0x20 t a k t i i l i 0x20 k o l m i u l o t t e i n e n 0x20 m u o t o 
 E s i n e 0x20 ( k o l m i u l o t t e i n e n ) 	| k o l m i u l o t t e i n e n 0x20 m u o t o 
 E s i n e 0x20 ( k o s k e t e l t a v a ) 	| t a k t i i l i 0x20 k o l m i u l o t t e i n e n 0x20 m u o t o 
-
+e s i t e t t y 0x20 m u s i i k k i  | e s i t e t t y 0x20 m u s i i k k i
 k a k s i u l o t t e i n e n 0x20 l i i k k u v a 0x20 k u v a  | k a k s i u l o t t e i n e n 0x20 l i i k k u v a 0x20 k u v a 
 k a r t o g r a f i n e n 0x20 d a t a | k a r t o g r a f i n e n 0x20 d a t a 
 k a r t o g r a f i n e n 0x20 k o l m i u l o t t e i n e n 0x20 m u o t o  | k a r t o g r a f i n e n 0x20 k o l m i u l o t t e i n e n 0x20 m u o t o
+
+k a r t o g r a f i n e n 0x20 k u v a 	| k a r t o g r a f i n e n 0x20 k u v a
+
 k a r t o g r a f i n e n 0x20 l i i k k u v a 0x20 k u v a  | k a r t o g r a f i n e n 0x20 l i i k k u v a 0x20 k u v a 
 k a r t o g r a f i n e n 0x20 t a k t i i l i 0x20 k o l m i u l o t t e i n e n 0x20 m u o t o | k a r t o g r a f i n e n 0x20 t a k t i i l i 0x20 k o l m i u l o t t e i n e n 0x20 m u o t o 
 k a r t o g r a f i n e n 0x20 t a k t i i l i 0x20 k u v a  | k a r t o g r a f i n e n 0x20 t a k t i i l i 0x20 k u v a
 k o l m i u l o t t e i n e n 0x20 l i i k k u v a 0x20 k u v a | k o l m i u l o t t e i n e n 0x20 l i i k k u v a 0x20 k u v a 
 k o l m i u l o t t e i n e n 0x20 m u o t o  | k o l m i u l o t t e i n e n 0x20 m u o t o
+
+K u v a 	| s t i l l k u v a 
 K u v a 0x20 ( k a r t o g r a f i n e n 0x20 ) 	| k a r t o g r a f i n e n 0x20 k u v a 
 K u v a 0x20 ( k a r t o g r a f i n e n 0x20 ; 0x20 k o s k e t e l t a v a ) 	| k a r t o g r a f i n e n 0x20 t a k t i i l i 0x20 k u v a 
 K u v a 0x20 ( k a r t o g r a f i n e n 0x20 ; 0x20 l i i k k u v a ) 	| k a r t o g r a f i n e n 0x20 l i i k k u v a 0x20 k u v a 
@@ -35,12 +40,14 @@ l i i k e n o t a a t i o  | l i i k e n o t a a t i o
 M u s i i k k i 0x20 ( e s i t e t t y ) 	| e s i t e t t y 0x20 m u s i i k k i 
 M u s i i k k i 0x20 ( k o s k e t e l t a v a 0x20 ; 0x20 n o t a t o i t u ) 	| t a k t i i l i 0x20 n u o t t i k i r j o i t u s 
 M u s i i k k i 0x20 ( n o t a t o i t u ) 	| n u o t t i k i r j o i t u s 
+m u u | a n n a n 
 m 0xc3 0xa4 0xc3 0xa4 r i t t e l e m 0xc3 0xa4 t 0xc3 0xb6 n | m 0xc3 0xa4 0xc3 0xa4 r i t t e l e m 0xc3 0xa4 t 0xc3 0xb6 n 
 M 0xc3 0xa4 0xc3 0xa4 r i t t e l e m 0xc3 0xa4 t 0xc3 0xb6 n 0x20 s i s 0xc3 0xa4 l t 0xc3 0xb6 t y y p p i 	| m 0xc3 0xa4 0xc3 0xa4 r i t t e l e m 0xc3 0xa4 t 0xc3 0xb6 n 
 n u o t t i k i r j o i t u s | n u o t t i k i r j o i t u s
 p u h e 	| p u h e
 P u h e 	| p u h e
 s t i l l k u v a | s t i l l k u v a 
+t a k t i i l i 0x20 k o l m i u l o t t e i n e n 0x20 m u o t o  | t a k t i i l i 0x20 k o l m i u l o t t e i n e n 0x20 m u o t o 
 t a k t i i l i 0x20 k u v a | t a k t i i l i 0x20 k u v a 
 t a k t i i l i 0x20 l i i k e n o t a a t i o  | t a k t i i l i 0x20 l i i k e n o t a a t i o 
 t a k t i i l i 0x20 n u o t t i k i r j o i t u s | t a k t i i l i 0x20 n u o t t i k i r j o i t u s 
