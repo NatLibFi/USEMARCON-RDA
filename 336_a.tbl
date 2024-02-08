@@ -16,6 +16,7 @@ k a r t o g r a f i n e n 0x20 l i i k k u v a 0x20 k u v a  | k a r t o g r a f
 k a r t o g r a f i n e n 0x20 t a k t i i l i 0x20 k o l m i u l o t t e i n e n 0x20 m u o t o | k a r t o g r a f i n e n 0x20 t a k t i i l i 0x20 k o l m i u l o t t e i n e n 0x20 m u o t o 
 k a r t o g r a f i n e n 0x20 t a k t i i l i 0x20 k u v a  | k a r t o g r a f i n e n 0x20 t a k t i i l i 0x20 k u v a
 k o l m i u l o t t e i n e n 0x20 l i i k k u v a 0x20 k u v a | k o l m i u l o t t e i n e n 0x20 l i i k k u v a 0x20 k u v a 
+K u v a 0x20 ( k a r t o g r a f i n e n 0x20 ) 	| k a r t o g r a f i n e n 0x20 k u v a 
 K u v a 0x20 ( k a r t o g r a f i n e n 0x20 ; 0x20 k o s k e t e l t a v a ) 	| k a r t o g r a f i n e n 0x20 t a k t i i l i 0x20 k u v a 
 K u v a 0x20 ( k a r t o g r a f i n e n 0x20 ; 0x20 l i i k k u v a ) 	| k a r t o g r a f i n e n 0x20 l i i k k u v a 0x20 k u v a 
 K u v a 0x20 ( k a r t o g r a f i n e n ) 	| k a r t o g r a f i n e n 0x20 k u v a 
