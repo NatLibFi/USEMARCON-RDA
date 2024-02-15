@@ -334,9 +334,8 @@ F45 | 245 | S
 #if (Not Exists(@773))
 260I1 | 260I1 | S
 260I2 | 260I2 | S
-260$a | 260$a | S; RegReplace('S\\.\\s*[Ll]\\.', 'Kustannuspaikka tuntematon');
+260$a | 260$a | S; RegReplace('S\\.\\s*[Ll]\\.', 'Kustannuspaikka tuntematon'); \
                    RegReplace('[Ss]\\.\\s*[Ll]\\.', 'kustannuspaikka tuntematon');
-                   RegReplace('[Ss]\\.\\s*[Nn]\\.', 'kustantaja tuntematon')
 260$b | 260$b | S; RegReplace('[Ss]\\.\\s*[Nn]\\.', 'kustantaja tuntematon')
 260$c | 260$c | S; RegReplace('[Ss]\\.\\s*[Aa]\\.*', 'julkaisuaika tuntematon')
 260$? | 260$? | S

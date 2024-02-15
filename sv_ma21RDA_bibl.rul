@@ -308,11 +308,13 @@ B43 | 243 | S; RAAMATTU
 F45 | 245 | S
 
 #if (Not Exists(@773))
+#if (Not Exists(@773))
 260I1 | 260I1 | S
 260I2 | 260I2 | S
-260$a | 260$a | S
-260$b | 260$b | S
-260$c | 260$c | S
+260$a | 260$a | S; RegReplace('S\\.\\s*[Ll]\\.', 'Utgivningsort okänd'); \
+                   RegReplace('[Ss]\\.\\s*[Ll]\\.', 'utgivningsort okänd');
+260$b | 260$b | S; RegReplace('[Ss]\\.\\s*[Nn]\\.', 'utgivare okänd')
+260$c | 260$c | S; RegReplace('[Ss]\\.\\s*[Aa]\\.*', 'utgivningstid okänd')
 260$? | 260$? | S
 #endif
 
