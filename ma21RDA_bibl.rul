@@ -539,42 +539,21 @@ T36   | <DEL  | S
 
 // VIDEOKASETTI
 
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Vv]ideokas') >= 0) \
-    And If (Not RegFind(@300$a, '[Vv]ideokass') >= 0) \
-    And If (Not Exists(@773))
+#if (Not Exists(@338)) And If (Not Exists(@773)) \
+    And If (RegFind(@300$a, '[Vv]ideo ?cas|[Vv]ideokas') >= 0)
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
-000 | 338(newest)$a | 'videokasetti'
+000 | 338(newest)$a | If (RegFind(@040$b, 'swe') >= 0) 'videokassett' Else 'videokasetti'
 000 | 338(newest)$b | 'vf'
 000 | 338(newest)$2 | 'rdacarrier'
 #endif
 
-// SAMMA PÅ SVENSKA : VIDEOKASSETT
+// PIIRTOHEITINKALVO / TRANSPARANG
 
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Vv]ideokass') >= 0) And If (Not Exists(@773))
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Hh]eijastuskuva|[Kk]alvo|[Tt]ransparang') >= 0) And If (Not Exists(@773))
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
-000 | 338(newest)$a | 'videokassett'
-000 | 338(newest)$b | 'vf'
-000 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-// PIIRTOHEITINKALVO
-
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Hh]eijastuskuva|[Kk]alvo') >= 0) And If (Not Exists(@773))
-000 | 338(new)I1 | ' '
-000 | 338(newest)I2 | ' '
-000 | 338(newest)$a | 'piirtoheitinkalvo'
-000 | 338(newest)$b | 'gt'
-000 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-// SAMMA PÅ SVENSKA : TRANSPARANG
-
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Tt]ranspara') >= 0) And If (Not Exists(@773))
-000 | 338(new)I1 | ' '
-000 | 338(newest)I2 | ' '
-000 | 338(newest)$a | 'transparang'
+000 | 338(newest)$a | If (RegFind(@040$b, 'swe') >= 0) 'transparang' Else 'piirtoheitinkalvo'
 000 | 338(newest)$b | 'gt'
 000 | 338(newest)$2 | 'rdacarrier'
 #endif
@@ -703,22 +682,12 @@ T36   | <DEL  | S
 000 | 338(newest)$2 | 'rdacarrier'
 #endif
 
-// ÄÄNIKELA
+// ÄÄNIKELA / LJUDSPOLE
 
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Ää]änikela') >= 0) And If (Not Exists(@773))
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Ll]judspol|[Ää]änikela') >= 0) And If (Not Exists(@773))
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
-000 | 338(newest)$a | 'äänikela'
-000 | 338(newest)$b | 'st'
-000 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-// SAMMA PÅ SVENSKA : LJUDSPOLE
-
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Ll]judsp') >= 0) And If (Not Exists(@773))
-000 | 338(new)I1 | ' '
-000 | 338(newest)I2 | ' '
-000 | 338(newest)$a | 'ljudspole'
+000 | 338(newest)$a | If (RegFind(@040$b, 'swe') >= 0) 'ljudspole' Else 'äänikela'
 000 | 338(newest)$b | 'st'
 000 | 338(newest)$2 | 'rdacarrier'
 #endif
@@ -810,12 +779,12 @@ T36   | <DEL  | S
 
 // ÄÄNILEVY
 
-#if (Not Exists(@338)) \
-  And ( (RegFind(@300$a, '[Cc][Dd]-levy|äänilevy') >= 0) ) \
-  And (Not Exists(@773))
+#if (Not Exists(@338)) And (Not Exists(@773)) \
+  And ( (RegFind(@300$a, '[Cc][Dd]-levy|äänilevy|[Cc][Dd]-skiv|ljudskiv') >= 0) ) \
+  
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
-000 | 338(newest)$a | 'äänilevy'
+000 | 338(newest)$a | If (RegFind(@040$b, 'swe') >= 0) 'ljudskiva' Else 'äänilevy'
 000 | 338(newest)$b | 'sd'
 000 | 338(newest)$2 | 'rdacarrier'
 #endif
@@ -881,33 +850,22 @@ T36   | <DEL  | S
 // VIDEOLEVY vs TIETOLEVY
 
 // Here using LDR/06 to guess 338 value. 336 and 337 might be better or at leat more human-readable (eg. 337$a video...)
-#if (Not Exists(@338)) And (Not Exists(@773)) And (RegFind(@300$a, '[Dd][Vv][Dd]-levy|[Vv]ideolevy|[Bb]lu-?ray') >= 0) And (Not (@000/7/ = 'm')) 
+#if (Not Exists(@338)) And (Not Exists(@773)) And (RegFind(@300$a, '[Dd][Vv][Dd]-(levy|skiv)|[Vv]ideo(disc|levy|skiv)|[Bb]lu-?ray') >= 0) And (Not (@000/7/ = 'm')) 
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
-000 | 338(newest)$a | 'videolevy'
+000 | 338(newest)$a | If (RegFind(@040$b, 'swe') >= 0) Then 'videoskiva' Else 'videolevy'
 000 | 338(newest)$b | 'vd'
 000 | 338(newest)$2 | 'rdacarrier'
 #endif
 
-#if (Not Exists(@338)) And (Not Exists(@773)) And (RegFind(@300$a, '[Dd][Vv][Dd]-levy|[Oo]ptinen levy|[Oo]ptista levy|[Vv]ideolevy|[Bb]lu-?ray') >= 0) And (@000/7/ = 'm')
+#if (Not Exists(@338)) And (Not Exists(@773)) And (RegFind(@300$a, '[Dd][Vv][Dd]-levy|[Oo]ptinen levy|[Oo]ptiska? skiv|[Oo]ptista levy|[Vv]ideolevy|[Bb]lu-?ray') >= 0) And (@000/7/ = 'm')
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
-000 | 338(newest)$a | 'tietolevy'
+000 | 338(newest)$a | If (RegFind(@040$b, 'swe') >= 0) Then 'datorskiva' Else 'tietolevy'
 000 | 338(newest)$b | 'cd'
 000 | 338(newest)$2 | 'rdacarrier'
 #endif
 
-
-// SAMMA PÅ SVENSKA : VIDEOSKIVA (not bothering with all the finesse above...)
-
-#if (Not Exists(@338)) And If (Not Exists(@773)) \
-    And If (RegFind(@300$a, '[Dd][Vv][Dd]-skiv|[Vv]ideoskiv') >= 0) 
-000 | 338(new)I1 | ' '
-000 | 338(newest)I2 | ' '
-000 | 338(newest)$a | 'videoskiva'
-000 | 338(newest)$b | 'vd'
-000 | 338(newest)$2 | 'rdacarrier'
-#endif
 
 // 338-KENTTIEN LUOMINEN LOPPUU
 
