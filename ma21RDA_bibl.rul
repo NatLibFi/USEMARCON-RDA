@@ -180,13 +180,14 @@ versio 1.9.2016 / Kansalliskirjasto (TV)
 024I1 | 024I1 | S
 024I2 | 024I2 | S
 024$c | <DEL  | S
-024   | 024   | Replace('.,' By ','); \ // Tapaukset tyyliin "024$q sid., muovikannet"
+024$? | 024$? | Replace('.,' By ','); \ // Tapaukset tyyliin "024$q sid., muovikannet"
                 Delete('.', At Ending); \ // Poistetaan piste lyhenteen perästä ennen avaamista
                 SIDOSASUT
 
 028I1 | 028I1  | If (Not Exists(@028(2))) And (S = '0') And (@000/7/ = 'c') Then '3' Else S
 028I2 | 028I2  | S
-028   | 028    | S
+028$q | 028$q  | SIDOSASUT
+028$? | 028$?  | S
 
 100I1 | 100I1  | S
 100I2 | 100I2  | S
