@@ -3,9 +3,14 @@ versio 1.9.2016 / Kansalliskirjasto (TV)
 
 #define version 317
 
-#define macro RELATORTERM | Table ('Funktiotermit.tbl'); \
-	      		    Delete('.', At Ending); \
-			    If (NextSub($e) = '' Or NextSub($e) = '0' && NextSub($e) = '5' Or NextSub($e) = '9' ) Then S + '.' Else S + ','
+// This rule is intented for fields with a single $e subfield.
+// Useamarcon is crappy and will fail spectacularily with multiple $es.
+// (= same rule is applied for all $e subfield, apparently it's always the first
+// $e subfield for which the nexSub($e) check is done.
+#define macro RELATORTERM | Table ('Funktiotermit.tbl'); S; \
+			    If (NextSub($e) = '' Or NextSub($e) = 't' Or NextSub($e) = '0' Or NextSub($e) = '5' Or NextSub($e) = '9' ) Then RegReplace('[.]?\$', '.') \
+			    Else RegReplace('[.,]?\$', ',')
+
 
 #define macro 300AE | RegReplace('\\b[Nn]\\.', 'noin', 'g'); \
                       RegReplace('(\\d+) s\\.', '\\1 sivua', 'g'); \
@@ -47,6 +52,11 @@ versio 1.9.2016 / Kansalliskirjasto (TV)
                       RegReplace('liites\\.|liites(\$|\\b)', 'liitesivua', 'g'); \
                       RegReplace('liitt\\.', 'liitteitä', 'g'); \
                       RegReplace('[Vv]erkkokirja', 'verkkoaineisto', 'g')
+
+#define macro 300C | RegReplace('\\b2:o', 'folio', 'g'); \
+	RegReplace('\\b4:o', 'kvartto', 'g'); \
+	RegReplace('\\b8:o', 'oktaavo', 'g')
+
 
 // Musiikin esityskokoonpanotermien avaaminen, osakenttä $m kentissä 130, 240, 600, 610, 630, 700, 710, 730, 800, 810, 830
 
@@ -353,9 +363,9 @@ F45 | 245 | S
 300$a | <Y30$a | 300AE; 300BE // Ei avata p.-lyhennettä jos kyseessä on esim. ranska
 #endif
 
-300$b | <Y30$b | 300BE
-300$c | <Y30$c | S; Delete('.', At Ending)
-300$e | <Y30$e | 300BE
+300$b | <Y30$b | 300BE; Delete('.', At Ending)
+300$c | <Y30$c | 300C; Delete('.', At Ending)
+300$e | <Y30$e | 300BE; Delete('.', At Ending)
 300$? | <Y30$? | S
 
 Y30   | 300    | S
