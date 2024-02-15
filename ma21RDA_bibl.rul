@@ -365,7 +365,7 @@ Y30   | 300    | S
 336   | <T36 | S
 T36(ns)$a | 336(n)$a | Delete('.', At Ending); \
                        Delete(',', At Ending); \
-                       If (InTable(S, '336_a.tbl')) Then Table ('336_a.tbl') Else Table ('336_a_svenska.tbl')
+		       If (RegFind(@040$b, 'swe') >= 0) Then Table ('336_a_svenska.tbl') Else Table ('336_a.tbl')
 //#if (Exists(T36$8))
 //T36(ns)$a | 336(n)$8 | T36$8
 //#endif
@@ -424,7 +424,10 @@ T36   | <DEL  | S
 
 337I1 | 337I1 | S
 337I2 | 337I2 | S
-337$a | 337$a |  Delete('.', At Ending); Delete(',', At Ending); If (InTable(S, '337_a.tbl')) Then Table ('337_a.tbl') Else Table ('337_a_svenska.tbl')
+337$a | 337$a |  Delete('.', At Ending); \
+      	      	 Delete(',', At Ending); \
+		 If (InTable(S, '337_a.tbl') And (RegFind(@040$b, 'swe') >= 0)) Then Table ('337_a_svenska.tbl') Else Table ('337_a.tbl')
+
 
 #if Not (Exists(@337$b))
 337$a | 337$b | Delete('.', At Ending); Delete(',', At Ending) ; If (InTable(S, '337_b.tbl')) Then Table ('337_b.tbl')
@@ -862,7 +865,7 @@ T36   | <DEL  | S
 000 | 338(newest)$2 | 'rdacarrier'
 #endif
 
-// TIETOLEVY
+// TIETOLEVY / DATORSKIVA
 
 #if (RegFind(@300$a,  '[Rr][Oo][Mm]') >= 0) \
   And (Not Exists(@773)) \
@@ -870,17 +873,7 @@ T36   | <DEL  | S
   And (InTable(@336$a, '336_a.tbl'))
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
-000 | 338(newest)$a | 'tietolevy'
-000 | 338(newest)$b | 'cd'
-000 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-// SAMMA PÅ SVENSKA : DATORSKIVA
-
-#if (Not Exists(%338)) And If (RegFind(@300$a, '[Rr][Oo][Mm]') >= 0) And If (Not Exists(@773)) And (InTable(@336$a, '336_a_svenska.tbl'))
-000 | 338(new)$a | 'datorskiva'
-000 | 338(newest)I1 | ' '
-000 | 338(newest)I2 | ' '
+000 | 338(newest)$a | If (RegFind(@040$b, 'swe') >= 0) 'datorskiva' Else 'tietolevy'
 000 | 338(newest)$b | 'cd'
 000 | 338(newest)$2 | 'rdacarrier'
 #endif
