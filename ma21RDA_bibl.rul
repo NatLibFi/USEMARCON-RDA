@@ -3,6 +3,10 @@ versio 1.9.2016 / Kansalliskirjasto (TV)
 
 #define version 317
 
+#define macro RELATORTERM | Table ('Funktiotermit.tbl'); \
+	      		    Delete('.', At Ending); \
+			    If (NextSub($e) = '' Or NextSub($e) = '0' && NextSub($e) = '5' Or NextSub($e) = '9' ) Then S + '.' Else S + ','
+
 #define macro 300AE | RegReplace('\\b[Nn]\\.', 'noin', 'g'); \
                       RegReplace('(\\d+) s\\.', '\\1 sivua', 'g'); \
                       RegReplace('(\\[\\d+\\]) s\\.', '\\1 sivua', 'g'); \
@@ -180,7 +184,7 @@ versio 1.9.2016 / Kansalliskirjasto (TV)
 100$b | <A10$b | S; If ((100$c Follows 100$b) And RegFind(@100$c, 'fikt') >= 0) Delete (',', At Ending)
 100$c | <A10$c | FIKTIIVINENHAHMO
 100$d | <A10$d | AIKAMAAREET
-100$e | <A10$e | Table ('Funktiotermit.tbl'); Delete('.', At Ending); If (NextSub($e) = '' OrNextSub($e) = '5' Or NextSub($e) = '9' ) Then S + '.' Else S + ','
+100$e | <A10$e | RELATORTERM
 100$4 | <A10$e | If (Not (Exists(@100$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
 100$? | <A10$? | S
 
@@ -189,7 +193,7 @@ A10   | 100    | FUNKTIOVALIMERKIT
 110I1 | 110I1  | S
 110I2 | 110I2  | S
 110$c | <B11$c | FIKTIIVINENYHTEISO; AIKAMAAREET
-110$e | <B11$e | Table ('Funktiotermit.tbl')
+110$e | <B11$e | RELATORTERM
 110$4 | <B11$e | If (Not (Exists(@110$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
 110$? | <B11$? | S
 
@@ -918,7 +922,7 @@ T36   | <DEL  | S
 600I2 | 600I2  | S
 600$c | <C60$c | FIKTIIVINENHAHMO
 600$d | <C60$d | AIKAMAAREET
-600$e | <C60$e | Table ('Funktiotermit.tbl')
+600$e | <C60$e | RELATORTERM
 
 #if (RegFind(@600$t, 'Triot') >= 0)
 600$m | <C60$m | TRIOT; ESITYSKOKOONPANO
@@ -947,7 +951,7 @@ C60 | 600 | FUNKTIOVALIMERKIT; If (@600I2 = '0') And (RegFind('[^A-Za-z]\$') < 0
 610I1 | 610I1  | S
 610I2 | 610I2  | S
 610$c | <D61$c | FIKTIIVINENYHTEISO
-610$e | <D61$e | Table ('Funktiotermit.tbl')
+610$e | <D61$e | RELATORTERM
 
 #if (RegFind(@610$t, 'Triot') >= 0)
 610$m | <D61$m | TRIOT; ESITYSKOKOONPANO
@@ -1045,7 +1049,7 @@ Z65   | 662    | FUNKTIOVALIMERKIT
 700I2 | 700I2  | S
 700$c | <G70$c | FIKTIIVINENHAHMO
 700$d | <G70$d | AIKAMAAREET
-700$e | <G70$e | Table ('Funktiotermit.tbl'); Delete ('.', At Ending); S + '.'
+700$e | <G70$e | RELATORTERM
 
 #if (RegFind(@700$t, 'Triot') >= 0)
 700$m | <G70$m | TRIOT; ESITYSKOKOONPANO
@@ -1074,7 +1078,7 @@ G70 | 700 | FUNKTIOVALIMERKIT
 710I1 | 710I1  | S
 710I2 | 710I2  | S
 710$c | <H71$c | FIKTIIVINENYHTEISO
-710$e | <H71$e | Table ('Funktiotermit.tbl')
+710$e | <H71$e | RELATORTERM
 
 #if (RegFind(@710$t, 'Triot') >= 0)
 710$m | <H71$m | TRIOT; ESITYSKOKOONPANO
@@ -1162,6 +1166,7 @@ J73 | 730 | LOPPUPISTE
 800I2 | 800I2  | S
 800$c | <K80$c | FIKTIIVINENHAHMO
 800$d | <K80$d | AIKAMAAREET
+800$e | <K80$e | RELATORTERM
 
 #if (RegFind(@800$t, 'Triot') >= 0)
 800$m | <K80$m | TRIOT; ESITYSKOKOONPANO
@@ -1188,6 +1193,7 @@ K80 | 800 | FUNKTIOVALIMERKIT
 
 810I1 | 810I1  | S
 810I2 | 810I2  | S
+810$e | <L81$e | RELATORTERM
 
 #if (RegFind(@810$t, 'Triot') >= 0)
 810$m | <L81$m | TRIOT; ESITYSKOKOONPANO
