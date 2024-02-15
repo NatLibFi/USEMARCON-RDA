@@ -116,11 +116,11 @@ versio 1.9.2016 / Kansalliskirjasto (TV)
                             RegReplace('\\bn\\.', 'noin', 'g'); \
                             RegReplace('\\bvs\\.', 'vuosisata', 'g')
 
-#define macro SIDOSASUT |  RegReplace('\\bsid\\.|\\bsid\\b', 'sidottu', 'g'); \
-                           RegReplace('\\bnid\\.|\\bnid\\b', 'nidottu', 'g'); \
+#define macro SIDOSASUT |  RegReplace('\\b(sid|Sid|SID|sidottu)(\\.|\\b)', 'kovakantinen', 'g'); \
+                           RegReplace('\\b(nid|Nid|NID|nidottu)(\\.|\\b)', 'pehmeäkantinen', 'g'); \
                            RegReplace('\\bvirh\\b|\\bvirh\\.', 'virheellinen', 'g'); \
-                           RegReplace('\\binb\\b|\\binb\\.', 'inbunden', 'g'); \
-                           RegReplace('\\bhft\\b|\\bhft\\.', 'häftad', 'g'); \
+                           RegReplace('\\b(inb|inbunden)(\\b|\\.)', 'hårda pärmar', 'g'); \
+                           RegReplace('\\b(hft|HFT|häftad)(\\b|\\.)', 'mjuka pärmar', 'g'); \
                            RegReplace('\\bpbk\\b|\\bpbk\\.', 'paperback', 'g'); \
                            RegReplace('\\bhbk\\b|\\bhbk\\.', 'hardback', 'g'); \
                            RegReplace('\\balk\\b|\\balk\\.', 'alkaline', 'g'); \
