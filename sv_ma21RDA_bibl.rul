@@ -90,7 +90,7 @@ versio 1.9.2016 / Kansalliskirjasto (TV)
                          RegReplace('\\bVT(\\b|\\.)', 'Vanha testamentti', 'g')
 
 
-#define macro FIKTIIVINENHAHMO | RegReplace('fikt\\.', '(fiktiivinen hahmo)', 'g'); \
+#define macro FIKTIIVINENHAHMO | RegReplace('fikt\\.', '(fiktiv gestalt)', 'g'); \
                                  RegReplace('fiktiivinen henkilö', '(fiktiivinen hahmo)', 'g')
 
 #define macro FIKTIIVINENYHTEISO | RegReplace('fikt\\.', '(fiktiivinen yhteisö)')
@@ -100,11 +100,12 @@ versio 1.9.2016 / Kansalliskirjasto (TV)
                             RegReplace('\\bn\\.', 'noin', 'g'); \
                             RegReplace('\\bvs\\.', 'vuosisata', 'g')
 
-#define macro SIDOSASUT |  RegReplace('\\bsid\\.|\\bsid\\b', 'sidottu', 'g'); \
-                           RegReplace('\\bnid\\.|\\bnid\\b', 'nidottu', 'g'); \
+
+#define macro SIDOSASUT |  RegReplace('\\b(sid|Sid|SID|sidottu)(\\.|\\b)', 'kovakantinen', 'g'); \
+                           RegReplace('\\b(nid|Nid|NID|nidottu)(\\.|\\b)', 'pehmeäkantinen', 'g'); \
                            RegReplace('\\bvirh\\b|\\bvirh\\.', 'virheellinen', 'g'); \
-                           RegReplace('\\binb\\b|\\binb\\.', 'inbunden', 'g'); \
-                           RegReplace('\\bhft\\b|\\bhft\\.', 'häftad', 'g'); \
+                           RegReplace('\\b(inb|inbunden)(\\b|\\.)', 'hårda pärmar', 'g'); \
+                           RegReplace('\\b(hft|HFT|häftad)(\\b|\\.)', 'mjuka pärmar', 'g'); \
                            RegReplace('\\bpbk\\b|\\bpbk\\.', 'paperback', 'g'); \
                            RegReplace('\\bhbk\\b|\\bhbk\\.', 'hardback', 'g'); \
                            RegReplace('\\balk\\b|\\balk\\.', 'alkaline', 'g'); \
@@ -163,13 +164,16 @@ versio 1.9.2016 / Kansalliskirjasto (TV)
 
 024I1 | 024I1 | S
 024I2 | 024I2 | S
-024   | 024   | Replace('.,' By ','); \ // Tapaukset tyyliin "024$q sid., muovikannet"
+024$c | <DEL  | S
+024$? | 024$? | Replace('.,' By ','); \ // Tapaukset tyyliin "024$q sid., muovikannet"
                 Delete('.', At Ending); \ // Poistetaan piste lyhenteen perästä ennen avaamista
                 SIDOSASUT
 
 028I1 | 028I1  | S
 028I2 | 028I2  | S
-028   | 028    | S
+028$q | 028$q  | SIDOSASUT
+028$? | 028$?  | S
+
 
 100I1 | 100I1  | S
 100I2 | 100I2  | S
