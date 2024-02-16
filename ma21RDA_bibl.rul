@@ -12,6 +12,9 @@ versio 1.9.2016 / Kansalliskirjasto (TV)
 			    Else RegReplace('[.,]?\$', ',')
 
 
+
+
+
 #define macro 300AE | RegReplace('\\b[Nn]\\.', 'noin', 'g'); \
                       RegReplace('(\\d+) s\\.', '\\1 sivua', 'g'); \
                       RegReplace('(\\[\\d+\\]) s\\.', '\\1 sivua', 'g'); \
@@ -148,7 +151,7 @@ versio 1.9.2016 / Kansalliskirjasto (TV)
                                RegReplace('Elektroninen julkaisu|Verkkojulkaisuun', 'Linkki verkkoaineistoon')
 
 #define macro FUNKTIOVALIMERKIT | RegReplace('(\\)|[Mm]r\\.|[Mm]rs\\.|[Jj]r\\.|Ph\\.+\\s+D\\.|Dr\\.|Sr\\.|[Rr]ev\\.|\\s[A-Za-z]\\.|\\.[A-Za-z]\\.)($4|$e)', '\\1,\\2', 'g'); \
-                                  RegReplace('\\.($[e|4])', ',\\1', 'g'); \
+                                  RegReplace('\\.$e', ',$e', 'g'); \
                                   RegReplace(',,', ',')
                                   
 
@@ -158,10 +161,14 @@ versio 1.9.2016 / Kansalliskirjasto (TV)
 
 // Lisää loppupisteen kenttään, jos se ei lopu johonkin seuraavista merkeistä: ), ], ?, !, -, .
 // NV 20230201: added rule that does not add a dot after a control subfield
-// NV 20230216: huh?
 #define macro LOPPUPISTE_X30 | If ( (RegFind('(\\)|\\]|\\?|\\!|-|\\.)\$') <0) And (RegFind('$[0-9][^$]+\$') <0) ) Then S + '.' Else S 
 
 #define macro COMMA2DOT_BEFORE_L | RegReplace(',$l', '.$l');
+
+#define macro ENTRY_FIELD_PUNCTUATION | RegReplace(',\$', ''); \
+	RegReplace ('($a[^$]+),$c\\(', '\\1$c('); \
+	RegReplace ('($e[^$]+[^.])\$', '\\1.') 
+
 
 000/1-9/ | 000/1-9/ | S
 000/10/ | 000/10/ | 'a'
@@ -213,7 +220,7 @@ versio 1.9.2016 / Kansalliskirjasto (TV)
 100$4 | <A10$e | If (Not (Exists(@100$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
 100$? | <A10$? | S
 
-A10   | 100    | FUNKTIOVALIMERKIT
+A10   | 100    | FUNKTIOVALIMERKIT; ENTRY_FIELD_PUNCTUATION 
 
 110I1 | 110I1  | S
 110I2 | 110I2  | S
@@ -222,7 +229,7 @@ A10   | 100    | FUNKTIOVALIMERKIT
 110$4 | <B11$e | If (Not (Exists(@110$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
 110$? | <B11$? | S
 
-B11   | 110    | FUNKTIOVALIMERKIT
+B11   | 110    | FUNKTIOVALIMERKIT; ENTRY_FIELD_PUNCTUATION
 
 111I1 | 111I1  | S
 111I2 | 111I2  | S
@@ -977,7 +984,7 @@ T36   | <DEL  | S
 600$? | <C60$? | S
 
 // LCSH:n loppupisteen asettaminen
-C60 | 600 | FUNKTIOVALIMERKIT; COMMA2DOT_BEFORE_L; If (@600I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
+C60 | 600 | FUNKTIOVALIMERKIT; COMMA2DOT_BEFORE_L; ENTRY_FIELD_PUNCTUATION; If (@600I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
 
 610I1 | 610I1  | S
 610I2 | 610I2  | S
@@ -1007,7 +1014,7 @@ C60 | 600 | FUNKTIOVALIMERKIT; COMMA2DOT_BEFORE_L; If (@600I2 = '0') And (RegFin
 610$4 | <C61$e | If (Not (Exists(@610$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
 610$? | <D61$? | S
 
-D61 | 610 | FUNKTIOVALIMERKIT; COMMA2DOT_BEFORE_L; If (@610I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
+D61 | 610 | FUNKTIOVALIMERKIT; COMMA2DOT_BEFORE_L; ENTRY_FIELD_PUNCTUATION ; If (@610I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
 
 611I1 | 611I1  | S
 611I2 | 611I2  | S
@@ -1113,7 +1120,7 @@ Z65   | 662    | FUNKTIOVALIMERKIT
 700$4 | <G70$4 | If (Not InTable(S, 'Funktiokoodit.tbl')) Then S 
 700$? | <G70$? | S
 
-G70 | 700 | FUNKTIOVALIMERKIT; COMMA2DOT_BEFORE_L
+G70 | 700 | FUNKTIOVALIMERKIT; ENTRY_FIELD_PUNCTUATION ; COMMA2DOT_BEFORE_L
 
 710I1 | 710I1  | S
 710I2 | 710I2  | S
@@ -1143,7 +1150,7 @@ G70 | 700 | FUNKTIOVALIMERKIT; COMMA2DOT_BEFORE_L
 710$4 | <H71$e | If InTable(S, 'Funktiokoodit.tbl') Then Table ('Funktiokoodit.tbl') + '.' Else S
 710$? | <H71$? | S
 
-H71 | 710 | FUNKTIOVALIMERKIT; COMMA2DOT_BEFORE_L
+H71 | 710 | FUNKTIOVALIMERKIT; ENTRY_FIELD_PUNCTUATION ; COMMA2DOT_BEFORE_L
 
 711I1 | 711I1  | S
 711I2 | 711I2  | S
@@ -1237,7 +1244,7 @@ J73 | 730 | LOPPUPISTE_X30; COMMA2DOT_BEFORE_L
 800$4 | <K80$e | If (Not (Exists(@800$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
 800$? | <K80$? | S
 
-K80 | 800 | FUNKTIOVALIMERKIT; COMMA2DOT_BEFORE_L
+K80 | 800 | FUNKTIOVALIMERKIT; ENTRY_FIELD_PUNCTUATION ; COMMA2DOT_BEFORE_L
 
 810I1 | 810I1  | S
 810I2 | 810I2  | S
@@ -1266,7 +1273,7 @@ K80 | 800 | FUNKTIOVALIMERKIT; COMMA2DOT_BEFORE_L
 810$4 | <L81$e | If Not (Exists(@810$e)) Then Table ('Funktiokoodit.tbl') + '.'
 810$? | <L81$? | S
 
-L81 | 810 | FUNKTIOVALIMERKIT; COMMA2DOT_BEFORE_L
+L81 | 810 | FUNKTIOVALIMERKIT; ENTRY_FIELD_PUNCTUATION ; COMMA2DOT_BEFORE_L
 
 811I1 | 811I1  | S
 811I2 | 811I2  | S
