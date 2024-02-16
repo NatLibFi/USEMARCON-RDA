@@ -26,7 +26,18 @@ versio 1.9.2016 / Kansalliskirjasto (TV)
                       RegReplace('\\bmuotokuv\\.', 'muotokuvia', 'g'); \
                       RegReplace('verkkojulkaisu', 'verkkoaineisto', 'g'); \
                       RegReplace('Verkkojulkaisu', 'Verkkoaineisto', 'g')
-                      
+
+// Usemarcon has Mixed() but I (nv) can't get it to work
+#define macro UPPERCASE130L | RegReplace('^a', 'A'); RegReplace('^b', 'B'); \
+	RegReplace('^c', 'C'); RegReplace('^d', 'D'); RegReplace('^e', 'E'); \
+	RegReplace('^f', 'F'); RegReplace('^g', 'G'); RegReplace('^h', 'H'); \
+	RegReplace('^i', 'I'); RegReplace('^j', 'J'); RegReplace('^k', 'K'); \
+	RegReplace('^l', 'L'); RegReplace('^m', 'M'); RegReplace('^n', 'N'); \
+	RegReplace('^o', 'O'); RegReplace('^p', 'P'); RegReplace('^q', 'Q'); \
+	RegReplace('^r', 'R'); RegReplace('^s', 'S'); RegReplace('^t', 'T'); \
+	RegReplace('^u', 'U'); RegReplace('^v', 'V'); RegReplace('^w', 'W'); \
+	RegReplace('^x', 'X'); RegReplace('^y', 'Y'); RegReplace('^z', 'Z');
+
 #define macro 300BE | RegReplace('kartt\\.', 'karttoja', 'g'); \
                       RegReplace('kuv\\.', 'kuvitettu', 'g'); \
                       RegReplace('mv\\.', 'mustavalkoinen', 'g'); \
@@ -147,7 +158,10 @@ versio 1.9.2016 / Kansalliskirjasto (TV)
 
 // Lisää loppupisteen kenttään, jos se ei lopu johonkin seuraavista merkeistä: ), ], ?, !, -, .
 // NV 20230201: added rule that does not add a dot after a control subfield
-#define macro LOPPUPISTE | If ( (RegFind('(\\)|\\]|\\?|\\!|-|\\.)\$') <0) And (RegFind('$[0-9][^$]+\$') <0) ) Then S + '.' Else S
+// NV 20230216: huh?
+#define macro LOPPUPISTE_X30 | If ( (RegFind('(\\)|\\]|\\?|\\!|-|\\.)\$') <0) And (RegFind('$[0-9][^$]+\$') <0) ) Then S + '.' Else S 
+
+#define macro COMMA2DOT_BEFORE_L | RegReplace(',$l', '.$l');
 
 000/1-9/ | 000/1-9/ | S
 000/10/ | 000/10/ | 'a'
@@ -221,6 +235,8 @@ C11   | 111    | FUNKTIOT2
 130I1 | 130I1  | S
 130I2 | 130I2  | S
 
+130$l | <A30$l | UPPERCASE130L
+
 #if (RegFind(@130$a, 'Triot') >= 0)
 130$m | <A30$m | TRIOT; ESITYSKOKOONPANO
 #endif
@@ -239,9 +255,9 @@ C11   | 111    | FUNKTIOT2
 
 130$o | <A30$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
 130$p | <A30$p | RAAMATTU
-130$? | <A30$? | S
+130$? | <A30$? | 
 
-A30 | 130 | LOPPUPISTE
+A30 | 130 | COMMA2DOT_BEFORE_L ; LOPPUPISTE_X30
 
 222I1 | 222I1 | S
 222I2 | 222I2 | S
@@ -249,6 +265,8 @@ A30 | 130 | LOPPUPISTE
 
 240I1 | 240I1  | S
 240I2 | 240I2  | S
+
+240$l | <F40$l | UPPERCASE130L
 
 #if (RegFind(@240$t, 'Triot') >= 0) Or (RegFind(@240$a, 'Triot') >= 0)
 240$m | <F40$m | TRIOT; ESITYSKOKOONPANO
@@ -271,10 +289,12 @@ A30 | 130 | LOPPUPISTE
 240$p | <F40$p | RAAMATTU
 240$? | <F40$? | S
 
-F40   | 240    | S
+F40   | 240    | COMMA2DOT_BEFORE_L
 
 243I1 | 243I1  | S
 243I2 | 243I2  | S
+
+243$l | <B43$l | UPPERCASE130L
 
 #if (RegFind(@243$a, 'Triot') >= 0)
 243$m | <B43$m | TRIOT; ESITYSKOKOONPANO
@@ -295,7 +315,7 @@ F40   | 240    | S
 243$o | <B43$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
 243$? | <B43$? | S
 
-B43 | 243 | S
+B43 | 243 | COMMA2DOT_BEFORE_L
 
 #if (Not Exists(%100)) And (Not Exists(%110)) And (Not Exists(%111)) And (Not Exists(%130))
 245I1 | 245I1  | '0'
@@ -934,6 +954,7 @@ T36   | <DEL  | S
 600$d | <C60$d | AIKAMAAREET
 600$e | <C60$e | RELATORTERM
 
+600$l | <C60$l | UPPERCASE130L
 #if (RegFind(@600$t, 'Triot') >= 0)
 600$m | <C60$m | TRIOT; ESITYSKOKOONPANO
 #endif
@@ -956,12 +977,14 @@ T36   | <DEL  | S
 600$? | <C60$? | S
 
 // LCSH:n loppupisteen asettaminen
-C60 | 600 | FUNKTIOVALIMERKIT; If (@600I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
+C60 | 600 | FUNKTIOVALIMERKIT; COMMA2DOT_BEFORE_L; If (@600I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
 
 610I1 | 610I1  | S
 610I2 | 610I2  | S
 610$c | <D61$c | FIKTIIVINENYHTEISO
 610$e | <D61$e | RELATORTERM
+
+610$l | <D61$l | UPPERCASE130L
 
 #if (RegFind(@610$t, 'Triot') >= 0)
 610$m | <D61$m | TRIOT; ESITYSKOKOONPANO
@@ -984,18 +1007,23 @@ C60 | 600 | FUNKTIOVALIMERKIT; If (@600I2 = '0') And (RegFind('[^A-Za-z]\$') < 0
 610$4 | <C61$e | If (Not (Exists(@610$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
 610$? | <D61$? | S
 
-D61 | 610 | FUNKTIOVALIMERKIT; If (@610I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
+D61 | 610 | FUNKTIOVALIMERKIT; COMMA2DOT_BEFORE_L; If (@610I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
 
 611I1 | 611I1  | S
 611I2 | 611I2  | S
 611$j | <K61$j | Table ('Funktiotermit.tbl')
 611$4 | <K61$j | If (Not (Exists(@611$j)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
+
+611$l | <K61$l | UPPERCASE130L
+
 611$? | <K61$? | If (@611I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
 
-K61   | 611     | FUNKTIOT2
+K61   | 611     | FUNKTIOT2; COMMA2DOT_BEFORE_L
 
 630I1 | 630I1  | S
 630I2 | 630I2  | S
+
+630$l | <E63$l | UPPERCASE130L
 
 #if (RegFind(@630$a, 'Triot') >= 0)
 630$m | <E63$m | TRIOT; ESITYSKOKOONPANO
@@ -1018,7 +1046,7 @@ K61   | 611     | FUNKTIOT2
 630$4 | <E63$e | If (Not (Exists(@630$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
 630$? | <E63$? | S
 
-E63 | 630 | FUNKTIOVALIMERKIT; LOPPUPISTE
+E63 | 630 | FUNKTIOVALIMERKIT; LOPPUPISTE_X30; COMMA2DOT_BEFORE_L
 
 650I1 | 650I1  | S
 650I2 | 650I2  | S
@@ -1061,6 +1089,8 @@ Z65   | 662    | FUNKTIOVALIMERKIT
 700$d | <G70$d | AIKAMAAREET
 700$e | <G70$e | RELATORTERM
 
+700$l | <G70$l | UPPERCASE130L
+
 #if (RegFind(@700$t, 'Triot') >= 0)
 700$m | <G70$m | TRIOT; ESITYSKOKOONPANO
 #endif
@@ -1083,12 +1113,14 @@ Z65   | 662    | FUNKTIOVALIMERKIT
 700$4 | <G70$4 | If (Not InTable(S, 'Funktiokoodit.tbl')) Then S 
 700$? | <G70$? | S
 
-G70 | 700 | FUNKTIOVALIMERKIT
+G70 | 700 | FUNKTIOVALIMERKIT; COMMA2DOT_BEFORE_L
 
 710I1 | 710I1  | S
 710I2 | 710I2  | S
 710$c | <H71$c | FIKTIIVINENYHTEISO
 710$e | <H71$e | RELATORTERM
+
+710$l | <H71$l | UPPERCASE130L
 
 #if (RegFind(@710$t, 'Triot') >= 0)
 710$m | <H71$m | TRIOT; ESITYSKOKOONPANO
@@ -1111,15 +1143,17 @@ G70 | 700 | FUNKTIOVALIMERKIT
 710$4 | <H71$e | If InTable(S, 'Funktiokoodit.tbl') Then Table ('Funktiokoodit.tbl') + '.' Else S
 710$? | <H71$? | S
 
-H71 | 710 | FUNKTIOVALIMERKIT
+H71 | 710 | FUNKTIOVALIMERKIT; COMMA2DOT_BEFORE_L
 
 711I1 | 711I1  | S
 711I2 | 711I2  | S
 711$j | <U71$j | Table ('Funktiotermit.tbl')
 711$4 | <U71$j | If (Not (Exists(%711$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
+
+711$l | <U71$l | UPPERCASE130L
 711$? | <U71$? | S
 
-U71   | 711    | FUNKTIOT2
+U71   | 711    | FUNKTIOT2; COMMA2DOT_BEFORE_L
 
 720I1 | 720I1  | S
 720I2 | 720I2  | S
@@ -1131,6 +1165,8 @@ Y72   | 720    | S
 
 730I1 | 730I1  | S
 730I2 | 730I2  | S
+
+730$l | <J73$l | UPPERCASE130L
 
 #if (RegFind(@730$a, 'Triot') >= 0)
 730$m | <J73$m | TRIOT; ESITYSKOKOONPANO
@@ -1152,7 +1188,7 @@ Y72   | 720    | S
 730$p | <J73$p | RAAMATTU
 730$? | <J73$? | S
 
-J73 | 730 | LOPPUPISTE
+J73 | 730 | LOPPUPISTE_X30; COMMA2DOT_BEFORE_L
 
 76?I1 | 76?I1 | S
 76?I2 | 76?I2 | S
@@ -1178,6 +1214,8 @@ J73 | 730 | LOPPUPISTE
 800$d | <K80$d | AIKAMAAREET
 800$e | <K80$e | RELATORTERM
 
+800$l | <K80$l | UPPERCASE130L
+
 #if (RegFind(@800$t, 'Triot') >= 0)
 800$m | <K80$m | TRIOT; ESITYSKOKOONPANO
 #endif
@@ -1199,11 +1237,13 @@ J73 | 730 | LOPPUPISTE
 800$4 | <K80$e | If (Not (Exists(@800$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
 800$? | <K80$? | S
 
-K80 | 800 | FUNKTIOVALIMERKIT
+K80 | 800 | FUNKTIOVALIMERKIT; COMMA2DOT_BEFORE_L
 
 810I1 | 810I1  | S
 810I2 | 810I2  | S
 810$e | <L81$e | RELATORTERM
+
+810$l | <L81$l | UPPERCASE130L
 
 #if (RegFind(@810$t, 'Triot') >= 0)
 810$m | <L81$m | TRIOT; ESITYSKOKOONPANO
@@ -1226,17 +1266,20 @@ K80 | 800 | FUNKTIOVALIMERKIT
 810$4 | <L81$e | If Not (Exists(@810$e)) Then Table ('Funktiokoodit.tbl') + '.'
 810$? | <L81$? | S
 
-L81 | 810 | FUNKTIOVALIMERKIT
+L81 | 810 | FUNKTIOVALIMERKIT; COMMA2DOT_BEFORE_L
 
 811I1 | 811I1  | S
 811I2 | 811I2  | S
 811$4 | <W81$j  | If (Not (Exists(@811$j)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
+811$l | <W81$l | UPPERCASE130L
 811$? | <W81$?  | S
 
 W81   | 811    | FUNKTIOT2
 
 830I1 | 830I1  | S
 830I2 | 830I2  | S
+
+830$l | <M83$l | UPPERCASE130L
 
 #if (RegFind(@830$a, 'Triot') >= 0)
 830$m | <M83$m | TRIOT; ESITYSKOKOONPANO
@@ -1260,7 +1303,7 @@ W81   | 811    | FUNKTIOT2
 830$? | <M83$? | S
 
 M83 | 830 | RegReplace('\\b;$v| ; $v', ' ;$v'); \
-            LOPPUPISTE 
+            LOPPUPISTE_X30; COMMA2DOT_BEFORE_L
 
 856I1 | 856I1 | S
 856I2 | 856I2 | S
