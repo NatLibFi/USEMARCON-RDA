@@ -177,9 +177,9 @@ versio 1.9.2016 / Kansalliskirjasto (TV)
 
 100I1 | 100I1  | S
 100I2 | 100I2  | S
-100$a | <A10$a | S; If ((100$c Follows 100$a) And RegFind(@100$c, 'fikt') >= 0) Delete (',', At Ending)
-100$b | <A10$b | S; If ((100$c Follows 100$b) And RegFind(@100$c, 'fikt') >= 0) Delete (',', At Ending)
-100$c | <A10$c | FIKTIIVINENHAHMO
+100$a | <A10$a | S
+100$b | <A10$b | S
+100$c | <A10$c | S
 100$d | <A10$d | AIKAMAAREET
 100$e | <A10$e | Delete('.', At Ending); Table ('sv_Funktiotermit.tbl'); If (NextSub($e) = '') Then S + '.' Else S
 100$4 | <A10$e | If (Not (Exists(@100$e)) And InTable(S, 'sv_Funktiokoodit.tbl')) Then Table ('sv_Funktiokoodit.tbl') + '.' Else S
@@ -189,7 +189,7 @@ A10   | 100    | FUNKTIOVALIMERKIT
 
 110I1 | 110I1  | S
 110I2 | 110I2  | S
-110$c | <B11$c | FIKTIIVINENYHTEISO; AIKAMAAREET
+110$c | <B11$c | AIKAMAAREET
 110$e | <B11$e | Table ('sv_Funktiotermit.tbl')
 110$4 | <B11$e | If (Not (Exists(@110$e)) And InTable(S, 'sv_Funktiokoodit.tbl')) Then Table ('sv_Funktiokoodit.tbl') + '.' Else S
 110$? | <B11$? | S
@@ -307,7 +307,6 @@ B43 | 243 | S; RAAMATTU
 
 F45 | 245 | S
 
-#if (Not Exists(@773))
 #if (Not Exists(@773))
 260I1 | 260I1 | S
 260I2 | 260I2 | S
@@ -772,7 +771,7 @@ Z65   | 662    | FUNKTIOVALIMERKIT
 
 700I1 | 700I1  | S
 700I2 | 700I2  | S
-700$c | <G70$c | FIKTIIVINENHAHMO
+700$c | <G70$c | S
 700$d | <G70$d | AIKAMAAREET
 700$e | <G70$e | Table ('sv_Funktiotermit.tbl'); Delete ('.', At Ending); S + '.'
 
@@ -802,7 +801,7 @@ G70 | 700 | FUNKTIOVALIMERKIT
 
 710I1 | 710I1  | S
 710I2 | 710I2  | S
-710$c | <H71$c | FIKTIIVINENYHTEISO
+710$c | <H71$c | S
 710$e | <H71$e | Table ('sv_Funktiotermit.tbl')
 
 #if (RegFind(@710$t, 'Triot') >= 0)
@@ -889,7 +888,7 @@ J73 | 730 | LOPPUPISTE
 
 800I1 | 800I1  | S
 800I2 | 800I2  | S
-800$c | <K80$c | FIKTIIVINENHAHMO
+800$c | <K80$c | S
 800$d | <K80$d | AIKAMAAREET
 
 #if (RegFind(@800$t, 'Triot') >= 0)

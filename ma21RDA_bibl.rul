@@ -212,9 +212,9 @@ versio 1.9.2016 / Kansalliskirjasto (TV)
 
 100I1 | 100I1  | S
 100I2 | 100I2  | S
-100$a | <A10$a | S; If ((100$c Follows 100$a) And RegFind(@100$c, 'fikt') >= 0) Delete (',', At Ending)
-100$b | <A10$b | S; If ((100$c Follows 100$b) And RegFind(@100$c, 'fikt') >= 0) Delete (',', At Ending)
-100$c | <A10$c | FIKTIIVINENHAHMO
+100$a | <A10$a | S
+100$b | <A10$b | S
+100$c | <A10$c | S
 100$d | <A10$d | AIKAMAAREET
 100$e | <A10$e | RELATORTERM
 100$4 | <A10$e | If (Not (Exists(@100$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
@@ -224,7 +224,7 @@ A10   | 100    | FUNKTIOVALIMERKIT; ENTRY_FIELD_PUNCTUATION
 
 110I1 | 110I1  | S
 110I2 | 110I2  | S
-110$c | <B11$c | FIKTIIVINENYHTEISO; AIKAMAAREET
+110$c | <B11$c | AIKAMAAREET
 110$e | <B11$e | RELATORTERM
 110$4 | <B11$e | If (Not (Exists(@110$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
 110$? | <B11$? | S
@@ -1092,7 +1092,7 @@ Z65   | 662    | FUNKTIOVALIMERKIT
 
 700I1 | 700I1  | S
 700I2 | 700I2  | S
-700$c | <G70$c | FIKTIIVINENHAHMO
+700$c | <G70$c | S
 700$d | <G70$d | AIKAMAAREET
 700$e | <G70$e | RELATORTERM
 
@@ -1124,7 +1124,7 @@ G70 | 700 | FUNKTIOVALIMERKIT; ENTRY_FIELD_PUNCTUATION ; COMMA2DOT_BEFORE_L
 
 710I1 | 710I1  | S
 710I2 | 710I2  | S
-710$c | <H71$c | FIKTIIVINENYHTEISO
+710$c | <H71$c | S
 710$e | <H71$e | RELATORTERM
 
 710$l | <H71$l | UPPERCASE130L
@@ -1217,7 +1217,7 @@ J73 | 730 | LOPPUPISTE_X30; COMMA2DOT_BEFORE_L
 
 800I1 | 800I1  | S
 800I2 | 800I2  | S
-800$c | <K80$c | FIKTIIVINENHAHMO
+800$c | <K80$c | S
 800$d | <K80$d | AIKAMAAREET
 800$e | <K80$e | RELATORTERM
 
