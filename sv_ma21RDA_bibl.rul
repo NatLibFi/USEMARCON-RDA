@@ -93,7 +93,7 @@ versio 1.9.2016 / Kansalliskirjasto (TV)
 #define macro FIKTIIVINENHAHMO | RegReplace('fikt\\.', '(fiktiv gestalt)', 'g'); \
                                  RegReplace('fiktiivinen henkilö', '(fiktiivinen hahmo)', 'g')
 
-#define macro FIKTIIVINENYHTEISO | RegReplace('fikt\\.', '(fiktiivinen yhteisö)')
+#define macro FIKTIIVINENYHTEISO | RegReplace('fikt\\.', '(fiktiv institution)')
 
 #define macro AIKAMAAREET | RegReplace('\\bs\\.', 'syntynyt', 'g'); \
                             RegReplace('\\bk\\.', 'kuollut', 'g'); \
