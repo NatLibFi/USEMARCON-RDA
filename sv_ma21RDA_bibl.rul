@@ -134,6 +134,10 @@ versio 1.9.2016 / Kansalliskirjasto (TV)
 // Lisää loppupisteen kenttään, jos se ei lopu johonkin seuraavista merkeistä: ), ], ?, !, -, .
 #define macro LOPPUPISTE | If ( (RegFind('(\\)|\\]|\\?|\\!|-|\\.)\$') <0 ) ) Then S + '.' Else S
 
+#define macro ENTRY_FIELD_PUNCTUATION | RegReplace(',\$', ''); \
+	RegReplace ('($a[^$]+),$c\\(', '\\1$c('); \
+	RegReplace ('($e[^$]+[^.])\$', '\\1.') 
+
 000/1-9/ | 000/1-9/ | S
 000/10/ | 000/10/ | 'a'
 000/11-12/ | 000/11-12/ | '22'
@@ -185,7 +189,7 @@ versio 1.9.2016 / Kansalliskirjasto (TV)
 100$4 | <A10$e | If (Not (Exists(@100$e)) And InTable(S, 'sv_Funktiokoodit.tbl')) Then Table ('sv_Funktiokoodit.tbl') + '.' Else S
 100$? | <A10$? | S
 
-A10   | 100    | FUNKTIOVALIMERKIT
+A10   | 100    | FUNKTIOVALIMERKIT; ENTRY_FIELD_PUNCTUATION
 
 110I1 | 110I1  | S
 110I2 | 110I2  | S
@@ -194,7 +198,7 @@ A10   | 100    | FUNKTIOVALIMERKIT
 110$4 | <B11$e | If (Not (Exists(@110$e)) And InTable(S, 'sv_Funktiokoodit.tbl')) Then Table ('sv_Funktiokoodit.tbl') + '.' Else S
 110$? | <B11$? | S
 
-B11   | 110    | FUNKTIOVALIMERKIT
+B11   | 110    | FUNKTIOVALIMERKIT; ENTRY_FIELD_PUNCTUATION
 
 111I1 | 111I1  | S
 111I2 | 111I2  | S
@@ -670,7 +674,7 @@ T36   | <DEL  | S
 600$? | <C60$? | S
 
 // LCSH:n loppupisteen asettaminen
-C60 | 600 | FUNKTIOVALIMERKIT; If (@600I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
+C60 | 600 | FUNKTIOVALIMERKIT; ENTRY_FIELD_PUNCTUATION; If (@600I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
 
 610I1 | 610I1  | S
 610I2 | 610I2  | S
@@ -698,7 +702,7 @@ C60 | 600 | FUNKTIOVALIMERKIT; If (@600I2 = '0') And (RegFind('[^A-Za-z]\$') < 0
 610$4 | <C61$e | If (Not (Exists(@610$e)) And InTable(S, 'sv_Funktiokoodit.tbl')) Then Table ('sv_Funktiokoodit.tbl') + '.' Else S
 610$? | <D61$? | S
 
-D61 | 610 | FUNKTIOVALIMERKIT; If (@610I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
+D61 | 610 | FUNKTIOVALIMERKIT; ENTRY_FIELD_PUNCTUATION; If (@610I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
 
 611I1 | 611I1  | S
 611I2 | 611I2  | S
@@ -797,7 +801,7 @@ Z65   | 662    | FUNKTIOVALIMERKIT
 700$4 | <G70$4 | If (Not InTable(S, 'sv_Funktiokoodit.tbl')) Then S 
 700$? | <G70$? | S
 
-G70 | 700 | FUNKTIOVALIMERKIT
+G70 | 700 | FUNKTIOVALIMERKIT; ENTRY_FIELD_PUNCTUATION
 
 710I1 | 710I1  | S
 710I2 | 710I2  | S
@@ -825,7 +829,7 @@ G70 | 700 | FUNKTIOVALIMERKIT
 710$4 | <H71$e | If InTable(S, 'sv_Funktiokoodit.tbl') Then Table ('sv_Funktiokoodit.tbl') + '.' Else S
 710$? | <H71$? | S
 
-H71 | 710 | FUNKTIOVALIMERKIT
+H71 | 710 | FUNKTIOVALIMERKIT; ENTRY_FIELD_PUNCTUATION
 
 711I1 | 711I1  | S
 711I2 | 711I2  | S
