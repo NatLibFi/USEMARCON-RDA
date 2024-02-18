@@ -6,16 +6,22 @@ versio 1.9.2016 / Kansalliskirjasto (TV)
 #define macro 300AE | RegReplace('\\b[Nn]\\.', 'noin', 'g'); \
                       RegReplace('\\bsek([^A-Z-a-z])', 's\\1', 'g'); \
                       RegReplace('(\\d+) bl\\.', '\\1 blad', 'g'); \
-                      RegReplace('ss\\.', 'sivut', 'g'); \
+                      RegReplace('\\bss\\.', 'sivut', 'g'); \
                       RegReplace('\\bkuv\\.', 'kuvitettu', 'g'); \
                       RegReplace('verkkojulkaisu', 'verkkoaineisto', 'g'); \
                       RegReplace('Verkkojulkaisu', 'Verkkoaineisto', 'g')
                       
-#define macro 300BE | RegReplace('kartt\\.', 'karttoja', 'g'); \
+#define macro 300BE | RegReplace('\\bill\\.', 'illustrationer', 'g'); \
+	      	      RegReplace('($[abcde])ill\\.', '\\1illustrationer', 'g'); \
+	      	      RegReplace('kartt\\.', 'karttoja', 'g'); \
                       RegReplace('kart\\.', 'kartor', 'g'); \
                       RegReplace('kuv\\.', 'kuvitettu', 'g'); \
-                      RegReplace('mv\\.', 'mustavalkoinen', 'g'); \
-                      RegReplace('vär\\.', 'värillinen', 'g'); \
+		      RegReplace('\\b1 ljudkass\\.', '1 ljudkassett', 'g'); \
+		      RegReplace('([0-9][0-9]|[02-9]) ljudkass\\.', '\\1 ljudkassetter', 'g'); \
+		      RegReplace('mv\\.', 'mustavalkoinen', 'g'); \
+		      RegReplace('\\b1 videokass\\.', '1 videokassett', 'g'); \
+		      RegReplace('([0-9][0-9]|[02-9]) videokass\\.', '\\1 videokassetter', 'g'); \
+		      RegReplace('vär\\.', 'värillinen', 'g'); \
                       RegReplace('\\bl\\.', 'blad', 'g'); \
                       RegReplace('\\bfig\\.', 'figurer', 'g'); \
                       RegReplace('värikuv\\.', 'värikuvitus', 'g'); \
@@ -634,8 +640,8 @@ T36   | <DEL  | S
 
 511I1 | 511I1 | S
 511I2 | 511I2 | S
-511$g | 511$g | If (RegFind(S, '\\d*-\\d*') >= 0) Then \
-                RegReplace('[^s]?s\\.|ss\\.', 'sivut', 'g') Else S
+511$g | 511$g | If (RegFind(S, '\\d-\\d') >= 0) Then \
+                RegReplace('[^s]?s\\.|\bss\\.', 'sivut', 'g') Else S
 511$? | 511$? | S
 
 516I1 | 516I1 | S

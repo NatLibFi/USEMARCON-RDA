@@ -24,7 +24,7 @@ versio 1.9.2016 / Kansalliskirjasto (TV)
                       RegReplace('1 vol\\.', '\\1 nide', 'g'); \
                       RegReplace('(\\d+) vol\\.', '\\1 nidettä', 'g'); \
                       RegReplace('\\bsek([^A-Z-a-z])', 's\\1', 'g'); \
-                      RegReplace('ss\\.', 'sivut', 'g'); \
+                      RegReplace('\\bss\\.', 'sivut', 'g'); \
                       RegReplace('\\bkuv\\.', 'kuvitettu', 'g'); \
                       RegReplace('\\bmuotokuv\\.', 'muotokuvia', 'g'); \
                       RegReplace('verkkojulkaisu', 'verkkoaineisto', 'g'); \
@@ -44,8 +44,12 @@ versio 1.9.2016 / Kansalliskirjasto (TV)
 #define macro 300BE | RegReplace('kartt\\.', 'karttoja', 'g'); \
                       RegReplace('kuv\\.', 'kuvitettu', 'g'); \
                       RegReplace('mv\\.', 'mustavalkoinen', 'g'); \
-                      RegReplace('vär\\.', 'värillinen', 'g'); \
+		      RegReplace('\\b1 videokas\\.', '1 äänikasetti', 'g'); \
+		      RegReplace('([0-9][0-9]|[02-9]) videokas\\.', '\\1 videokasettia', 'g'); \
+		      RegReplace('vär\\.', 'värillinen', 'g'); \
                       RegReplace('värikuv\\.', 'värikuvitus', 'g'); \
+		      RegReplace('\\b1 äänikas\\.', '1 äänikasetti', 'g'); \
+		      RegReplace('([0-9][0-9]|[02-9]) äänikas\\.', '\\1 äänikasettia', 'g'); \
                       RegReplace('nuott\\.', 'nuotteja', 'g'); \
                       RegReplace('kuval\\.', 'kuvalehteä', 'g'); \
                       RegReplace('diagrs\\.', 'diagrams', 'g'); \
@@ -945,8 +949,8 @@ T36   | <DEL  | S
 
 511I1 | 511I1 | S
 511I2 | 511I2 | S
-511$g | 511$g | If (RegFind(S, '\\d*-\\d*') >= 0) Then \
-                RegReplace('[^s]?s\\.|ss\\.', 'sivut', 'g') Else S
+511$g | 511$g | If (RegFind(S, '\\d-\\d') >= 0) Then \
+                RegReplace('[^s]?s\\.|\bss\\.', 'sivut', 'g') Else S
 511$? | 511$? | S
 
 516I1 | 516I1 | S
