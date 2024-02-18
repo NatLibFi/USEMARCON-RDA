@@ -391,7 +391,8 @@ F45 | 245 | S
 #endif
 
 300$b | <Y30$b | 300BE; Delete('.', At Ending)
-300$c | <Y30$c | 300C; Delete('.', At Ending)
+// Don't use macro 300C
+300$c | <Y30$c | Delete('.', At Ending)
 300$e | <Y30$e | 300BE; Delete('.', At Ending)
 300$? | <Y30$? | S
 
@@ -418,7 +419,9 @@ T36   | <DEL  | S
 336(ns)$a | 336(no)$2 | Delete('.', At Ending); Delete(';', At Ending); If (InTable(S, '336_b.tbl')) Then Table 'rdacontent'
 #endif
 
+
 #if (Exists(@336$b))
+// Should we check legal 336$b values here?
 336$b | 336$b | S
 336$a | 336(no)$2 | 'rdacontent'
 #endif
