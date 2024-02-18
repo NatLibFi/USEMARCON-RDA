@@ -120,10 +120,13 @@ versio 1.9.2016 / Kansalliskirjasto (TV)
                          RegReplace('\\bVT(\\b|\\.)', 'Vanha testamentti', 'g')
 
 
-#define macro FIKTIIVINENHAHMO | RegReplace('fikt\\.', '(fiktiivinen hahmo)', 'g'); \
-                                 RegReplace('fiktiivinen henkilö', '(fiktiivinen hahmo)', 'g')
+#define macro FIKTIIVINEN_HAHMO | RegReplace('fikt\\.|fiktiivinen henkilö|fiktiv gestalt', '(fiktiivinen hahmo)', 'g');
 
-#define macro FIKTIIVINENYHTEISO | RegReplace('fikt\\.', '(fiktiivinen yhteisö)')
+#define macro FIKTIV_GESTALT | RegReplace('fikt\\.|fiktiivinen henkilö|fiktiivinen hahmo', '(fiktiv gestalt)', 'g');
+
+#define macro FIKTIIVINEN_YHTEISO | RegReplace('fikt\\.', '(fiktiivinen yhteisö)')
+
+#define macro FIKTIV_INSTITUTION | RegReplace('fikt\\.', '(fiktiv institution)')
 
 #define macro AIKAMAAREET | RegReplace('\\bs\\.', 'syntynyt', 'g'); \
                             RegReplace('\\bk\\.', 'kuollut', 'g'); \
@@ -960,7 +963,12 @@ T36   | <DEL  | S
 
 600I1 | 600I1  | S
 600I2 | 600I2  | S
-600$c | <C60$c | FIKTIIVINENHAHMO
+#if (RegFind(@040$b, 'swe') = 0)
+600$c | <C60$c | FIKTIV_GESTALT
+#endif
+#if (RegFind(@040$b, 'swe') != 0)
+600$c | <C60$c | FIKTIIVINEN_HAHMO
+#endif
 600$d | <C60$d | AIKAMAAREET
 600$e | <C60$e | RELATORTERM
 
@@ -991,7 +999,13 @@ C60 | 600 | FUNKTIOVALIMERKIT; COMMA2DOT_BEFORE_L; ENTRY_FIELD_PUNCTUATION; If (
 
 610I1 | 610I1  | S
 610I2 | 610I2  | S
-610$c | <D61$c | FIKTIIVINENYHTEISO
+#if (RegFind(@040$b, 'swe') = 0)
+610$c | <D61$c | FIKTIV_INSTITUTION
+#endif
+#if (RegFind(@040$b, 'swe') != 0)
+610$c | <D61$c | FIKTIIVINEN_YHTEISO
+#endif
+
 610$e | <D61$e | RELATORTERM
 
 610$l | <D61$l | UPPERCASE130L
