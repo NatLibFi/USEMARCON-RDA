@@ -1,7 +1,7 @@
 sv_Funktiotermit.tbl -- RDA-funktiotermien avaus, englanninkielisten kääntäminen, ruotsi (X00, X10, X11 $e, $j)
 
-a r r.   | a r r a n g 0xc3 0xb6 r
-a r t i s t  | e x e k u t 0xc3 0xb6 r
+a r r .   | a r r a n g 0xc3 0xb6 r
+a r t .  | k o n s t n 0xc3 0xa4 r
 e x e k .  | e x e k u t 0xc3 0xb6 r
 i l l .    | i l l u s t r a t 0xc3 0xb6 r
 k o m p .  | k o m p o s i t 0xc3 0xb6 r
