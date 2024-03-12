@@ -44,7 +44,7 @@ versio 1.9.2016 / Kansalliskirjasto (TV)
 #define macro 300BE | RegReplace('kartt\\.', 'karttoja', 'g'); \
                       RegReplace('kuv\\.', 'kuvitettu', 'g'); \
                       RegReplace('mv\\.', 'mustavalkoinen', 'g'); \
-		      RegReplace('\\b1 videokas\\.', '1 äänikasetti', 'g'); \
+		      RegReplace('\\b1 videokas\\.', '1 videokasetti', 'g'); \
 		      RegReplace('([0-9][0-9]|[02-9]) videokas\\.', '\\1 videokasettia', 'g'); \
 		      RegReplace('vär\\.', 'värillinen', 'g'); \
                       RegReplace('värikuv\\.', 'värikuvitus', 'g'); \
