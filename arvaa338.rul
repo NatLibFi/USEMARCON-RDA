@@ -74,18 +74,19 @@
 000 | <B38$b | 'gt'
 #endif
 
-// DIA
+// DIA/DIABILD/SLIDE
 #if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
-    If ( (RegFind(@300$a, '[Kk]uultokuv|[Dd]iaa') >= 0) \
-    	 Or ( @000/7/ = 'g' And @007/1/ = 'g' And @007/2/ = 's' And RegFind(@300$a, '[Dd]iabild') < 0 ) )
+    ( @000/7/ = 'g') And ( @007/1/ = 'g' ) And ( @007/2/ = 's' )
 000 | <B38$b | 'gs'
 #endif
 
-// SAMMA PÅ SVENSKA : DIABILD
+// DIA/DIABILD/SLIDE #2
 #if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
-    If (RegFind(@300$a, '[Dd]iabild') >= 0)
+    If ( (RegFind(@300$a, '([Kk]uultokuv|[Dd]iaa|\\b[Dd]ia\\b|[Dd]iabild)') >= 0)
 000 | <B38$b | 'gs'
 #endif
+
+
 
 // MIKROKORTTI
 #if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
@@ -108,31 +109,20 @@
 000 | <B38$b | 'he'
 #endif
 
-// KORTTI
+// KORTTI/KORT/CARD
 #if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
-    If (RegFind(@300$a, '\\b[Kk]ortti') >= 0)
+    If (RegFind(@300$a, '(\\b[Kk]ortti|\\b[Kk]ort\\b)') >= 0)
 000 | <B38$b | 'no'
 #endif
 
-// SAMMA PÅ SVENSKA : BILDKORT
-#if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
-    If (RegFind(@300$a, '[Kk]ort\\b') >= 0)
-000 | <B38$b | 'no'
-#endif
 
-// ARKKI
+// ARKKI/ARK/SHEET
 #if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
-    ( (RegFind(@300$a, '[Aa]rkki') >= 0) Or \
-        ( (RegFind(@336$a, 'kartograf') >= 0) And (RegFind(@337$a, 'laitetta') >= 0) ) )
+    ( (RegFind(@300$a, '[Aa]rkki|\\b[Aa]rk\\b ') >= 0) Or \
+      ( (RegFind(@336$a, 'kartograf') >= 0) And (RegFind(@337$a, 'ingen medietyp|laitetta') >= 0) ) )
 000 | <B38$b | 'nb'	
 #endif
 
-// SAMMA PÅ SVENSKA : ARK
-#if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
-    ( (RegFind(@300$a, '[Aa]rk\\b') >= 0) Or \
-        ( (RegFind(@336$a, 'kartograf') >= 0) And (RegFind(@337$a, 'ingen medietyp') >= 0) ) )
-000 | <B38$b | 'nb'	
-#endif
 
 // MIKROFILMIRULLA
 #if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
@@ -228,29 +218,14 @@
 000 | <B38$b | 'sd'  
 #endif
 
-// ÄÄNIKASETTI
+// ÄÄNIKASETTI / LJUD-KASSETT
 #if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
-    If (Not RegFind(@300$a, 'kassett') >= 0) \
-    And If ( \
-  (RegFind(@300$a, '[Cc]-kas') >= 0) \
-  Or (RegFind(@300$a, '[Dd][Aa][Tt]-kase|[Dd][Cc][Cc]-kas|[Ää]nikas|kasettia') >= 0) \
-  Or (RegFind(@300$e, '[Dd][Aa][Tt]-kase|[Dd][Cc][Cc]-kas|[Ää]nikas|kasettia') >= 0) \
-  ) \
-  And If (Not Exists(@773))
+    And If ( (RegFind(@300$a, '[Cc]-kas') >= 0) Or \
+    	     (RegFind(@300$a, '[Dd][Aa][Tt]-kas|[Dd][Cc][Cc]-kas|[Ll]judkas|[Ää]nikas|kasettia|kassetter') >= 0) ) 
 000 | <B38$b | 'ss'  
 #endif
 
-// SAMMA PÅ SVENSKA : LJUDKASSETT
-#if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
-    If ( \
-  (RegFind(@300$a, '[Cc]-kass') >= 0) \
-  Or (RegFind(@300$a, '[Dd][Aa][Tt]-kass|[Dd][Cc][Cc]-kass|[Ll]judkas|kassetter') >= 0) \
-  Or (RegFind(@300$e, '[Dd][Aa][Tt]-kass|[Dd][Cc][Cc]-kass|[Ll]judkas|kassetter') >= 0) \
-  )
-000 | <B38$b | 'ss'
-#endif
-
-// TIETOLEVY / DATORSKIVA
+// TIETOLEVY / DATORSKIVA (can /rom/i overgenerate? what's with the 336 check?)
 #if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
     (RegFind(@300$a,  '[Rr][Oo][Mm]') >= 0) \
   And (InTable(@336$a, '336_a.tbl'))
