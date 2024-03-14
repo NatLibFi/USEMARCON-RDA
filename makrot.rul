@@ -86,25 +86,29 @@
                                  RegReplace('puhallinork\\.|puhallinork(\$|\\b)', 'puhallinorkesteri'); \
                                  RegReplace('\\bkät\\.|\\bkät(\$|\\b)', 'kätisesti'); \
                                  RegReplace('soitinääni', 'määrittämätön soitin'); \
-                                 RegReplace('\\bS\\s*(\\(\\d+)', 'sopraanot \\1', 'g'); \
-                                 RegReplace('\\bS(,|\\s|/|\\)|\$)', 'sopraano\\1', 'g'); \
-                                 RegReplace('\\bMz\\s*(\\(\\d+)', 'mezzosopraanot \\1', 'g'); \
-                                 RegReplace('\\bMz(,|\\s|/|\\)|\$)', 'mezzosopraano\\1', 'g'); \
-                                 RegReplace('\\bA\\s*(\\(\\d+)', 'altot \\1', 'g'); \
-                                 RegReplace('\\bA(,|\\s|/|\\)|\$)', 'altto\\1', 'g'); \
-                                 RegReplace('\\bKt\\s*(\\(\\d+)', 'kontratenorit \\1', 'g'); \
-                                 RegReplace('\\bKt(,|\\s|/|\\)|\$)', 'kontratenori\\1', 'g'); \
-                                 RegReplace('\\bT\\s*(\\(\\d+)', 'tenorit \\1', 'g'); \
-                                 RegReplace('\\bT(,|\\s|/|\\)|\$)', 'tenori\\1', 'g'); \
-                                 RegReplace('\\bBar\\s*(\\(\\d+)', 'baritonit \\1', 'g'); \
-                                 RegReplace('\\bBar(,|\\s|/|\\)|\$)', 'baritoni\\1', 'g'); \
-                                 RegReplace('\\bB\\s*(\\(\\d+)', 'bassot \\1', 'g'); \
-                                 RegReplace('\\bB(,|\\s|/|\\)|\$)', 'basso\\1', 'g'); \
                                  If (RegFind(S, 'sovitettu, jousitrio') >= 0) Or (RegFind(S, ', jousitrio') < 0) RegReplace('jousitrio', 'viulu, alttoviulu, sello'); \
                                  If (RegFind(S, 'sovitettu, jousikvartetti') >= 0) Or (RegFind(S, ', jousikvartetti') < 0) RegReplace('jousikvartetti', 'viulut (2), alttoviulu, sello'); \
                                  If (RegFind(S, 'sovitettu, jousikvintetti') >= 0) Or (RegFind(S, ', jousikvintetti') < 0) RegReplace('jousikvintetti', 'viulut (2), alttoviulut (2), sello'); \
                                  If (RegFind(S, 'sovitettu, puupuhallinkvartetti') >= 0) Or (RegFind(S, ', puupuhallinkvartetti') < 0) RegReplace('puupuhallinkvartetti', 'huilu, oboe, klarinetti, fagotti'); \
                                  If (RegFind(S, 'sovitettu, puhallinkvintetti') >= 0) Or (RegFind(S, ', puhallinkvintetti') < 0) RegReplace('puhallinkvintetti', 'huilu, oboe, klarinetti, käyrätorvi, fagotti')
+
+
+#define macro AANITYYPPI RegReplace('\\bS\\s*(\\(\\d+)', 'sopraanot \\1', 'g'); \
+  RegReplace('\\bS(,|\\s|/|\\)|\$)', 'sopraano\\1', 'g'); \
+  RegReplace('\\bMz\\s*(\\(\\d+)', 'mezzosopraanot \\1', 'g'); \
+  RegReplace('\\bMz(,|\\s|/|\\)|\$)', 'mezzosopraano\\1', 'g'); \
+  RegReplace('\\bA\\s*(\\(\\d+)', 'altot \\1', 'g'); \
+  RegReplace('\\bA(,|\\s|/|\\)|\$)', 'altto\\1', 'g'); \
+  RegReplace('\\bKt\\s*(\\(\\d+)', 'kontratenorit \\1', 'g'); \
+  RegReplace('\\bKt(,|\\s|/|\\)|\$)', 'kontratenori\\1', 'g'); \
+  RegReplace('\\bT\\s*(\\(\\d+)', 'tenorit \\1', 'g'); \
+  RegReplace('\\bT(,|\\s|/|\\)|\$)', 'tenori\\1', 'g'); \
+  RegReplace('\\bBar\\s*(\\(\\d+)', 'baritonit \\1', 'g'); \
+  RegReplace('\\bBar(,|\\s|/|\\)|\$)', 'baritoni\\1', 'g'); \
+  RegReplace('\\bB\\s*(\\(\\d+)', 'bassot \\1', 'g'); \
+  RegReplace('\\bB(,|\\s|/|\\)|\$)', 'basso\\1', 'g');
+
+
 
 #define macro TRIOT            | RegReplace('^piano, jouset', 'piano, viulu, sello'); \
                                  RegReplace('^jouset', 'viulu, alttoviulu, sello')

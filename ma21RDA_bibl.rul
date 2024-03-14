@@ -81,22 +81,22 @@ C11   | 111    | FUNKTIOT2
 130$l | <A30$l | UPPERCASE130L
 
 #if (RegFind(@130$a, 'Triot') >= 0)
-130$m | <A30$m | TRIOT; ESITYSKOKOONPANO
+130$m | <A30$m | TRIOT; ESITYSKOKOONPANO; AANITYYPPI
 #endif
 
 #if (RegFind(@130$a, 'Kvartetot') >= 0)
-130$m | <A30$m | KVARTETOT; ESITYSKOKOONPANO
+130$m | <A30$m | KVARTETOT; ESITYSKOKOONPANO; AANITYYPPI
 #endif
 
 #if (RegFind(@130$a, 'Kvintetot') >= 0)
-130$m | <A30$m | KVINTETOT; ESITYSKOKOONPANO
+130$m | <A30$m | KVINTETOT; ESITYSKOKOONPANO; AANITYYPPI
 #endif
 
 #if (RegFind(@130$a, 'Triot') < 0) And (RegFind(@130$a, 'Kvartetot') < 0) And (RegFind(@130$a, 'Kvintetot') < 0)
-130$m | <A30$m | ESITYSKOKOONPANO
+130$m | <A30$m | ESITYSKOKOONPANO; AANITYYPPI
 #endif
 
-130$o | <A30$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
+130$o | <A30$o | SOVITUSMERKINTO; ESITYSKOKOONPANO; AANITYYPPI
 130$p | <A30$p | RAAMATTU
 130$? | <A30$? | 
 
@@ -112,23 +112,23 @@ A30 | 130 | COMMA2DOT_BEFORE_L ; LOPPUPISTE_X30
 240$l | <F40$l | UPPERCASE130L
 
 #if (RegFind(@240$t, 'Triot') >= 0) Or (RegFind(@240$a, 'Triot') >= 0)
-240$m | <F40$m | TRIOT; ESITYSKOKOONPANO
+240$m | <F40$m | TRIOT; ESITYSKOKOONPANO; AANITYYPPI
 #endif
 
 #if (RegFind(@240$t, 'Kvartetot') >= 0) Or (RegFind(@240$a, 'Kvartetot') >= 0)
-240$m | <F40$m | KVARTETOT; ESITYSKOKOONPANO
+240$m | <F40$m | KVARTETOT; ESITYSKOKOONPANO; AANITYYPPI
 #endif
 
 #if (RegFind(@240$t, 'Kvintetot') >= 0) Or (RegFind(@240$a, 'Kvintetot') >= 0)
-240$m | <F40$m | KVINTETOT; ESITYSKOKOONPANO
+240$m | <F40$m | KVINTETOT; ESITYSKOKOONPANO; AANITYYPPI
 #endif
 
 // Jos aiemmat säännöt eivät tärpänneet eli väliaikaista kenttää F40$m ei ole luotu
 #if Not Exists(F40$m)
-240$m | <F40$m | ESITYSKOKOONPANO
+240$m | <F40$m | ESITYSKOKOONPANO; AANITYYPPI
 #endif
                  
-240$o | <F40$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
+240$o | <F40$o | SOVITUSMERKINTO; ESITYSKOKOONPANO; AANITYYPPI
 240$p | <F40$p | RAAMATTU
 240$? | <F40$? | S
 
@@ -140,22 +140,22 @@ F40   | 240    | COMMA2DOT_BEFORE_L
 243$l | <B43$l | UPPERCASE130L
 
 #if (RegFind(@243$a, 'Triot') >= 0)
-243$m | <B43$m | TRIOT; ESITYSKOKOONPANO
+243$m | <B43$m | TRIOT; ESITYSKOKOONPANO; AANITYYPPI
 #endif
 
 #if (RegFind(@243$a, 'Kvartetot') >= 0)
-243$m | <B43$m | KVARTETOT; ESITYSKOKOONPANO
+243$m | <B43$m | KVARTETOT; ESITYSKOKOONPANO; AANITYYPPI
 #endif
 
 #if (RegFind(@243$a, 'Kvintetot') >= 0)
-243$m | <B43$m | KVINTETOT; ESITYSKOKOONPANO
+243$m | <B43$m | KVINTETOT; ESITYSKOKOONPANO; AANITYYPPI
 #endif
 
 #if (RegFind(@243$a, 'Triot') < 0) And (RegFind(@243$a, 'Kvartetot') < 0) And (RegFind(@243$a, 'Kvintetot') < 0)
-243$m | <B43$m | ESITYSKOKOONPANO
+243$m | <B43$m | ESITYSKOKOONPANO; AANITYYPPI
 #endif
 
-243$o | <B43$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
+243$o | <B43$o | SOVITUSMERKINTO; ESITYSKOKOONPANO; AANITYYPPI
 243$? | <B43$? | S
 
 B43 | 243 | COMMA2DOT_BEFORE_L
@@ -807,22 +807,22 @@ T36   | <DEL  | S
 
 600$l | <C60$l | UPPERCASE130L
 #if (RegFind(@600$t, 'Triot') >= 0)
-600$m | <C60$m | TRIOT; ESITYSKOKOONPANO
+600$m | <C60$m | TRIOT; ESITYSKOKOONPANO; AANITYYPPI
 #endif
 
 #if (RegFind(@600$t, 'Kvartetot') >= 0)
-600$m | <C60$m | KVARTETOT; ESITYSKOKOONPANO
+600$m | <C60$m | KVARTETOT; ESITYSKOKOONPANO; AANITYYPPI
 #endif
 
 #if (RegFind(@600$t, 'Kvintetot') >= 0)
-600$m | <C60$m | KVINTETOT; ESITYSKOKOONPANO
+600$m | <C60$m | KVINTETOT; ESITYSKOKOONPANO; AANITYYPPI
 #endif
 
 #if (RegFind(@600$t, 'Triot') < 0) And (RegFind(@600$t, 'Kvartetot') <0) And (RegFind(@600$t, 'Kvintetot') < 0)
 600$m | <C60$m | S
 #endif
 
-600$o | <C60$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
+600$o | <C60$o | SOVITUSMERKINTO; ESITYSKOKOONPANO; AANITYYPPI
 600$p | <C60$p | RAAMATTU
 600$4 | <C60$e | If (Not (Exists(@600$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
 600$? | <C60$? | S
@@ -844,22 +844,22 @@ C60 | 600 | FUNKTIOVALIMERKIT; COMMA2DOT_BEFORE_L; ENTRY_FIELD_PUNCTUATION; If (
 610$l | <D61$l | UPPERCASE130L
 
 #if (RegFind(@610$t, 'Triot') >= 0)
-610$m | <D61$m | TRIOT; ESITYSKOKOONPANO
+610$m | <D61$m | TRIOT; ESITYSKOKOONPANO; AANITYYPPI
 #endif
 
 #if (RegFind(@610$t, 'Kvartetot') >= 0)
-610$m | <D61$m | KVARTETOT; ESITYSKOKOONPANO
+610$m | <D61$m | KVARTETOT; ESITYSKOKOONPANO; AANITYYPPI
 #endif
 
 #if (RegFind(@610$t, 'Kvintetot') >= 0)
-610$m | <D61$m | KVINTETOT; ESITYSKOKOONPANO
+610$m | <D61$m | KVINTETOT; ESITYSKOKOONPANO; AANITYYPPI
 #endif
 
 #if (RegFind(@610$t, 'Triot') < 0) And (RegFind(@610$t, 'Kvartetot') < 0) And (RegFind(@610$t, 'Kvintetot') < 0)
 610$m | <D61$m | S
 #endif
 
-610$o | <D61$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
+610$o | <D61$o | SOVITUSMERKINTO; ESITYSKOKOONPANO; AANITYYPPI
 610$p | <D61$p | RAAMATTU
 610$4 | <C61$e | If (Not (Exists(@610$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
 610$? | <D61$? | S
@@ -883,22 +883,22 @@ K61   | 611     | FUNKTIOT2; COMMA2DOT_BEFORE_L
 630$l | <E63$l | UPPERCASE130L
 
 #if (RegFind(@630$a, 'Triot') >= 0)
-630$m | <E63$m | TRIOT; ESITYSKOKOONPANO
+630$m | <E63$m | TRIOT; ESITYSKOKOONPANO; AANITYYPPI
 #endif
 
 #if (RegFind(@630$a, 'Kvartetot') >= 0)
-630$m | <E63$m | KVARTETOT; ESITYSKOKOONPANO
+630$m | <E63$m | KVARTETOT; ESITYSKOKOONPANO; AANITYYPPI
 #endif
 
 #if (RegFind(@630$a, 'Kvintetot') >= 0)
-630$m | <E63$m | KVINTETOT; ESITYSKOKOONPANO
+630$m | <E63$m | KVINTETOT; ESITYSKOKOONPANO; AANITYYPPI
 #endif
 
 #if (RegFind(@630$a, 'Triot') < 0) And (RegFind(@630$a, 'Kvartetot') < 0) And (RegFind(@630$a, 'Kvintetot') < 0)
 630$m | <E63$m | S
 #endif
 
-630$o | <E63$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
+630$o | <E63$o | SOVITUSMERKINTO; ESITYSKOKOONPANO; AANITYYPPI
 630$p | <E63$p | RAAMATTU
 630$4 | <E63$e | If (Not (Exists(@630$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
 630$? | <E63$? | S
@@ -949,22 +949,22 @@ Z65   | 662    | FUNKTIOVALIMERKIT
 700$l | <G70$l | UPPERCASE130L
 
 #if (RegFind(@700$t, 'Triot') >= 0)
-700$m | <G70$m | TRIOT; ESITYSKOKOONPANO
+700$m | <G70$m | TRIOT; ESITYSKOKOONPANO; AANITYYPPI
 #endif
 
 #if (RegFind(@700$t, 'Kvartetot') >= 0)
-700$m | <G70$m | KVARTETOT; ESITYSKOKOONPANO
+700$m | <G70$m | KVARTETOT; ESITYSKOKOONPANO; AANITYYPPI
 #endif
 
 #if (RegFind(@700$t, 'Kvintetot') >= 0)
-700$m | <G70$m | KVINTETOT; ESITYSKOKOONPANO
+700$m | <G70$m | KVINTETOT; ESITYSKOKOONPANO; AANITYYPPI
 #endif
 
 #if (RegFind(@700$t, 'Triot') < 0) And (RegFind(@700$t, 'Kvartetot') < 0) And (RegFind(@700$t, 'Kvintetot') < 0)
-700$m | <G70$m | ESITYSKOKOONPANO
+700$m | <G70$m | ESITYSKOKOONPANO; AANITYYPPI
 #endif
 
-700$o | <G70$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
+700$o | <G70$o | SOVITUSMERKINTO; ESITYSKOKOONPANO; AANITYYPPI
 700$p | <G70$p | RAAMATTU
 700$4 | <G70$e | If InTable(S, 'Funktiokoodit.tbl') Then Table ('Funktiokoodit.tbl') + '.'
 700$4 | <G70$4 | If (Not InTable(S, 'Funktiokoodit.tbl')) Then S 
@@ -980,22 +980,22 @@ G70 | 700 | FUNKTIOVALIMERKIT; ENTRY_FIELD_PUNCTUATION ; COMMA2DOT_BEFORE_L
 710$l | <H71$l | UPPERCASE130L
 
 #if (RegFind(@710$t, 'Triot') >= 0)
-710$m | <H71$m | TRIOT; ESITYSKOKOONPANO
+710$m | <H71$m | TRIOT; ESITYSKOKOONPANO; AANITYYPPI
 #endif
 
 #if (RegFind(@710$t, 'Kvartetot') >= 0)
-710$m | <H71$m | KVARTETOT; ESITYSKOKOONPANO
+710$m | <H71$m | KVARTETOT; ESITYSKOKOONPANO; AANITYYPPI
 #endif
 
 #if (RegFind(@710$t, 'Kvintetot') >= 0)
-710$m | <H71$m | KVINTETOT; ESITYSKOKOONPANO
+710$m | <H71$m | KVINTETOT; ESITYSKOKOONPANO; AANITYYPPI
 #endif
 
 #if (RegFind(@710$t, 'Triot') < 0) And (RegFind(@710$t, 'Kvartetot') < 0) And (RegFind(@710$t, 'Kvintetot') < 0)
 710$m | <H71$m | S
 #endif
 
-710$o | <H71$o | SOVITUSMERKINTO, ESITYSKOKOONPANO
+710$o | <H71$o | SOVITUSMERKINTO, ESITYSKOKOONPANO; AANITYYPPI
 710$p | <H71$p | RAAMATTU
 710$4 | <H71$e | If InTable(S, 'Funktiokoodit.tbl') Then Table ('Funktiokoodit.tbl') + '.' Else S
 710$? | <H71$? | S
@@ -1026,22 +1026,22 @@ Y72   | 720    | S
 730$l | <J73$l | UPPERCASE130L
 
 #if (RegFind(@730$a, 'Triot') >= 0)
-730$m | <J73$m | TRIOT; ESITYSKOKOONPANO
+730$m | <J73$m | TRIOT; ESITYSKOKOONPANO; AANITYYPPI
 #endif
 
 #if (RegFind(@730$a, 'Kvartetot') >= 0)
-730$m | <J73$m | KVARTETOT; ESITYSKOKOONPANO
+730$m | <J73$m | KVARTETOT; ESITYSKOKOONPANO; AANITYYPPI
 #endif
 
 #if (RegFind(@730$a, 'Kvintetot') >= 0)
-730$m | <J73$m | KVINTETOT; ESITYSKOKOONPANO
+730$m | <J73$m | KVINTETOT; ESITYSKOKOONPANO; AANITYYPPI
 #endif
 
 #if (RegFind(@730$a, 'Triot') < 0) And (RegFind(@730$a, 'Kvartetot') < 0) And (RegFind(@730$a, 'Kvintetot') < 0)
-730$m | <J73$m | ESITYSKOKOONPANO
+730$m | <J73$m | ESITYSKOKOONPANO; AANITYYPPI
 #endif
 
-730$o | <J73$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
+730$o | <J73$o | SOVITUSMERKINTO; ESITYSKOKOONPANO; AANITYYPPI
 730$p | <J73$p | RAAMATTU
 730$? | <J73$? | S
 
@@ -1074,22 +1074,22 @@ J73 | 730 | LOPPUPISTE_X30; COMMA2DOT_BEFORE_L
 800$l | <K80$l | UPPERCASE130L
 
 #if (RegFind(@800$t, 'Triot') >= 0)
-800$m | <K80$m | TRIOT; ESITYSKOKOONPANO
+800$m | <K80$m | TRIOT; ESITYSKOKOONPANO; AANITYYPPI
 #endif
 
 #if (RegFind(@800$t, 'Kvartetot') >= 0)
-800$m | <K80$m | KVARTETOT; ESITYSKOKOONPANO
+800$m | <K80$m | KVARTETOT; ESITYSKOKOONPANO; AANITYYPPI
 #endif
 
 #if (RegFind(@800$t, 'Kvintetot') >= 0)
-800$m | <K80$m | KVINTETOT; ESITYSKOKOONPANO
+800$m | <K80$m | KVINTETOT; ESITYSKOKOONPANO; AANITYYPPI
 #endif
 
 #if ((RegFind(@800$t, 'Triot') < 0) And (RegFind(@800$t, 'Kvartetot') < 0) And (RegFind(@800$t, 'Kvintetot') < 0))
-800$m | <K80$m | ESITYSKOKOONPANO
+800$m | <K80$m | ESITYSKOKOONPANO; AANITYYPPI
 #endif
 
-800$o | <K80$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
+800$o | <K80$o | SOVITUSMERKINTO; ESITYSKOKOONPANO; AANITYYPPI
 800$p | <K80$p | RAAMATTU
 800$4 | <K80$e | If (Not (Exists(@800$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
 800$? | <K80$? | S
@@ -1103,22 +1103,22 @@ K80 | 800 | FUNKTIOVALIMERKIT; ENTRY_FIELD_PUNCTUATION ; COMMA2DOT_BEFORE_L
 810$l | <L81$l | UPPERCASE130L
 
 #if (RegFind(@810$t, 'Triot') >= 0)
-810$m | <L81$m | TRIOT; ESITYSKOKOONPANO
+810$m | <L81$m | TRIOT; ESITYSKOKOONPANO; AANITYYPPI
 #endif
 
 #if (RegFind(@810$t, 'Kvartetot') >= 0)
-810$m | <L81$m | KVARTETOT; ESITYSKOKOONPANO
+810$m | <L81$m | KVARTETOT; ESITYSKOKOONPANO; AANITYYPPI
 #endif
 
 #if (RegFind(@810$t, 'Kvintetot') >= 0)
-810$m | <L81$m | KVINTETOT; ESITYSKOKOONPANO
+810$m | <L81$m | KVINTETOT; ESITYSKOKOONPANO; AANITYYPPI
 #endif
 
 #if Not Exists(@810$t) Or ((RegFind(@810$t, 'Triot') >= 0) And (RegFind(@810$t, 'Kvartetot') >= 0) And (RegFind(@810$t, 'Kvintetot') >= 0))
 810$m | <L81$m | S
 #endif
 
-810$o | <L81$o | SOVITUSMERKINTO, ESITYSKOKOONPANO
+810$o | <L81$o | SOVITUSMERKINTO, ESITYSKOKOONPANO; AANITYYPPI
 810$p | <L81$p | RAAMATTU
 810$4 | <L81$e | If Not (Exists(@810$e)) Then Table ('Funktiokoodit.tbl') + '.'
 810$? | <L81$? | S
@@ -1139,22 +1139,22 @@ W81   | 811    | FUNKTIOT2
 830$l | <M83$l | UPPERCASE130L
 
 #if (RegFind(@830$a, 'Triot') >= 0)
-830$m | <M83$m | TRIOT; ESITYSKOKOONPANO
+830$m | <M83$m | TRIOT; ESITYSKOKOONPANO; AANITYYPPI
 #endif
 
 #if (RegFind(@830$a, 'Kvartetot') >= 0)
-830$m | <M83$m | KVARTETOT; ESITYSKOKOONPANO
+830$m | <M83$m | KVARTETOT; ESITYSKOKOONPANO; AANITYYPPI
 #endif
 
 #if (RegFind(@830$a, 'Kvintetot') >= 0)
-830$m | <M83$m | KVINTETOT; ESITYSKOKOONPANO
+830$m | <M83$m | KVINTETOT; ESITYSKOKOONPANO; AANITYYPPI
 #endif
 
 #if Not Exists(@830$a) Or ((RegFind(@830$a, 'Triot') >= 0) And (RegFind(@830$a, 'Kvartetot') >= 0) And (RegFind(@830$a, 'Kvintetot') >= 0))
 830$m | <M83$m | S
 #endif
 
-830$o | <M83$o | SOVITUSMERKINTO, ESITYSKOKOONPANO
+830$o | <M83$o | SOVITUSMERKINTO, ESITYSKOKOONPANO; AANITYYPPI
 830$p | <M83$p | S; If (Not Exists(@830$p(2))) Then RAAMATTU
 830$v | <M83$v | S; Delete ('.', At Ending)
 830$? | <M83$? | S
