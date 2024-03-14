@@ -7,6 +7,17 @@
 // For LDR/06 'o' and 'p' we need to do tailor rules to begin with. (Not done.)
 // Also the we now create the 338$b and then build 338$a based on CAT lang.
 
+
+// TODO: The order should be
+// 1. multi-338 (LDR/06='o' or 'p'. TODO)
+// 2. others in order of probability (safest first=
+
+// Object/esine/
+#if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
+    ( @000/7/ = 'r' )
+000 | <B38$b | 'nr'   
+#endif
+
 // NIDE
 
 #if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
