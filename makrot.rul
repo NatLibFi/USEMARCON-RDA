@@ -12,9 +12,10 @@
 
 
 
+// TODO: refator FI300AE vs SV300AE
+// TODO: refator FI300BE vs SV300BE
 
-
-#define macro 300AE | RegReplace('\\b[Nn]\\.', 'noin', 'g'); \
+#define macro FI300AE | RegReplace('\\b[Nn]\\.', 'noin', 'g'); \
                       RegReplace('(\\d+) s\\.', '\\1 sivua', 'g'); \
                       RegReplace('(\\[\\d+\\]) s\\.', '\\1 sivua', 'g'); \
                       RegReplace('(\\d+) bl\\.', '\\1 blad', 'g'); \
@@ -29,6 +30,14 @@
                       RegReplace('verkkojulkaisu', 'verkkoaineisto', 'g'); \
                       RegReplace('Verkkojulkaisu', 'Verkkoaineisto', 'g')
 
+#define macro SV300AE | RegReplace('\\b[Nn]\\.', 'noin', 'g'); \
+                      RegReplace('\\bsek([^A-Z-a-z])', 's\\1', 'g'); \
+                      RegReplace('(\\d+) bl\\.', '\\1 blad', 'g'); \
+                      RegReplace('\\bss\\.', 'sivut', 'g'); \
+                      RegReplace('\\bkuv\\.', 'kuvitettu', 'g'); \
+                      RegReplace('verkkojulkaisu', 'verkkoaineisto', 'g'); \
+                      RegReplace('Verkkojulkaisu', 'Verkkoaineisto', 'g')
+		      
 // Usemarcon has Mixed() but I (nv) can't get it to work
 #define macro UPPERCASE130L | RegReplace('^a', 'A'); RegReplace('^b', 'B'); \
 	RegReplace('^c', 'C'); RegReplace('^d', 'D'); RegReplace('^e', 'E'); \
@@ -40,16 +49,16 @@
 	RegReplace('^u', 'U'); RegReplace('^v', 'V'); RegReplace('^w', 'W'); \
 	RegReplace('^x', 'X'); RegReplace('^y', 'Y'); RegReplace('^z', 'Z');
 
-#define macro 300BE | RegReplace('kartt\\.', 'karttoja', 'g'); \
+#define macro FI300BE | RegReplace('kartt\\.', 'karttoja', 'g'); \
                       RegReplace('kuv\\.', 'kuvitettu', 'g'); \
-                      RegReplace('mv\\.', 'mustavalkoinen', 'g'); \
+		      RegReplace('mv\\.', 'mustavalkoinen', 'g'); \
 		      RegReplace('\\b1 videokas\\.', '1 videokasetti', 'g'); \
 		      RegReplace('([0-9][0-9]|[02-9]) videokas\\.', '\\1 videokasettia', 'g'); \
 		      RegReplace('vär\\.', 'värillinen', 'g'); \
                       RegReplace('värikuv\\.', 'värikuvitus', 'g'); \
 		      RegReplace('\\b1 äänikas\\.', '1 äänikasetti', 'g'); \
 		      RegReplace('([0-9][0-9]|[02-9]) äänikas\\.', '\\1 äänikasettia', 'g'); \
-                      RegReplace('nuott\\.', 'nuotteja', 'g'); \
+		      RegReplace('nuott\\.', 'nuotteja', 'g'); \
                       RegReplace('kuval\\.', 'kuvalehteä', 'g'); \
                       RegReplace('diagrs\\.', 'diagrams', 'g'); \
                       RegReplace('incl\\.', 'includes', 'g'); \
@@ -69,6 +78,44 @@
                       RegReplace('liites\\.|liites(\$|\\b)', 'liitesivua', 'g'); \
                       RegReplace('liitt\\.', 'liitteitä', 'g'); \
                       RegReplace('[Vv]erkkokirja', 'verkkoaineisto', 'g')
+
+
+#define macro SV300BE | RegReplace('\\bill\\.', 'illustrationer', 'g'); \
+	      	      RegReplace('($[abcde])ill\\.', '\\1illustrationer', 'g'); \
+	      	      RegReplace('kartt\\.', 'karttoja', 'g'); \
+                      RegReplace('kart\\.', 'kartor', 'g'); \
+                      RegReplace('kuv\\.', 'kuvitettu', 'g'); \
+		      RegReplace('\\b1 ljudkass\\.', '1 ljudkassett', 'g'); \
+		      RegReplace('([0-9][0-9]|[02-9]) ljudkass\\.', '\\1 ljudkassetter', 'g'); \
+		      RegReplace('mv\\.', 'mustavalkoinen', 'g'); \
+		      RegReplace('\\b1 videokass\\.', '1 videokassett', 'g'); \
+		      RegReplace('([0-9][0-9]|[02-9]) videokass\\.', '\\1 videokassetter', 'g'); \
+		      RegReplace('vär\\.', 'värillinen', 'g'); \
+                      RegReplace('\\bl\\.', 'blad', 'g'); \
+                      RegReplace('\\bfig\\.', 'figurer', 'g'); \
+                      RegReplace('värikuv\\.', 'värikuvitus', 'g'); \
+                      RegReplace('nuott\\.', 'nuotteja', 'g'); \
+                      RegReplace('\\bbil\\.', 'bilder', 'g'); \
+                      RegReplace('kuval\\.', 'kuvalehteä', 'g'); \
+                      RegReplace('diagrs\\.', 'diagrams', 'g'); \
+                      RegReplace('incl\\.', 'includes', 'g'); \
+                      RegReplace('fold(\\.)* maps', 'folded maps', 'g'); \
+                      RegReplace('(\\d+) irtol\\.', '\\1 irtolehteä'); \
+                      Replace('kuvas.' By 'kuvasivua'); \
+                      RegReplace('([^0-9]) (taul[.,])', '\\1 taulukkoja', 'g'); \
+                      RegReplace('\\btaul\\.', 'taulukkoja', 'g'); \
+                      RegReplace('hakem\\.|hakem(\$|\\b)', 'hakemisto', 'g'); \
+                      RegReplace('lyh\\. luett\\.', 'lyhenneluettelo', 'g'); \
+                      RegReplace('lähdel\\.|lähdel(\$|\\b)', 'lähdeluettelo', 'g'); \
+                      RegReplace('liitel\\.|liitel(\$|\\b)', 'liiteluettelo', 'g'); \
+                      RegReplace('(\\d*) taul\\.', '\\1 taulukkoa', 'g'); \
+                      RegReplace('(\\d*) karttal\\.', '\\1 karttaliitettä', 'g'); \
+                      RegReplace('\\] kuvas\\.|\\] kuvas(\$|\\b)', '] kuvasivua', 'g'); \
+                      RegReplace('1 liites\\.|1 liites(\$|\\b)', '1 liitesivu', 'g'); \
+                      RegReplace('liites\\.|liites(\$|\\b)', 'liitesivua', 'g'); \
+                      RegReplace('liitt\\.', 'liitteitä', 'g'); \
+                      RegReplace('[Vv]erkkokirja', 'verkkoaineisto', 'g')
+
 
 #define macro 300C | RegReplace('\\b2:o', 'folio', 'g'); \
 	RegReplace('\\b4:o', 'kvartto', 'g'); \
@@ -109,6 +156,22 @@
   RegReplace('\\bB(,|\\s|/|\\)|\$)', 'basso\\1', 'g');
 
 
+#define macro ROSTTYP RegReplace('\\bS\\s*(\\(\\d+)', 'sopraner \\1', 'g'); \
+  RegReplace('\\bS(,|\\s|/|\\)|\$)', 'sopran\\1', 'g'); \
+  RegReplace('\\bMz\\s*(\\(\\d+)', 'mezzosopraner \\1', 'g'); \
+  RegReplace('\\bMz(,|\\s|/|\\)|\$)', 'mezzosopran\\1', 'g'); \
+  RegReplace('\\bA\\s*(\\(\\d+)', 'altar \\1', 'g'); \
+  RegReplace('\\bA(,|\\s|/|\\)|\$)', 'alt\\1', 'g'); \
+  RegReplace('\\bKt\\s*(\\(\\d+)', 'kontratenorer \\1', 'g'); \
+  RegReplace('\\bKt(,|\\s|/|\\)|\$)', 'kontratenor\\1', 'g'); \
+  RegReplace('\\bT\\s*(\\(\\d+)', 'tenorer \\1', 'g'); \
+  RegReplace('\\bT(,|\\s|/|\\)|\$)', 'tenor\\1', 'g'); \
+  RegReplace('\\bBar\\s*(\\(\\d+)', 'barytoner \\1', 'g'); \
+  RegReplace('\\bBar(,|\\s|/|\\)|\$)', 'baryton\\1', 'g'); \
+  RegReplace('\\bB\\s*(\\(\\d+)', 'basar \\1', 'g'); \
+  RegReplace('\\bB(,|\\s|/|\\)|\$)', 'bas\\1', 'g');
+
+
 
 #define macro TRIOT            | RegReplace('^piano, jouset', 'piano, viulu, sello'); \
                                  RegReplace('^jouset', 'viulu, alttoviulu, sello')
@@ -121,8 +184,12 @@
                                  RegReplace('^piano, jouset', 'piano, viulut (2), alttoviulu, sello'); \
                                  RegReplace('^puhaltimet', 'huilu, oboe, klarinetti, käyrätorvi, fagotti')
 
-#define macro SOVITUSMERKINTO | RegReplace('sov\\.', 'sovitettu', 'g')
+// Term name seen in auth 400$q (Arranged statement of music)
+#define macro SOVITUSMERKINTO_FI | RegReplace('sov\\.', 'sovitettu', 'g')
 
+#define macro SOVITUSMERKINTO_SV | RegReplace('sov\\.', 'sovitettu', 'g'); \
+                                RegReplace('arr\\.', 'arrangemang', 'g')
+				
 #define macro RAAMATTU | RegReplace('\\bUT(\\b|\\.)', 'Uusi testamentti', 'g'); \
                          RegReplace('\\bVT(\\b|\\.)', 'Vanha testamentti', 'g')
 
@@ -134,6 +201,8 @@
 #define macro FIKTIIVINEN_YHTEISO | RegReplace('fikt\\.', '(fiktiivinen yhteisö)')
 
 #define macro FIKTIV_INSTITUTION | RegReplace('fikt\\.', '(fiktiv institution)')
+
+// TODO: samma på svenska, t.ex.: f. => föddes?
 
 #define macro AIKAMAAREET | RegReplace('\\bs\\.', 'syntynyt', 'g'); \
                             RegReplace('\\bk\\.', 'kuollut', 'g'); \
@@ -155,7 +224,6 @@
                                RegReplace('[Pp]aperisena', 'painettuna', 'g'); \
                                RegReplace('Verkkokirja', '1 verkkoaineisto', 'g'); \
                                RegReplace('[Ii]nternet-julkaisu\\b', 'verkkoaineisto', 'g'); \
-                               RegReplace('paperisena', 'painettuna', 'g'); \
                                RegReplace('[Ee]lektroninen aineisto', 'Verkkoaineisto', 'g'); \
                                RegReplace('erkkojulkaisu', 'erkkoaineisto'); \
                                RegReplace('Elektroninen julkaisu|Verkkojulkaisuun', 'Linkki verkkoaineistoon')

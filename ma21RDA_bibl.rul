@@ -96,7 +96,7 @@ C11   | 111    | FUNKTIOT2
 130$m | <A30$m | ESITYSKOKOONPANO; AANITYYPPI
 #endif
 
-130$o | <A30$o | SOVITUSMERKINTO; ESITYSKOKOONPANO; AANITYYPPI
+130$o | <A30$o | SOVITUSMERKINTO_FI; ESITYSKOKOONPANO; AANITYYPPI
 130$p | <A30$p | RAAMATTU
 130$? | <A30$? | 
 
@@ -128,7 +128,7 @@ A30 | 130 | COMMA2DOT_BEFORE_L ; LOPPUPISTE_X30
 240$m | <F40$m | ESITYSKOKOONPANO; AANITYYPPI
 #endif
                  
-240$o | <F40$o | SOVITUSMERKINTO; ESITYSKOKOONPANO; AANITYYPPI
+240$o | <F40$o | SOVITUSMERKINTO_FI; ESITYSKOKOONPANO; AANITYYPPI
 240$p | <F40$p | RAAMATTU
 240$? | <F40$? | S
 
@@ -155,7 +155,7 @@ F40   | 240    | COMMA2DOT_BEFORE_L
 243$m | <B43$m | ESITYSKOKOONPANO; AANITYYPPI
 #endif
 
-243$o | <B43$o | SOVITUSMERKINTO; ESITYSKOKOONPANO; AANITYYPPI
+243$o | <B43$o | SOVITUSMERKINTO_FI; ESITYSKOKOONPANO; AANITYYPPI
 243$? | <B43$? | S
 
 B43 | 243 | COMMA2DOT_BEFORE_L
@@ -186,7 +186,7 @@ F45 | 245 | S
 #if (Not Exists(@300))
 256I1 | 300I1 | S
 256I2 | 300I2 | S
-256   | 300   | VERKKOAINEISTO; 300AE; Delete('.', At Ending)
+256   | 300   | VERKKOAINEISTO; FI300AE; Delete('.', At Ending)
 #endif
 
 # 20240201: Remove remaining 256 fields. (In some cases data could theoretically go to field 516.)
@@ -219,17 +219,17 @@ F45 | 245 | S
 300I2 | 300(newest)I2 | S
 
 #if (RegFind(@041, 'eng') >= 0)
-300$a | <Y30$a | 300AE; 300BE; RegReplace('(\\d*) p\\.', '\\1 pages')
+300$a | <Y30$a | FI300AE; FI300BE; RegReplace('(\\d*) p\\.', '\\1 pages')
 #endif
 
 #if (RegFind(@041, 'eng') < 0)
-300$a | <Y30$a | 300AE; 300BE // Ei avata p.-lyhennettä jos kyseessä on esim. ranska
+300$a | <Y30$a | FI300AE; FI300BE // Ei avata p.-lyhennettä jos kyseessä on esim. ranska
 #endif
 
-300$b | <Y30$b | 300BE; Delete('.', At Ending)
+300$b | <Y30$b | FI300BE; Delete('.', At Ending)
 // Don't use macro 300C
 300$c | <Y30$c | Delete('.', At Ending)
-300$e | <Y30$e | 300BE; Delete('.', At Ending)
+300$e | <Y30$e | FI300BE; Delete('.', At Ending)
 300$? | <Y30$? | S
 
 Y30   | 300    | S
@@ -822,7 +822,7 @@ T36   | <DEL  | S
 600$m | <C60$m | S
 #endif
 
-600$o | <C60$o | SOVITUSMERKINTO; ESITYSKOKOONPANO; AANITYYPPI
+600$o | <C60$o | SOVITUSMERKINTO_FI; ESITYSKOKOONPANO; AANITYYPPI
 600$p | <C60$p | RAAMATTU
 600$4 | <C60$e | If (Not (Exists(@600$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
 600$? | <C60$? | S
@@ -859,7 +859,7 @@ C60 | 600 | FUNKTIOVALIMERKIT; COMMA2DOT_BEFORE_L; ENTRY_FIELD_PUNCTUATION; If (
 610$m | <D61$m | S
 #endif
 
-610$o | <D61$o | SOVITUSMERKINTO; ESITYSKOKOONPANO; AANITYYPPI
+610$o | <D61$o | SOVITUSMERKINTO_FI; ESITYSKOKOONPANO; AANITYYPPI
 610$p | <D61$p | RAAMATTU
 610$4 | <C61$e | If (Not (Exists(@610$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
 610$? | <D61$? | S
@@ -898,7 +898,7 @@ K61   | 611     | FUNKTIOT2; COMMA2DOT_BEFORE_L
 630$m | <E63$m | S
 #endif
 
-630$o | <E63$o | SOVITUSMERKINTO; ESITYSKOKOONPANO; AANITYYPPI
+630$o | <E63$o | SOVITUSMERKINTO_FI; ESITYSKOKOONPANO; AANITYYPPI
 630$p | <E63$p | RAAMATTU
 630$4 | <E63$e | If (Not (Exists(@630$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
 630$? | <E63$? | S
@@ -964,7 +964,7 @@ Z65   | 662    | FUNKTIOVALIMERKIT
 700$m | <G70$m | ESITYSKOKOONPANO; AANITYYPPI
 #endif
 
-700$o | <G70$o | SOVITUSMERKINTO; ESITYSKOKOONPANO; AANITYYPPI
+700$o | <G70$o | SOVITUSMERKINTO_FI; ESITYSKOKOONPANO; AANITYYPPI
 700$p | <G70$p | RAAMATTU
 700$4 | <G70$e | If InTable(S, 'Funktiokoodit.tbl') Then Table ('Funktiokoodit.tbl') + '.'
 700$4 | <G70$4 | If (Not InTable(S, 'Funktiokoodit.tbl')) Then S 
@@ -995,7 +995,7 @@ G70 | 700 | FUNKTIOVALIMERKIT; ENTRY_FIELD_PUNCTUATION ; COMMA2DOT_BEFORE_L
 710$m | <H71$m | S
 #endif
 
-710$o | <H71$o | SOVITUSMERKINTO, ESITYSKOKOONPANO; AANITYYPPI
+710$o | <H71$o | SOVITUSMERKINTO_FI; ESITYSKOKOONPANO; AANITYYPPI
 710$p | <H71$p | RAAMATTU
 710$4 | <H71$e | If InTable(S, 'Funktiokoodit.tbl') Then Table ('Funktiokoodit.tbl') + '.' Else S
 710$? | <H71$? | S
@@ -1041,7 +1041,7 @@ Y72   | 720    | S
 730$m | <J73$m | ESITYSKOKOONPANO; AANITYYPPI
 #endif
 
-730$o | <J73$o | SOVITUSMERKINTO; ESITYSKOKOONPANO; AANITYYPPI
+730$o | <J73$o | SOVITUSMERKINTO_FI; ESITYSKOKOONPANO; AANITYYPPI
 730$p | <J73$p | RAAMATTU
 730$? | <J73$? | S
 
@@ -1089,7 +1089,7 @@ J73 | 730 | LOPPUPISTE_X30; COMMA2DOT_BEFORE_L
 800$m | <K80$m | ESITYSKOKOONPANO; AANITYYPPI
 #endif
 
-800$o | <K80$o | SOVITUSMERKINTO; ESITYSKOKOONPANO; AANITYYPPI
+800$o | <K80$o | SOVITUSMERKINTO_FI; ESITYSKOKOONPANO; AANITYYPPI
 800$p | <K80$p | RAAMATTU
 800$4 | <K80$e | If (Not (Exists(@800$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
 800$? | <K80$? | S
@@ -1118,7 +1118,7 @@ K80 | 800 | FUNKTIOVALIMERKIT; ENTRY_FIELD_PUNCTUATION ; COMMA2DOT_BEFORE_L
 810$m | <L81$m | S
 #endif
 
-810$o | <L81$o | SOVITUSMERKINTO, ESITYSKOKOONPANO; AANITYYPPI
+810$o | <L81$o | SOVITUSMERKINTO_FI; ESITYSKOKOONPANO; AANITYYPPI
 810$p | <L81$p | RAAMATTU
 810$4 | <L81$e | If Not (Exists(@810$e)) Then Table ('Funktiokoodit.tbl') + '.'
 810$? | <L81$? | S
@@ -1154,7 +1154,7 @@ W81   | 811    | FUNKTIOT2
 830$m | <M83$m | S
 #endif
 
-830$o | <M83$o | SOVITUSMERKINTO, ESITYSKOKOONPANO; AANITYYPPI
+830$o | <M83$o | SOVITUSMERKINTO_FI; ESITYSKOKOONPANO; AANITYYPPI
 830$p | <M83$p | S; If (Not Exists(@830$p(2))) Then RAAMATTU
 830$v | <M83$v | S; Delete ('.', At Ending)
 830$? | <M83$? | S
