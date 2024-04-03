@@ -9,4 +9,5 @@
 005009831 300   L $$a1 whatever.
 005009831 500   L $$aTässä testataan 600- ja 610-kentän välimerkkejä.
 005009831 7001  L $$aSukunimi, Etunimi,$$esäv.,$$esan.$$esov.
-
+005009831 7001  L $$aSukunimi, Etunimi,$$esäveltäjä
+005009831 7001  L $$aSukunimi, Etunimi,$$esäveltäjä$$0(FI-ASTERI-N)012345678
