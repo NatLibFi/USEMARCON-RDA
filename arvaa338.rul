@@ -10,7 +10,7 @@
 
 // TODO: The order should be
 // 1. multi-338 (LDR/06='o' or 'p'. TODO)
-// 2. others in order of probability (safest first=
+// 2. others in order of probability (safest first)
 
 // Object/esine/
 #if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
@@ -21,20 +21,15 @@
 // NIDE
 
 #if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
-    ( ( @000/7/ = 'a' Or @000/7/ = 'c' Or @000/7/ = 'e' Or @000/7/ = 't') And \
-          ( \
-            ( (RegFind(@336(1)$a, 'eksti') >= 0) Or \
-              (RegFind(@336(2)$a, 'eksti') >= 0) Or \
-              (RegFind(@336(3)$a, 'eksti') >= 0) Or \
-              (RegFind(@336(4)$a, 'eksti') >= 0) Or \
-              (RegFind(@336$a, 'notatoitu|nuottikirjoitus') >= 0 ) ) And \
-            ( (RegFind(@337(1)$a, 'laitetta') >= 0) Or \
-              (RegFind(@337(2)$a, 'laitetta') >= 0) Or \
-              (RegFind(@337(3)$a, 'laitetta') >= 0) Or \
-              (RegFind(@337(4)$a, 'laitetta') >= 0) ) \
-          ) \
-        Or (RegFind(@300$a, '[Tt]ekstivihko|\\b[Kk]irja|[Kk]artasto') >= 0) \
-        Or (RegFind(%336$a, 'Kartografinen') >=0) )
+    ( @000/7/ = 'a' Or @000/7/ = 'c' Or @000/7/ = 'e' Or @000/7/ = 't') And \
+    ( RegFind(@336$a, '([Kk]artografisk|[Kk]artografinen|[Nn]otatoitu|[Nn]uottikirjoitus|[Tt]eksti|[Tt]ext)') >= 0 Or RegFind(@336$b, 'txt') >= 0 ) And \
+    ( RegFind(@337$a, 'ingen medietyp|laitetta|oförmedlad|omedierad') >= 0 Or RegFind(@337$b, 'n') >= 0 )
+000 | <B38$b | 'nc'
+#endif
+
+#if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
+    ( @000/7/ = 'a' Or @000/7/ = 'c' Or @000/7/ = 'e' Or @000/7/ = 't') And \
+    RegFind(@300$a, 'artbok|atlas|\\b[Bb]ok|[Tt]ekstivihko|\\b[Kk]irja|[Kk]artasto') >= 0
 000 | <B38$b | 'nc'
 #endif
 
@@ -46,25 +41,10 @@
 000 | <B38$b | 'nc'
 #endif
 
-// SAMMA PÅ SVENSKA : VOLYM
-
-#if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
-  And If ( @000/7/ = 'a' Or @000/7/ = 'c' Or @007/7/ = 'e' Or \
-        (RegFind(@300$a, '[Bb]ok|artbok|atlas') >= 0) Or (RegFind(%336$a, 'artografisk') >=0) ) \
-  And If (RegFind(@337, 'ingen medietyp|oförmedlad|omedierad') >= 0)
-000 | <B38$b | 'nc'
-#endif
-
-
-#if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
-  And (RegFind(%336$a, 'ext') >= 0) \
-  And (RegFind(%337$a, 'oförmedlad|omedierad') >= 0)
-000 | <B38$b | 'nc'
-#endif
 
 // VIDEOKASETTI
 #if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
-    And If (RegFind(@300$a, '[Vv]ideo ?cas|[Vv]ideokas') >= 0)
+    RegFind(@300$a, '[Vv]ideo ?[ck]as') >= 0
 000 | <B38$b | 'vf'
 #endif
 
@@ -82,7 +62,7 @@
 
 // DIA/DIABILD/SLIDE #2
 #if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
-    If ( (RegFind(@300$a, '([Kk]uultokuv|[Dd]iaa|\\b[Dd]ia\\b|[Dd]iabild)') >= 0)
+    (RegFind(@300$a, '([Kk]uultokuv|[Dd]iaa|\\b[Dd]ia\\b|[Dd]iabild)') >= 0)
 000 | <B38$b | 'gs'
 #endif
 
@@ -90,23 +70,19 @@
 
 // MIKROKORTTI
 #if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
-    And ( \
-      (RegFind(@300$a, '[Mm]ikrokortti') >= 0) Or (RegFind(@500$a, 'filmikortt') >= 0) \
-        Or (007/1-2/ = 'hg') Or (007/1-2/ = 'he') \
-        Or (008/24/ = 'b') \
-        Or (008/24/ = 'c') \
-        ) \
-    And (Not (000/7/ = 'e') Or (000/7/ = 'f'))
+    (Not (000/7/ = 'e') Or (000/7/ = 'f')) And \
+    ( (RegFind(@300$a, '[Ff]ilmi?kort|[Mm]ikrokort') >= 0) Or (RegFind(@500$a, 'filmi?kort') >= 0) \
+        Or (007/1-2/ = 'he') Or (008/24/ = 'b') \
+        ) 
 000 | <B38$b | 'he'
 #endif
 
-// SAMMA PÅ SVENSKA : MIKROKORT
+// TODO: tests for both 'he' and 'hg' (fixed a bug there)
 
 #if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
-    And ( (RegFind(@300$a, '[Mm]ikrokort\\b') >= 0) Or (RegFind(@500$a, 'filmikort\\b') >= 0) ) \
-    And ( (007/1-2/ = 'hg') Or (007/1-2/ = 'he') ) \
-    And (Not (000/7/ = 'e') Or (000/7/ = 'f'))
-000 | <B38$b | 'he'
+    (Not (000/7/ = 'e')) And (Not 000/7/ = 'f') And \
+    ( (007/1-2/ = 'hg') Or ( 008/24/ = 'c' ) )
+000 | <B38$b | 'hg'
 #endif
 
 // KORTTI/KORT/CARD
@@ -124,17 +100,10 @@
 #endif
 
 
-// MIKROFILMIRULLA
+// MIKROFILMIRULLA/MIKROFILMSRULLE
 #if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
-    ( (RegFind(@300$a, '[Mm]ikrofilmi|[Mm]icrofilm') >= 0) Or (007/1-2/ = 'hj') Or (008/24/ = 'a')) \
+    ( (RegFind(@300$a, '[Mm]ikrofilmi|[Mm]icrofilm\\b|[Mm]icrofilmsrull') >= 0) Or (007/1-2/ = 'hj') Or (008/24/ = 'a')) \
       And (Not (000/7/ = 'e') Or (000/7/ = 'f'))
-000 | <B38$b | 'hj'
-#endif
-
-// SAMMA PÅ SVENSKA : MIKROFILMSRULLE
-#if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
-    ( RegFind(@300$a, '[Mm]ikrofilm\\b|[Mm]ikrofilmsrull') >= 0 ) \
-    And (Not ((000/7/ = 'e') Or (000/7/ = 'f')))
 000 | <B38$b | 'hj'
 #endif
 
@@ -147,27 +116,11 @@
 
 // MUISTIKORTTI (2024-02-06) (related: 007/00-01=cs, 008/23=q)
 #if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
-    And (000/7/ = 'm') \
-    And (RegFind(@300$a, '[Cc]omputer card|[Dd]atorkort|[Mm]uistikortti') >= 0)
+    (000/7/ = 'm') And \
+    RegFind(@300$a, '[Cc]omputer card|[Dd]atorkort|[Mm]uistikortti') >= 0
 000 | <B38$b | 'ck'    
 #endif
 
-// MUU (NV 2024-03-14: This rules is erronous. TODO: Fix it after other stuff has been commited etc!)
-#if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
-    ( \
-      (RegFind(@300, '[Tt]aulu\\b|[Uu][Ss][Bb]-muisti|[Ll]evyke|[Dd]isketti|[Oo]petuskuva') >= 0) \
-      Or ( (RegFind(@337$a, 'useita v') >= 0) And (RegFind(@336$a, 'useita') >= 0) ) \
-   )
-000 | <B38$b | 'nz'       
-#endif
-
-// SAMMA PÅ SVENSKA : ÖVRIG
-#if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
-    ( (RegFind(@300$a, '[Tt]avla|[Uu][Ss][Bb]-minne|[Oo]ptisk|[Dd]iskett\\b') >= 0) Or \
-      (RegFind(@337$a, 'ospecifierad') >= 0) \
-    )
-000 | <B38$b | 'nz'           
-#endif
 
 // VERKKOAINEISTO
 
@@ -191,37 +144,28 @@
 
 // SAMMA PÅ SVENSKA : ONLINERESURS
 #if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
-    (RegFind(%338$a, '[Vv]erkkoaineisto|[Ww]ebbmaterial') < 0)) \
-   And If ( \
-     (RegFind(@300$a, '[Ww]ebb|[Ff]il\\b') >= 0) \
-     Or (RegFind(@516$a, '[Ww]ebb|WWW') >= 0) \
-     Or (RegFind(@500, '[Ii]nternet-julkaisu') >= 0) \
-     Or (RegFind(@538$a, '[Ii]nternet|[Ww][Ww][Ww]|selain|[Aa]dobe|[Vv]iewer') >= 0) \
-     Or (RegFind(@256$a, '[Vv]erkkoaineisto') >= 0) \
-     Or ( (RegFind(@300, '[Ii][Bb]ooks|[Ff][Ll][Aa][Cc]|[Hh][Tt][Mm][Ll]|online') >= 0) And (@008/24/ = 'o') ) \
-   ) \
-   And (Not Exists(@773)) \
-   And (RegFind(@337, 'elektronisk') >= 0) \
-   And (RegFind(@300$a, 'ROM') < 0)
+    (RegFind(@337, 'elektronisk') >= 0) And \
+    (RegFind(@300$a, 'ROM') < 0) And \
+    ( (RegFind(@300$a, '[Ww]ebb|[Ff]il\\b') >= 0) Or \
+      	(RegFind(@516$a, '[Ww]ebb|WWW') >= 0) Or \
+     	(RegFind(@500, '[Ii]nternet-julkaisu') >= 0) Or \
+     	(RegFind(@538$a, '[Ii]nternet|[Ww][Ww][Ww]|selain|[Aa]dobe|[Vv]iewer') >= 0) Or \
+     	(RegFind(@256$a, '[Vv]erkkoaineisto') >= 0) Or \
+     	( (RegFind(@300, '[Ii][Bb]ooks|[Ff][Ll][Aa][Cc]|[Hh][Tt][Mm][Ll]|online') >= 0) And (@008/24/ = 'o') ) \
+   )
 000 | <B38$b | 'cr'  
 #endif
 
-// ÄÄNILEVY
+// ÄÄNILEVY/LJUDSKIVA
 #if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
-    ( (RegFind(@300$a, '[Cc][Dd]-levy|äänilevy|[Cc][Dd]-skiv|ljudskiv') >= 0) )
-000 | <B38$b | 'sd'  
-#endif
-
-// SAMMA PÅ SVENSKA : LJUDSKIVA
-#if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
-    ( (RegFind(@300$a, '[Cc][Dd]-skiva|ljudskiva') >= 0) )
+    ( (RegFind(@300$a, '[Cc][Dd]-levy|[Ll][Pp]-levy|äänilevy|[Cc][Dd]-skiv|ljudskiv') >= 0) )
 000 | <B38$b | 'sd'  
 #endif
 
 // ÄÄNIKASETTI / LJUD-KASSETT
 #if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
-    And If ( (RegFind(@300$a, '[Cc]-kas') >= 0) Or \
-    	     (RegFind(@300$a, '[Dd][Aa][Tt]-kas|[Dd][Cc][Cc]-kas|[Ll]judkas|[Ää]nikas|kasettia|kassetter') >= 0) ) 
+    ( (RegFind(@300$a, '[Cc]-kas') >= 0) Or \
+      (RegFind(@300$a, '[Dd][Aa][Tt]-kas|[Dd][Cc][Cc]-kas|[Ll]judkas|[Ää]nikas|kasettia|kassetter') >= 0) )
 000 | <B38$b | 'ss'  
 #endif
 
@@ -245,6 +189,12 @@
 000 | <B38$b | 'cd'
 #endif
 
+
+// Fallback:
+#if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
+    ( @000/7/ = 'a' Or @000/7/ = 'c' Or @000/7/ = 'e' Or @000/7/ = 't')
+000 | <B38$b | 'nc'
+#endif
 
 // 338-KENTTIEN LUOMINEN LOPPUU
 
