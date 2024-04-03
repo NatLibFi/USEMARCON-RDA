@@ -48,32 +48,30 @@ versio 1.9.2016 / Kansalliskirjasto (TV)
 
 100I1 | 100I1  | S
 100I2 | 100I2  | S
+
 100$a | <A10$a | S
 100$b | <A10$b | S
 100$c | <A10$c | S
 100$d | <A10$d | AIKAMAAREET
-100$e | <A10$e | RELATORTERM
-100$4 | <A10$e | If (Not (Exists(@100$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
+100$e | <A10$e | FINNISHRELATORABBRS; SWEDISHRELATORABBRS; RELATORTERM
 100$? | <A10$? | S
 
-A10   | 100    | FUNKTIOVALIMERKIT; ENTRY_FIELD_PUNCTUATION 
+A10   | 100    | RELATORCODES2FIN; RegReplace('$E', '$e', 'g'); ENTRY_FIELD_PUNCTUATION 
 
 110I1 | 110I1  | S
 110I2 | 110I2  | S
 110$c | <B11$c | AIKAMAAREET
 110$e | <B11$e | RELATORTERM
-110$4 | <B11$e | If (Not (Exists(@110$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
 110$? | <B11$? | S
 
-B11   | 110    | FUNKTIOVALIMERKIT; ENTRY_FIELD_PUNCTUATION
+B11   | 110    | RELATORCODES2FIN; RegReplace('$E', '$e', 'g'); ENTRY_FIELD_PUNCTUATION
 
 111I1 | 111I1  | S
 111I2 | 111I2  | S
 111$j | <C11$j | Table ('Funktiotermit.tbl')
-111$4 | <C11$j | Table ('Funktiokoodit.tbl') + '.'
 111$? | <C11$? | S
 
-C11   | 111    | FUNKTIOT2
+C11   | 111    | RELATORCODES2FIN; RegReplace('$E', '$j', 'g'); ENTRY_FIELD_PUNCTUATION
 
 130I1 | 130I1  | S
 130I2 | 130I2  | S
@@ -100,7 +98,7 @@ C11   | 111    | FUNKTIOT2
 130$p | <A30$p | RAAMATTU
 130$? | <A30$? | 
 
-A30 | 130 | COMMA2DOT_BEFORE_L ; LOPPUPISTE_X30
+A30 | 130     | RELATORCODES2FIN; RegReplace('$E', '$j', 'g'); ENTRY_FIELD_PUNCTUATION ; LOPPUPISTE_X30
 
 222I1 | 222I1 | S
 222I2 | 222I2 | S
@@ -423,11 +421,10 @@ T36   | <DEL  | S
 
 600$o | <C60$o | SOVITUSMERKINTO_FI; ESITYSKOKOONPANO; AANITYYPPI
 600$p | <C60$p | RAAMATTU
-600$4 | <C60$e | If (Not (Exists(@600$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
 600$? | <C60$? | S
 
 // LCSH:n loppupisteen asettaminen
-C60 | 600 | FUNKTIOVALIMERKIT; COMMA2DOT_BEFORE_L; ENTRY_FIELD_PUNCTUATION; If (@600I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
+C60 | 600 | ENTRY_FIELD_PUNCTUATION
 
 610I1 | 610I1  | S
 610I2 | 610I2  | S
@@ -460,21 +457,19 @@ C60 | 600 | FUNKTIOVALIMERKIT; COMMA2DOT_BEFORE_L; ENTRY_FIELD_PUNCTUATION; If (
 
 610$o | <D61$o | SOVITUSMERKINTO_FI; ESITYSKOKOONPANO; AANITYYPPI
 610$p | <D61$p | RAAMATTU
-610$4 | <C61$e | If (Not (Exists(@610$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
 610$? | <D61$? | S
 
-D61 | 610 | FUNKTIOVALIMERKIT; COMMA2DOT_BEFORE_L; ENTRY_FIELD_PUNCTUATION ; If (@610I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
+D61 | 610 | ENTRY_FIELD_PUNCTUATION
 
 611I1 | 611I1  | S
 611I2 | 611I2  | S
 611$j | <K61$j | Table ('Funktiotermit.tbl')
-611$4 | <K61$j | If (Not (Exists(@611$j)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
 
 611$l | <K61$l | UPPERCASE130L
 
-611$? | <K61$? | If (@611I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
+611$? | <K61$? | S
 
-K61   | 611     | FUNKTIOT2; COMMA2DOT_BEFORE_L
+K61   | 611     | COMMA2DOT_BEFORE_L
 
 630I1 | 630I1  | S
 630I2 | 630I2  | S
@@ -499,48 +494,43 @@ K61   | 611     | FUNKTIOT2; COMMA2DOT_BEFORE_L
 
 630$o | <E63$o | SOVITUSMERKINTO_FI; ESITYSKOKOONPANO; AANITYYPPI
 630$p | <E63$p | RAAMATTU
-630$4 | <E63$e | If (Not (Exists(@630$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
 630$? | <E63$? | S
 
-E63 | 630 | FUNKTIOVALIMERKIT; LOPPUPISTE_X30; COMMA2DOT_BEFORE_L
+E63 | 630 | LOPPUPISTE_X30; ENTRY_FIELD_PUNCTUATION
 
 650I1 | 650I1  | S
 650I2 | 650I2  | S
-650$4 | <O65$e | If (Not (Exists(@650$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
-650$? | <O65$? | If (@650I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
+650$? | <O65$? | S
 
-O65   | 650    | FUNKTIOVALIMERKIT
+O65   | 650    | S
 
 651I1 | 651I1  | S
 651I2 | 651I2  | S
-651$4 | <U65$e | If (Not (Exists(@651$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
-651$? | <U65$? | If (@651I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
+651$? | <U65$? | S
 
-U65   | 651    | FUNKTIOVALIMERKIT
+U65   | 651    | S
 
 654I1 | 654I1  | S
 654I2 | 654I2  | S
-654$4 | <R54$e | If (Not (Exists(@654$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
 654$? | <R54$? | S
 
-R54   | 654    | FUNKTIOVALIMERKIT
+R54   | 654    | S
 
 655I1 | 655I1  | S
 655I2 | 655I2  | S
-655$4 | <T55$e | If (Not (Exists(@655$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
-655   | <T55   | If (@655I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
+655   | <T55   | S
 
-T55   | 655    | FUNKTIOVALIMERKIT
+T55   | 655    | S
 
 662I1 | 662I1  | S
 662I2 | 662I2  | S
-662$4 | <Z62$e | If (Not (Exists(@662$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
 662$? | <Z62$? | S
 
-Z65   | 662    | FUNKTIOVALIMERKIT
+Z65   | 662    | S
 
 700I1 | 700I1  | S
 700I2 | 700I2  | S
+
 700$c | <G70$c | S
 700$d | <G70$d | AIKAMAAREET
 700$e | <G70$e | RELATORTERM
@@ -565,11 +555,9 @@ Z65   | 662    | FUNKTIOVALIMERKIT
 
 700$o | <G70$o | SOVITUSMERKINTO_FI; ESITYSKOKOONPANO; AANITYYPPI
 700$p | <G70$p | RAAMATTU
-700$4 | <G70$e | If InTable(S, 'Funktiokoodit.tbl') Then Table ('Funktiokoodit.tbl') + '.'
-700$4 | <G70$4 | If (Not InTable(S, 'Funktiokoodit.tbl')) Then S 
 700$? | <G70$? | S
 
-G70 | 700 | FUNKTIOVALIMERKIT; ENTRY_FIELD_PUNCTUATION ; COMMA2DOT_BEFORE_L
+G70 | 700 | RELATORCODES2FIN; RegReplace('$E', '$e', 'g'); ENTRY_FIELD_PUNCTUATION 
 
 710I1 | 710I1  | S
 710I2 | 710I2  | S
@@ -596,26 +584,23 @@ G70 | 700 | FUNKTIOVALIMERKIT; ENTRY_FIELD_PUNCTUATION ; COMMA2DOT_BEFORE_L
 
 710$o | <H71$o | SOVITUSMERKINTO_FI; ESITYSKOKOONPANO; AANITYYPPI
 710$p | <H71$p | RAAMATTU
-710$4 | <H71$e | If InTable(S, 'Funktiokoodit.tbl') Then Table ('Funktiokoodit.tbl') + '.' Else S
 710$? | <H71$? | S
 
-H71 | 710 | FUNKTIOVALIMERKIT; ENTRY_FIELD_PUNCTUATION ; COMMA2DOT_BEFORE_L
+H71 | 710 | ENTRY_FIELD_PUNCTUATION
 
 711I1 | 711I1  | S
 711I2 | 711I2  | S
 711$j | <U71$j | Table ('Funktiotermit.tbl')
-711$4 | <U71$j | If (Not (Exists(%711$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
 
 711$l | <U71$l | UPPERCASE130L
 711$? | <U71$? | S
 
-U71   | 711    | FUNKTIOT2; COMMA2DOT_BEFORE_L
+U71   | 711    | ENTRY_FIELD_PUNCTUATION
 
 720I1 | 720I1  | S
 720I2 | 720I2  | S
 720$e | <Y72$e | Table ('Funktiotermit.tbl')
-720$4 | <Y72$e | If (Not (Exists(%720$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
-720$? | <Y72$? | FUNKTIOVALIMERKIT 
+720$? | <Y72$? | S 
 
 Y72   | 720    | S
 
@@ -690,10 +675,9 @@ J73 | 730 | LOPPUPISTE_X30; COMMA2DOT_BEFORE_L
 
 800$o | <K80$o | SOVITUSMERKINTO_FI; ESITYSKOKOONPANO; AANITYYPPI
 800$p | <K80$p | RAAMATTU
-800$4 | <K80$e | If (Not (Exists(@800$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
 800$? | <K80$? | S
 
-K80 | 800 | FUNKTIOVALIMERKIT; ENTRY_FIELD_PUNCTUATION ; COMMA2DOT_BEFORE_L
+K80 | 800 | ENTRY_FIELD_PUNCTUATION ; COMMA2DOT_BEFORE_L
 
 810I1 | 810I1  | S
 810I2 | 810I2  | S
@@ -719,18 +703,16 @@ K80 | 800 | FUNKTIOVALIMERKIT; ENTRY_FIELD_PUNCTUATION ; COMMA2DOT_BEFORE_L
 
 810$o | <L81$o | SOVITUSMERKINTO_FI; ESITYSKOKOONPANO; AANITYYPPI
 810$p | <L81$p | RAAMATTU
-810$4 | <L81$e | If Not (Exists(@810$e)) Then Table ('Funktiokoodit.tbl') + '.'
 810$? | <L81$? | S
 
-L81 | 810 | FUNKTIOVALIMERKIT; ENTRY_FIELD_PUNCTUATION ; COMMA2DOT_BEFORE_L
+L81 | 810 | ENTRY_FIELD_PUNCTUATION
 
 811I1 | 811I1  | S
 811I2 | 811I2  | S
-811$4 | <W81$j  | If (Not (Exists(@811$j)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
 811$l | <W81$l | UPPERCASE130L
 811$? | <W81$?  | S
 
-W81   | 811    | FUNKTIOT2
+W81   | 811    | ENTRY_FIELD_PUNCTUATION
 
 830I1 | 830I1  | S
 830I2 | 830I2  | S
@@ -759,7 +741,7 @@ W81   | 811    | FUNKTIOT2
 830$? | <M83$? | S
 
 M83 | 830 | RegReplace('\\b;$v| ; $v', ' ;$v'); \
-            LOPPUPISTE_X30; COMMA2DOT_BEFORE_L
+            LOPPUPISTE_X30; ENTRY_FIELD_PUNCTUATION
 
 856I1 | 856I1 | S
 856I2 | 856I2 | S

@@ -1,6 +1,10 @@
 RDA-konversio - bibliografiset tietueet, ruotsi
 versio 13.3.2024 / Kansalliskirjasto (NV)
 
+// Known bugs: if '$4' maps to '$e', the originaö '$e' subfields are lost...
+
+// NB! I use $E and then convert it to $j (X11) or $e (others)
+
 #define version 317
 
 #include "makrot.rul"
@@ -16,7 +20,7 @@ versio 13.3.2024 / Kansalliskirjasto (NV)
 
 015I1 | 015I1 | S
 015I2 | 015I2 | S
-015$? | 015$? | Replace('.,' By ','); \ // Tapaukset tyyliin "020$q sid., muovikannet"
+015$? | 015$? | Replace('.,' By ','); \
                 Delete('('); \
                 Delete(')'); \
                 SIDOSASUT
@@ -26,8 +30,8 @@ versio 13.3.2024 / Kansalliskirjasto (NV)
 020$a | 020$a | If (RegFind(S, '\\d+') >= 0) Then S; RegReplace('[\\s](.*)', '')
 020$a | 020$q | If (RegFind(@020$a, '\\(') >= 0) Then S; RegReplace('(.*)\\(', ''); RegReplace('\\)', ''); SIDOSASUT; Delete(':', At Ending);
 020$c | <DEL  | S
-020$? | 020$? | Replace('.,' By ','); \ // Tapaukset tyyliin "020$q sid., muovikannet"
-                SIDOSASUT; \
+020$? | 020$? | SIDOSASUT; \
+		REMOVEPARENTHESES; \
                 Delete('('); \
                 Delete(')'); \
                 Delete(';'); \
@@ -49,29 +53,28 @@ versio 13.3.2024 / Kansalliskirjasto (NV)
 
 100I1 | 100I1  | S
 100I2 | 100I2  | S
+//100   | <Z10   | ENTRYFIELDABBRS
 100$a | <A10$a | S
 100$b | <A10$b | S
 100$c | <A10$c | S
 100$d | <A10$d | AIKAMAAREET
-100$e | <A10$e | Delete('.', At Ending); Table ('sv_Funktiotermit.tbl'); If (NextSub($e) = '') Then S + '.' Else S
-100$4 | <A10$e | If (Not (Exists(@100$e)) And InTable(S, 'sv_Funktiokoodit.tbl')) Then Table ('sv_Funktiokoodit.tbl') + '.' Else S
+100$e | <A10$e | SWEDISHRELATORABBRS; FINNISHRELATORABBRS ; Table ('sv_Funktiotermit.tbl')
 100$? | <A10$? | S
 
-A10   | 100    | FUNKTIOVALIMERKIT; ENTRY_FIELD_PUNCTUATION
+A10   | 100 | RELATORCODES2SWE; RegReplace('$E', '$e', 'g'); ENTRY_FIELD_PUNCTUATION
 
 110I1 | 110I1  | S
 110I2 | 110I2  | S
 110$c | <B11$c | AIKAMAAREET
 110$e | <B11$e | Table ('sv_Funktiotermit.tbl')
-110$4 | <B11$e | If (Not (Exists(@110$e)) And InTable(S, 'sv_Funktiokoodit.tbl')) Then Table ('sv_Funktiokoodit.tbl') + '.' Else S
 110$? | <B11$? | S
 
-B11   | 110    | FUNKTIOVALIMERKIT; ENTRY_FIELD_PUNCTUATION
+B11   | 110    | RELATORCODES2SWE; RegReplace('$E', '$e', 'g'); ENTRY_FIELD_PUNCTUATION
 
 111I1 | 111I1  | S
 111I2 | 111I2  | S
 111$j | <C11$j | Table ('sv_Funktiotermit.tbl')
-111$4 | <C11$j | Table ('sv_Funktiokoodit.tbl') + '.'
+111$4 | <C11$j | Table ('sv_Funktiokoodit.tbl')
 111$? | <C11$? | S
 
 C11   | 111    | FUNKTIOT2
@@ -265,219 +268,8 @@ T36   | <DEL  | S
 337$8 | 337$8 | S
 
 // LUODAAN 338-KENTÄT, JOS NIITÄ EI OLE TIETUEESSA VALMIINA
+#include "arvaa338.rul"
 
-// 338-kenttiä voi olla useampia esim. moniviestimissä. Samanmuotoiset kentät luovat säännöt on ryhmitelty peräkkäin.
-// Kahta samansisältöistä kenttää ei luoda missään tilanteessa.
-
-// VOLYM
-
-#if (Not Exists(@338)) \
-  And (Not Exists(@773)) \
-  And ( ( @000/7/ = 'a' Or @000/7/ = 'c' Or @000/7/ = 'e' Or @000/7/ = 't') And \
-          ( \
-            ( (RegFind(@336(1)$a, 'eksti|ext|otat') >= 0) Or \
-              (RegFind(@336(2)$a, 'eksti|ext|otat') >= 0) Or \
-              (RegFind(@336(3)$a, 'eksti|ext|otat') >= 0) Or \
-              (RegFind(@336(4)$a, 'eksti|ext|otat') >= 0) ) \
-               And \
-            ( (RegFind(@337(1)$a, 'laitetta|medietyp|oförmedlad|omedierad') >= 0) Or \
-              (RegFind(@337(2)$a, 'laitetta|medietyp|oförmedlad|omedierad') >= 0) Or \
-              (RegFind(@337(3)$a, 'laitetta|medietyp|oförmedlad|omedierad') >= 0) Or \
-              (RegFind(@337(4)$a, 'laitetta|medietyp|oförmedlad|omedierad') >= 0) ) \
-          ) \
-        Or (RegFind(@300$a, '[Bb]ok|artbok|atlas|[Tt]ekstivihko|[Kk]irja|[Kk]artasto') >= 0) \
-        Or (RegFind(%336$a, 'Kartograf') >=0) )
-000 | 338(new)I1 | ' '
-000 | 338(newest)I2 | ' '
-000 | 338(newest)$a | 'volym'
-000 | 338(newest)$b | 'nc'
-000 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-// VIDEOKASSETT
-
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Vv]ideokas') >= 0) And If (Not Exists(@773))
-000 | 338(new)I1 | ' '
-000 | 338(newest)I2 | ' '
-000 | 338(newest)$a | 'videokassett'
-000 | 338(newest)$b | 'vf'
-000 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-// TRANSPARANG
-
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Hh]eijastuskuva|[Kk]alvo|[Tt]ranspara') >= 0) And If (Not Exists(@773))
-000 | 338(new)I1 | ' '
-000 | 338(newest)I2 | ' '
-000 | 338(newest)$a | 'transparang'
-000 | 338(newest)$b | 'gt'
-000 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-// DIABILD
-
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Kk]uultokuv|[Dd]ia') >= 0) And If (Not Exists(@773))
-000 | 338(new)I1 | ' '
-000 | 338(newest)I2 | ' '
-000 | 338(newest)$a | 'diabild'
-000 | 338(newest)$b | 'gs'
-000 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-// MIKROKORT
-
-#if (Not Exists(@338)) \
-    And ( (RegFind(@337$a, 'mikro') >= 0) Or (RegFind(@300$a, '[Mm]ikrokort') >= 0) Or (RegFind(@500$a, 'film(i)*kort') >= 0) Or (007/1-2/ = 'hg') Or (007/1-2/ = 'he') ) \
-    And (Not (000/7/ = 'e') Or (000/7/ = 'f')) \
-    And (Not Exists(@773))
-000 | 338(new)I1 | ' '
-000 | 338(newest)I2 | ' '
-000 | 338(newest)$a | 'mikrokort'
-000 | 338(newest)$b | 'he'
-000 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-// BILDKORT
-
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Kk]ort\\b') >= 0) And If (Not Exists(@773))
-000 | 338(new)I1 | ' '
-000 | 338(newest)I2 | ' '
-000 | 338(newest)$a | 'bildkort'
-000 | 338(newest)$b | 'no'
-000 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-// ARK
-
-#if (Not Exists(@338)) \
-  And (Not Exists(@773)) \
-  And ( (RegFind(@300$a, '[Aa]rk') >= 0) Or \
-        ( (RegFind(@336$a, 'kartograf') >= 0) And (RegFind(@337$a, 'laitetta|ingen medietyp') >= 0) ) )
-000 | 338(new)I1 | ' '
-000 | 338(newest)I2 | ' '
-000 | 338(newest)$a | 'ark'
-000 | 338(newest)$b | 'nb'
-000 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-// MIKROFILMSRULLE
-
-#if (Not Exists(@338)) \
-  And ( (RegFind(@300$a, '[Mm]ikrofilm') >= 0) Or (007/1-2/ = 'hj') ) \
-  And (Not (000/7/ = 'e') Or (000/7/ = 'f')) \
-  And (Not Exists(@773))
-000 | 338(new)I1 | ' '
-000 | 338(newest)I2 | ' '
-000 | 338(newest)$a | 'mikrofilmsrulle'
-000 | 338(newest)$b | 'hj'
-000 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-// LJUDSPOLE
-
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Ää]nikela|[Ll]judsp') >= 0) And If (Not Exists(@773))
-000 | 338(new)I1 | ' '
-000 | 338(newest)I2 | ' '
-000 | 338(newest)$a | 'ljudspole'
-000 | 338(newest)$b | 'st'
-000 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-// ÖVRIG
-
-#if (Not Exists(@338)) And (Not Exists(@773)) And ( \
-      (RegFind(@300$a, '[Tt]aulu|[Uu][Ss][Bb]-muisti|[Oo]ptinen levy|[Ll]evyke|[Dd]isketti|[Oo]petuskuva|[Tt]avla|[Uu][Ss][Bb]-minne|[Oo]ptisk|[Dd]iskett\\b') >= 0) \
-      Or (RegFind(@337$a, 'ospecifierad') >= 0) \
-    ) 
-000 | 338(new)I1 | ' '
-000 | 338(newest)I2 | ' '
-000 | 338(newest)$a | 'övrig'
-000 | 338(newest)$b | 'nz'
-000 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-// ONLINERESURS
-
-#if (Not Exists(@338)) \
-  And (RegFind(@300$a, 'ROM') < 0) \
-  And (Not Exists(@773)) \
-  And (RegFind(@337, 'elektroni') >= 0) \
-  And ( \
-    (RegFind(@300$a, '[Ww]ebb|[Ff]il|[Vv]erkkojulkaisu|[Tt]iedosto') >= 0) \
-    Or (RegFind(@516$a, '[Vv]erkkoaineisto') >= 0) \
-    Or (RegFind(@500, '[Ii]nternet-julkaisu') >= 0) \
-    Or (RegFind(@538$a, '[Ii]nternet|[Ww][Ww][Ww]|selain|[Aa]dobe|[Vv]iewer') >= 0) \
-    Or (RegFind(@256$a, '[Tt]ekstiä|ext|[Vv]erkkoaineisto') >= 0) \
-    Or ( (RegFind(@300, '[Ii][Bb]ooks|[Pp][Dd][Ff]-[Ff][Ll][Aa][Cc]|[Hh][Tt][Mm][Ll]|online') >= 0) And (@008/24/ = 'o') ) \
-    Or (RegFind(@000/8/, 's') >= 0) \
-    Or (RegFind(@256, '[Vv]erkko|[Ss]uorakäyttöjärjestelmä') >= 0) \
-    Or (RegFind(@020, '[Pp][Dd][Ff]') >= 0) \
-  )
-000 | 338(new)I1 | ' '
-000 | 338(newest)I2 | ' '
-000 | 338(newest)$a | 'onlineresurs'
-000 | 338(newest)$b | 'cr'
-000 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-// LJUDSKIVA
-
-#if (Not Exists(@338)) \
-  And ( (RegFind(@300, '[Cc][Dd]-skiva|ljudskiva|[Cc][Dd]-levy|änilevy') >= 0) ) \
-  And (Not Exists(@773))
-000 | 338(new)I1 | ' '
-000 | 338(newest)I2 | ' '
-000 | 338(newest)$a | 'ljudskiva'
-000 | 338(newest)$b | 'sd'
-000 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-// LJUDKASSETT
-
-#if (Not Exists(@338)) \
-  And If ( \
-  (RegFind(@300$a, '[Cc]-kass') >= 0) \
-  Or (RegFind(@300$a, '[Ää]nikas|kasettia|[Dd][Aa][Tt]-kas|[Dd][Cc][Cc]-kas|[Ll]judkas|kassetter') >= 0) \
-  Or (RegFind(@300$e, '[Ää]nikas|kasettia|[Dd][Aa][Tt]-kas|[Dd][Cc][Cc]-kas|[Ll]judkas|kassetter') >= 0) \
-  ) \
-  And If (Not Exists(@773))
-000 | 338(new)I1 | ' '
-000 | 338(newest)I2 | ' '
-000 | 338(newest)$a | 'ljudkassett'
-000 | 338(newest)$b | 'ss'
-000 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-// DATORSKIVA
-
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Rr][Oo][Mm]') >= 0) And If (Not Exists(@773))
-000 | 338(new)I1 | ' '
-000 | 338(newest)I2 | ' '
-000 | 338(newest)$a | 'datorskiva'
-000 | 338(newest)$b | 'cd'
-000 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-// VIDEOSKIVA
-
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[D][Vv][Dd]-levy|[Vv]ideolevy|[Dd][Vv][Dd]-skiv|[Vv]ideoskiv') >= 0) And If (Not Exists(@773))
-000 | 338(new)I1 | ' '
-000 | 338(newest)I2 | ' '
-000 | 338(newest)$a | 'videoskiva'
-000 | 338(newest)$b | 'vd'
-000 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-// 338-KENTTIEN LUOMINEN LOPPUU
-
-#if (Exists(@338))
-338I1 | 338I1 | S
-338I2 | 338I2 | S
-338$a | 338$a | Table ('338_a_svenska.tbl')
-338$a | 338$b | If (InTable(S, '338_b.tbl')) Then Table ('338_b.tbl')
-338$b | 338$b | If (Not Exists(%338$b)) Then S
-338$2 | 338$2 | 'rdacarrier'
-#endif
 
 490I1 | 490I1 | S
 490I2 | 490I2 | S
@@ -546,11 +338,11 @@ T36   | <DEL  | S
 
 600$o | <C60$o | SOVITUSMERKINTO_SV; ESITYSKOKOONPANO; ROSTTYP
 600$p | <C60$p | RAAMATTU
-600$4 | <C60$e | If (Not (Exists(@600$e)) And InTable(S, 'sv_Funktiokoodit.tbl')) Then Table ('sv_Funktiokoodit.tbl') + '.' Else S
 600$? | <C60$? | S
 
-// LCSH:n loppupisteen asettaminen
-C60 | 600 | FUNKTIOVALIMERKIT; ENTRY_FIELD_PUNCTUATION; If (@600I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
+// LCSH:n loppupisteen asettaminen lopetettu (nvolk 2024-04-03) usemarconin bugisuuden takia. Oli tontyyppinen sääntö:
+// If (@600I2 = '0') And (RegFind('$[adexyz][^$]*[A-Za-z]\$') < 0) Then S + '.' Else S
+C60 | 600 | RELATORCODES2SWE;  RegReplace('$E', '$e', 'g'); ENTRY_FIELD_PUNCTUATION; 
 
 610I1 | 610I1  | S
 610I2 | 610I2  | S
@@ -580,16 +372,14 @@ C60 | 600 | FUNKTIOVALIMERKIT; ENTRY_FIELD_PUNCTUATION; If (@600I2 = '0') And (R
 
 610$o | <D61$o | SOVITUSMERKINTO_SV; ESITYSKOKOONPANO; ROSTTYP
 610$p | <D61$p | RAAMATTU
-610$4 | <C61$e | If (Not (Exists(@610$e)) And InTable(S, 'sv_Funktiokoodit.tbl')) Then Table ('sv_Funktiokoodit.tbl') + '.' Else S
 610$? | <D61$? | S
 
-D61 | 610 | FUNKTIOVALIMERKIT; ENTRY_FIELD_PUNCTUATION; If (@610I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
+D61 | 610 | RELATORCODES2SWE; RegReplace('$E', '$e', 'g'); ENTRY_FIELD_PUNCTUATION
 
 611I1 | 611I1  | S
 611I2 | 611I2  | S
 611$j | <K61$j | Table ('sv_Funktiotermit.tbl')
-611$4 | <K61$j | If (Not (Exists(@611$j)) And InTable(S, 'sv_Funktiokoodit.tbl')) Then Table ('sv_Funktiokoodit.tbl') + '.' Else S
-611$? | <K61$? | If (@611I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
+611$? | <K61$? | RELATORCODES2SWE; RegReplace('$E', '$j', 'g'); ENTRY_FIELD_PUNCTUATION
 
 K61   | 611     | FUNKTIOT2
 
@@ -617,48 +407,54 @@ K61   | 611     | FUNKTIOT2
 630$4 | <E63$e | If (Not (Exists(@630$e)) And InTable(S, 'sv_Funktiokoodit.tbl')) Then Table ('sv_Funktiokoodit.tbl') + '.' Else S
 630$? | <E63$? | S
 
-E63 | 630 | FUNKTIOVALIMERKIT; LOPPUPISTE_X30
+E63 | 630 | LOPPUPISTE_X30
 
 650I1 | 650I1  | S
 650I2 | 650I2  | S
 650$4 | <O65$e | If (Not (Exists(@650$e)) And InTable(S, 'sv_Funktiokoodit.tbl')) Then Table ('sv_Funktiokoodit.tbl') + '.' Else S
 650$? | <O65$? | If (@650I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
 
-O65   | 650    | FUNKTIOVALIMERKIT
+O65   | 650    | S
 
 651I1 | 651I1  | S
 651I2 | 651I2  | S
 651$4 | <U65$e | If (Not (Exists(@651$e)) And InTable(S, 'sv_Funktiokoodit.tbl')) Then Table ('sv_Funktiokoodit.tbl') + '.' Else S
 651$? | <U65$? | If (@651I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
 
-U65   | 651    | FUNKTIOVALIMERKIT
+U65   | 651    | S
 
 654I1 | 654I1  | S
 654I2 | 654I2  | S
 654$4 | <R54$e | If (Not (Exists(@654$e)) And InTable(S, 'sv_Funktiokoodit.tbl')) Then Table ('sv_Funktiokoodit.tbl') + '.' Else S
 654$? | <R54$? | S
 
-R54   | 654    | FUNKTIOVALIMERKIT
+R54   | 654    | S
 
 655I1 | 655I1  | S
 655I2 | 655I2  | S
 655$4 | <T55$e | If (Not (Exists(@655$e)) And InTable(S, 'sv_Funktiokoodit.tbl')) Then Table ('sv_Funktiokoodit.tbl') + '.' Else S
 655   | <T55   | If (@655I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
 
-T55   | 655    | FUNKTIOVALIMERKIT
+T55   | 655    | S
 
 662I1 | 662I1  | S
 662I2 | 662I2  | S
 662$4 | <Z62$e | If (Not (Exists(@662$e)) And InTable(S, 'sv_Funktiokoodit.tbl')) Then Table ('sv_Funktiokoodit.tbl') + '.' Else S
 662$? | <Z62$? | S
 
-Z65   | 662    | FUNKTIOVALIMERKIT
+Z65   | 662    | S
 
 700I1 | 700I1  | S
 700I2 | 700I2  | S
+700I1 | Z70I1  | S
+700I2 | Z70I2  | S
+700I1 | G70I1  | S
+700I2 | G70I2  | S
+
 700$c | <G70$c | S
 700$d | <G70$d | AIKAMAAREET
-700$e | <G70$e | Table ('sv_Funktiotermit.tbl'); Delete ('.', At Ending); S + '.'
+700$e | <G70$e | SWEDISHRELATORABBRS; FINNISHRELATORABBRS ; Table ('sv_Funktiotermit.tbl')
+
 
 #if (RegFind(@700$t, 'Triot') >= 0)
 700$m | <G70$m | TRIOT; ESITYSKOKOONPANO; ROSTTYP
@@ -678,11 +474,9 @@ Z65   | 662    | FUNKTIOVALIMERKIT
 
 700$o | <G70$o | SOVITUSMERKINTO_SV; ESITYSKOKOONPANO; ROSTTYP
 700$p | <G70$p | RAAMATTU
-700$4 | <G70$e | If InTable(S, 'sv_Funktiokoodit.tbl') Then Table ('sv_Funktiokoodit.tbl') + '.'
-700$4 | <G70$4 | If (Not InTable(S, 'sv_Funktiokoodit.tbl')) Then S 
 700$? | <G70$? | S
 
-G70 | 700 | FUNKTIOVALIMERKIT; ENTRY_FIELD_PUNCTUATION
+G70 | 700 | RELATORCODES2SWE; RegReplace('$E', '$e', 'g'); ENTRY_FIELD_PUNCTUATION
 
 710I1 | 710I1  | S
 710I2 | 710I2  | S
@@ -710,7 +504,7 @@ G70 | 700 | FUNKTIOVALIMERKIT; ENTRY_FIELD_PUNCTUATION
 710$4 | <H71$e | If InTable(S, 'sv_Funktiokoodit.tbl') Then Table ('sv_Funktiokoodit.tbl') + '.' Else S
 710$? | <H71$? | S
 
-H71 | 710 | FUNKTIOVALIMERKIT; ENTRY_FIELD_PUNCTUATION
+H71 | 710 | RELATORCODES2SWE; ENTRY_FIELD_PUNCTUATION
 
 711I1 | 711I1  | S
 711I2 | 711I2  | S
@@ -724,7 +518,7 @@ U71   | 711    | FUNKTIOT2
 720I2 | 720I2  | S
 720$e | <Y72$e | Table ('sv_Funktiotermit.tbl')
 720$4 | <Y72$e | If (Not (Exists(%720$e)) And InTable(S, 'sv_Funktiokoodit.tbl')) Then Table ('sv_Funktiokoodit.tbl') + '.' Else S
-720$? | <Y72$? | FUNKTIOVALIMERKIT 
+720$? | <Y72$? | S 
 
 Y72   | 720    | S
 
@@ -797,7 +591,7 @@ J73 | 730 | LOPPUPISTE_X30
 800$4 | <K80$e | If (Not (Exists(@800$e)) And InTable(S, 'sv_Funktiokoodit.tbl')) Then Table ('sv_Funktiokoodit.tbl') + '.' Else S
 800$? | <K80$? | S
 
-K80 | 800 | FUNKTIOVALIMERKIT
+K80 | 800 | S
 
 810I1 | 810I1  | S
 810I2 | 810I2  | S
@@ -823,7 +617,7 @@ K80 | 800 | FUNKTIOVALIMERKIT
 810$4 | <L81$e | If Not (Exists(@810$e)) Then Table ('sv_Funktiokoodit.tbl') + '.'
 810$? | <L81$? | S
 
-L81 | 810 | FUNKTIOVALIMERKIT
+L81 | 810 | S
 
 811I1 | 811I1  | S
 811I2 | 811I2  | S
