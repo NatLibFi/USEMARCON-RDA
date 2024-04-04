@@ -94,7 +94,7 @@
 
 // ARKKI/ARK/SHEET
 #if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
-    ( (RegFind(@300$a, '[Aa]rkki|\\b[Aa]rk\\b ') >= 0) Or \
+    ( (RegFind(@300$a, '[Aa]rkki|\\b[Aa]rk\\b|^[0-9]+ karttaa?\b') >= 0) Or \
       ( (RegFind(@336$a, 'kartograf') >= 0) And (RegFind(@337$a, 'ingen medietyp|laitetta') >= 0) ) )
 000 | <B38$b | 'nb'	
 #endif
