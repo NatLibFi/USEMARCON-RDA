@@ -230,7 +230,10 @@ F45 | 245 | S
 300$e | <Y30$e | FI300BE; Delete('.', At Ending)
 300$? | <Y30$? | S
 
-Y30   | 300    | S
+Y30   | 300    | RegReplace('($[ab][^$]+[0-9a-z)])$b', '\\1 :$b'); \
+      RegReplace('($[ab][^$]+[0-9a-z])$c', '\\1 ;$c'); \
+      RegReplace('($[abc][^$]+[0-9a-z])$e', '\\1 +$e'); \
+      S
 
 // OLEMASSA OLEVIEN 336- JA 337-KENTTIEN KÄÄNTÄMINEN, $b- JA $2-OSAKENTTIEN LUOMINEN
 
