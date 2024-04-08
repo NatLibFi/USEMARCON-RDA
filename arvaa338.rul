@@ -18,6 +18,36 @@
 000 | <B38$b | 'nr'   
 #endif
 
+// VERKKOAINEISTO
+
+#if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
+  (RegFind(@300$a, 'ROM') < 0) \
+  And (RegFind(@337, 'elektroninen') >= 0) \
+  And ( \
+    (RegFind(@300$a, '[Vv]erkkojulkaisu|[Tt]iedosto') >= 0) \
+    Or (RegFind(@516$a, '[Vv]erkkoaineisto') >= 0) \
+    Or (RegFind(@500, '[Ii]nternet-julkaisu') >= 0) \
+    Or (RegFind(@538$a, '[Ii]nternet|[Ww][Ww][Ww]|selain|[Aa]dobe|[Vv]iewer') >= 0) \
+    Or (RegFind(@256$a, '[Vv]erkkoaineisto') >= 0) \
+    Or ( (RegFind(@300, '[Ii][Bb]ooks|[Ff][Ll][Aa][Cc]|[Hh][Tt][Mm][Ll]|online') >= 0) And (@008/24/ = 'o') ) \
+    Or (RegFind(000/8/, 's') >= 0) \
+    Or (RegFind(@256, '[Vv]erkko|[Ss]uorakäyttöjärjestelmä') >= 0) \
+    Or (RegFind(@020, '[Pp][Dd][Ff]') >= 0) \
+    Or (RegFind(@336, 'eksti') >= 0) \
+  )
+000 | <B38$b | 'cr'  
+#endif
+
+
+// ARKKI/ARK/SHEET
+#if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
+    ( (RegFind(@300$a, '[Aa]rkki|\\b[Aa]rk\\b|^[0-9]+ karttaa?\b') >= 0) Or \
+      ( (RegFind(@336$a, 'kartograf') >= 0) And (RegFind(@337$a, 'ingen medietyp|laitetta') >= 0) ) )
+000 | <B38$b | 'nb'	
+#endif
+
+
+
 // NIDE
 
 #if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
@@ -92,13 +122,6 @@
 #endif
 
 
-// ARKKI/ARK/SHEET
-#if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
-    ( (RegFind(@300$a, '[Aa]rkki|\\b[Aa]rk\\b|^[0-9]+ karttaa?\b') >= 0) Or \
-      ( (RegFind(@336$a, 'kartograf') >= 0) And (RegFind(@337$a, 'ingen medietyp|laitetta') >= 0) ) )
-000 | <B38$b | 'nb'	
-#endif
-
 
 // MIKROFILMIRULLA/MIKROFILMSRULLE
 #if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
@@ -122,25 +145,7 @@
 #endif
 
 
-// VERKKOAINEISTO
 
-#if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
-  (RegFind(@300$a, 'ROM') < 0) \
-  And (RegFind(@337, 'elektroninen') >= 0) \
-  And ( \
-    (RegFind(@300$a, '[Vv]erkkojulkaisu|[Tt]iedosto') >= 0) \
-    Or (RegFind(@516$a, '[Vv]erkkoaineisto') >= 0) \
-    Or (RegFind(@500, '[Ii]nternet-julkaisu') >= 0) \
-    Or (RegFind(@538$a, '[Ii]nternet|[Ww][Ww][Ww]|selain|[Aa]dobe|[Vv]iewer') >= 0) \
-    Or (RegFind(@256$a, '[Vv]erkkoaineisto') >= 0) \
-    Or ( (RegFind(@300, '[Ii][Bb]ooks|[Ff][Ll][Aa][Cc]|[Hh][Tt][Mm][Ll]|online') >= 0) And (@008/24/ = 'o') ) \
-    Or (RegFind(000/8/, 's') >= 0) \
-    Or (RegFind(@256, '[Vv]erkko|[Ss]uorakäyttöjärjestelmä') >= 0) \
-    Or (RegFind(@020, '[Pp][Dd][Ff]') >= 0) \
-    Or (RegFind(@336, 'eksti') >= 0) \
-  )
-000 | <B38$b | 'cr'  
-#endif
 
 // SAMMA PÅ SVENSKA : ONLINERESURS
 #if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
