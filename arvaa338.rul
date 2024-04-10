@@ -24,8 +24,8 @@
   (RegFind(@300$a, 'ROM') < 0) \
   And (RegFind(@337, 'elektroninen') >= 0) \
   And ( \
-    (RegFind(@300$a, '[Vv]erkkojulkaisu|[Tt]iedosto') >= 0) \
-    Or (RegFind(@516$a, '[Vv]erkkoaineisto') >= 0) \
+    (RegFind(@300$a, '[Ff]il\b|[Vv]erkkojulkaisu|[Tt]iedosto|[Ww]ebb') >= 0) \
+    Or (RegFind(@516$a, '[Ff]il\b|[Vv]erkkoaineisto|[Ww]ebb') >= 0) \
     Or (RegFind(@500, '[Ii]nternet-julkaisu') >= 0) \
     Or (RegFind(@538$a, '[Ii]nternet|[Ww][Ww][Ww]|selain|[Aa]dobe|[Vv]iewer') >= 0) \
     Or (RegFind(@256$a, '[Vv]erkkoaineisto') >= 0) \
@@ -37,7 +37,6 @@
   )
 000 | <B38$b | 'cr'  
 #endif
-
 
 // ARKKI/ARK/SHEET
 #if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
@@ -147,19 +146,7 @@
 
 
 
-// SAMMA PÅ SVENSKA : ONLINERESURS
-#if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
-    (RegFind(@337, 'elektronisk') >= 0) And \
-    (RegFind(@300$a, 'ROM') < 0) And \
-    ( (RegFind(@300$a, '[Ww]ebb|[Ff]il\\b') >= 0) Or \
-      	(RegFind(@516$a, '[Ww]ebb|WWW') >= 0) Or \
-     	(RegFind(@500, '[Ii]nternet-julkaisu') >= 0) Or \
-     	(RegFind(@538$a, '[Ii]nternet|[Ww][Ww][Ww]|selain|[Aa]dobe|[Vv]iewer') >= 0) Or \
-     	(RegFind(@256$a, '[Vv]erkkoaineisto') >= 0) Or \
-     	( (RegFind(@300, '[Ii][Bb]ooks|[Ff][Ll][Aa][Cc]|[Hh][Tt][Mm][Ll]|online') >= 0) And (@008/24/ = 'o') ) \
-   )
-000 | <B38$b | 'cr'  
-#endif
+
 
 // ÄÄNILEVY/LJUDSKIVA
 #if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
