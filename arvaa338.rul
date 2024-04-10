@@ -18,6 +18,26 @@
 000 | <B38$b | 'nr'   
 #endif
 
+// Hacks: create multi-338 based on field 300
+
+#if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
+    ( @000/7/ = 'o' ) And (RegFind(@300$a, 'CD-äänilevy.*kirja') >= 0)
+// FFS: C38 has to come before B38 here for this to work...
+000 | <C38$b | 'nc'
+000 | <B38$b | 'sd'
+#endif
+
+#if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
+    ( @000/7/ = 'o' )
+    // And (RegFind(@300$a, 'kirja.*CD-äänilevy') >= 0)
+// FFS: C38 has to come before B38 here for this to work...
+000 | <C38$b | 'sd'
+000 | <B38$b | 'nc'
+#endif
+
+
+
+
 // VERKKOAINEISTO
 
 #if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
@@ -37,6 +57,7 @@
   )
 000 | <B38$b | 'cr'  
 #endif
+
 
 // ARKKI/ARK/SHEET
 #if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
@@ -188,6 +209,11 @@
 000 | <B38$b | 'nc'
 #endif
 
+// Panic button fallback:
+#if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773))
+000 | <B38$b | 'zu'
+#endif
+
 // 338-KENTTIEN LUOMINEN LOPPUU
 
 #if (Exists(@338))
@@ -202,10 +228,23 @@
 
 // Create a new 338 based on B38
 #if Exists(@B38) And (Not Exists(@338))
-000   | 338(1)I2 | ' '
 000   | 338(1)I1 | ' '
+000   | 338(1)I2 | ' '
 B38$b | 338(1)$a | If (RegFind(@040$b, 'swe') >= 0) Table('map_swe_338b_to_a') Else Table('map_fin_338b_to_a')
 B38$b | 338(1)$b | S
 B38$b | 338(1)$2 | 'rdacarrier'
-B38 | <DEL  | S
+
 #endif
+
+// NB! Here we don't check whether 338 exists
+#if Exists(@C38)
+000   | 338(2)I1 | ' '
+000   | 338(2)I2 | ' '
+C38$b | 338(2)$a | If (RegFind(@040$b, 'swe') >= 0) Table('map_swe_338b_to_a') Else Table('map_fin_338b_to_a')
+C38$b | 338(2)$b | S
+C38$b | 338(2)$2 | 'rdacarrier'
+#endif
+
+B38 | <DEL  | S
+C38 | <DEL  | S
+
