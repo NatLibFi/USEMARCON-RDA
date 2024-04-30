@@ -4,5 +4,6 @@
 005009831 007   L hd|||||||||||
 005009831 008   L 170207s2014^^^^fi^||||||||||||||||eng|c
 005009831 300   L $$a1 mikrofilmikela.
-005009831 336   L $$aTeksti
-005009831 337   L $$amikromuoto
+005009831 336   L $$ateksti$$btxt$$2rdacontent
+005009831 337   L $$amikromuoto$$bh$$2rdamedia
+005009831 338   L $$amikrofilmirulla$$bhj$$2rdacarrier
