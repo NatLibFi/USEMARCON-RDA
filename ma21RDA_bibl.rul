@@ -14,6 +14,8 @@ versio 1.9.2016 / Kansalliskirjasto (TV)
 000/20/ | 000/20/ | S
 000/21-24/ | 000/21-24/ | '4500'
 
+008 | 008 | S
+
 015I1 | 015I1 | S
 015I2 | 015I2 | S
 015$? | 015$? | Replace('.,' By ','); \ // Tapaukset tyyliin "020$q sid., muovikannet"
@@ -343,16 +345,8 @@ T36   | <DEL  | S
 000 | 337$2 | 'rdacontent'
 #endif
 
-// https://www.loc.gov/standards/valuelist/rdamedia.html offers little
-// We could make rules for based on field 300, but that would get insanely complicate
-#if (Not (Exists(%337))) And (@000/7/ = 'o' Or @000/7/ = 'p')
-000 | 337I1 | ' '
-000 | 337I2 | ' '
-000 | 337$a | 'määrittelemätön'
-000 | 337$b | 'x'
-000 | 337$2 | 'rdamedia'
-#endif
 
+#include "arvaa337.rul"
 #include "arvaa338.rul"
 
 
