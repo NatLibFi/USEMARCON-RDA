@@ -268,6 +268,7 @@ T36   | <DEL  | S
 337$8 | 337$8 | S
 
 // LUODAAN 33X-KENTÄT, JOS NIITÄ EI OLE TIETUEESSA VALMIINA
+#include "arvaa336.rul"
 #include "arvaa337.rul"
 #include "arvaa338.rul"
 
