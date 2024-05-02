@@ -9,6 +9,7 @@
 005009831 1001  L $$aSukunimi, Etunimi,$$esäveltäjä.$$0(FI-ASTERI-N)012345678
 005009831 24500 L $$aFillariopas
 005009831 300   L $$a1 whatever.
+005009831 336   L $$ateksti$$btxt$$2rdacontent
 005009831 337   L $$amikromuoto$$bh$$2rdamedia
 005009831 338   L $$amikrofilmirulla$$bhj$$2rdacarrier
 005009831 500   L $$aTässä testataan 600- ja 610-kentän välimerkkejä.
