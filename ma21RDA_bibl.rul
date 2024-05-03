@@ -222,33 +222,11 @@ Y30   | 300    | RegReplace('($[ab][^$]+[0-9a-z)])$b', '\\1 :$b'); \
 
 // OLEMASSA OLEVIEN 336- JA 337-KENTTIEN KÄÄNTÄMINEN, $b- JA $2-OSAKENTTIEN LUOMINEN
 
-336I1 | 336I1 | S
-336I2 | 336I2 | S
-
-// Toistuvat 336$a-osakentät pilkotaan erillisiin 336-kenttiin. Mahdollinen $8 kopioidaan $a-osakentän mukaan. 
-336   | <T36 | S
-T36(ns)$a | 336(n)$a | Delete('.', At Ending); \
-                       Delete(',', At Ending); \
-		       If (RegFind(@040$b, 'swe') >= 0) Then Table ('336_a_svenska.tbl') Else Table ('336_a.tbl')
-//#if (Exists(T36$8))
-//T36(ns)$a | 336(n)$8 | T36$8
-//#endif
-
-T36   | <DEL  | S
-
-#if Not (Exists(@336$b))
-336(ns)$a | 336(no)$b | Delete('.', At Ending); Delete(';', At Ending); If (InTable(S, '336_b.tbl')) Then Table ('336_b.tbl')
-336(ns)$a | 336(no)$2 | Delete('.', At Ending); Delete(';', At Ending); If (InTable(S, '336_b.tbl')) Then 'rdacontent'
-#endif
+#include "modify336.rul"
 
 
-#if (Exists(@336$b))
-// Should we check legal 336$b values here?
-336$b | 336$b | S
-336$a | 336(no)$2 | 'rdacontent'
-#endif
 
-336(ns)$a | 336(n) | Sort('8ab2')
+
 
 
 337I1 | 337I1 | S
