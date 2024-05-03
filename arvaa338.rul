@@ -12,6 +12,8 @@
 // 1. multi-338 (LDR/06='o' or 'p'. TODO)
 // 2. others in order of probability (safest first)
 
+// 245$h based guesses are mostly gone...
+
 // Object/esine/
 #if (Not Exists(@338)) And (Not Exists(@B38)) And (Not Exists(@773)) And \
     ( @000/7/ = 'r' )

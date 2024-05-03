@@ -159,28 +159,7 @@ F40   | 240    | S
 
 B43 | 243 | S; RAAMATTU
 
-#if (Not Exists(%100)) And (Not Exists(%110)) And (Not Exists(%111)) And (Not Exists(%130))
-245I1 | 245I1  | '0'
-#endif
-
-#if Not (Exists(%245I1))
-245I1 | 245I1  | S
-#endif
-
-245I2 | 245I2  | S
-
-245$a | <F45$a | S
-245$b | <F45$b | S
-245$c | <F45$c | S; RegReplace('\\[et al\\.\\]', '[och andra]')
-245$f | <F45$f | S
-245$g | <F45$g | S
-245$p | <F45$p | S
-245$6 | <F45$6 | S
-245$8 | <F45$8 | S
-245$k | <F45$k | S
-245$n | <F45$n | S
-
-F45 | 245 | S
+#include "field245.rul"
 
 #if (Not Exists(@773))
 260I1 | 260I1 | S
