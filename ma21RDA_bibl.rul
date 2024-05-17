@@ -248,28 +248,6 @@ Y30   | 300    | RegReplace('($[ab][^$]+[0-9a-z)])$b', '\\1 :$b'); \
 
 // 337$8 | 337$8 | S
 
-
-#if (Not Exists(@337)) And \
-    ( ( ( @000/7/ = 'o' Or @000/7/ = 'p') And (RegFind(@300$a, '\\bkirja') >= 0 ) ) \
-      Or ( (@000/7/ = 'e' Or @000/7/ = 'f') And (@008/30/ = ' ' Or @008/30/ = 'r' ) ) )
-000 | 337I1 | ' '
-000 | 337I2 | ' '
-000 | 337$a | 'käytettävissä ilman laitetta'
-000 | 337$b | 'n'
-000 | 337$2 | 'rdacontent'
-#endif
-
-#if (Not Exists(@337)) And ( @000/7/ = 'o' Or @000/7/ = 'p') \
-     And (RegFind(@300$a, '\\bCD-äänilevy') >= 0)
-// esitetty musiikki/prm vs puhe/spw vs ääni/snd...
-000 | 337I1 | ' '
-000 | 337I2 | ' '
-000 | 337$a | 'audio'
-000 | 337$b | 's'
-000 | 337$2 | 'rdacontent'
-#endif
-
-
 #include "arvaa336.rul"
 #include "arvaa337.rul"
 #include "arvaa338.rul"
