@@ -6,6 +6,8 @@
 T36(ns)$a | 336(n)$a | Delete('.', At Ending); \
                        Delete(',', At Ending); \
 		       If (RegFind(@040$b, 'swe') >= 0) Then Table ('336_a_svenska.tbl') Else Table ('336_a.tbl')
+T36(ns)$a | 336(n)I1 | ' '
+T36(ns)$a | 336(n)I2 | ' '
 
 // Mahdollinen $8 kopioidaan $a-osakentän mukaan.
 // (Disabled by NV on 202404xx; There was some Tati bug related to this)
