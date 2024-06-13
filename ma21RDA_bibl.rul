@@ -124,7 +124,7 @@ A30 | 130     | RELATORCODES2FIN; RegReplace('$E', '$j', 'g'); ENTRY_FIELD_PUNCT
 #endif
 
 // Jos aiemmat säännöt eivät tärpänneet eli väliaikaista kenttää F40$m ei ole luotu
-#if Not Exists(F40$m)
+#if Not Exists(@F40$m)
 240$m | <F40$m | ESITYSKOKOONPANO; AANITYYPPI
 #endif
                  
